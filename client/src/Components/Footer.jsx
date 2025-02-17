@@ -1,8 +1,8 @@
 import footerLogo from "../assets/images/footer-logo.png";
 import call from "../assets/icons/Call.svg";
 import instagram from "../assets/icons/instagram_icon.svg";
-import facebook from "../assets/icons/facebook.svg";
-import twitter from "../assets/icons/twitter.svg";
+import facebook from "../assets/icons/facebook_icon.svg";
+import twitter from "../assets/icons/twitter_icon.svg";
 
 const companySections = [
   "Our Story",
