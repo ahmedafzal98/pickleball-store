@@ -1,5 +1,5 @@
 import footerLogo from "../assets/images/footer-logo.png";
-import call from "../assets/icons/call.svg";
+import call from "../assets/icons/Call.svg";
 import instagram from "../assets/icons/instagram.svg";
 import facebook from "../assets/icons/facebook.svg";
 import twitter from "../assets/icons/twitter.svg";
