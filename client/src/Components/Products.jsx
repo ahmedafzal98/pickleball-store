@@ -9,7 +9,8 @@ import "swiper/css/navigation";
 export default function App() {
   const [setSwiperRef] = useState(null);
   return (
-    <>
+    <div className="">
+      {/* <span className="text-white font-semibold text-4xl mt-4">Products</span> */}
       <Swiper
         className="mt-[5%]"
         ref={setSwiperRef}
@@ -54,6 +55,6 @@ export default function App() {
           <Product />
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 }
