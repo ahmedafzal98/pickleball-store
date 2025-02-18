@@ -1,8 +1,6 @@
 import { Rating } from "@mui/material";
 
 const Product = ({ data }) => {
-  console.log(data.name);
-
   return (
     <section>
       <div
