@@ -8,7 +8,7 @@ const Product = ({ data }) => {
         className="p-3 cursor-pointer hover:transition-transform duration-300"
       >
         <div className="relative">
-          <div className="absolute top-0 left-0 bg-[#E04243] text-white p-2">
+          <div className="absolute top-0 left-0 bg-[#E04243] text-white text-base p-0.5 xl:p-2">
             <span>Sale</span>
           </div>
 
