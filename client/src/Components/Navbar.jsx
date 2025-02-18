@@ -18,7 +18,7 @@ const Navbar = () => {
   const options = ["Brands", "Paddles", "Balls", "Shoes", "More", "Deals"];
 
   useEffect(() => {
-    if (isOpen && showAllCategories) {
+    if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -26,7 +26,7 @@ const Navbar = () => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isOpen, showAllCategories]);
+  }, [isOpen]);
 
   const handleMouseEnter = (category) => {
     setActiveCategory(category);
@@ -57,7 +57,7 @@ const Navbar = () => {
             className="relative text-base font-sans font-semibold p-3"
             onMouseEnter={handleAllCategoriesMouseEnter}
             onMouseLeave={handleAllCategoriesMouseLeave}
-            style={{ position: "static" }} // 👈 Add this
+            style={{ position: "static", overscrollBehavior: "contain" }} // 👈 Add this
           >
             <Tooltip title="All Categories">
               <CategoryIcon className="cursor-pointer" />
