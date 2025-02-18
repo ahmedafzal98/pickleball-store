@@ -12,7 +12,7 @@ export default function App() {
   const [setSwiperRef] = useState(null);
   return (
     <div className="flex flex-col items-center mt-[3%]">
-      <span className="text-4xl font-semibold text-white">
+      <span className="text-base xl:text-4xl font-semibold text-white">
         Explore Our Products
       </span>
       <SwiperCoverflow from="products" data={pickleballProducts} />

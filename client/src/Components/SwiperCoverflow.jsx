@@ -15,11 +15,10 @@ import BasicModal from "./Modal";
 export default function SwiperCoverflow({ from, data }) {
   const [openModal, setOpenModal] = useState(false);
   const [path, setPath] = useState("");
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // State for screen size
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const swiperRef = useRef(null);
   let interval = null;
 
-  // Update isMobile state on window resize
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
