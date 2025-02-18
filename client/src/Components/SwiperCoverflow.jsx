@@ -10,14 +10,16 @@ import category from "../assets/images/category.png";
 import leftPaddle from "../assets/icons/leftPaddle.svg";
 import rightPaddle from "../assets/icons/rightPaddle.svg";
 import categoryImages from "../../data/categoryImages";
+import Product from "./Product";
+import pickleballProducts from "../../data/pickleballProducts";
 
-export default function SwiperCoverflow() {
+export default function SwiperCoverflow({ from, data }) {
   const swiperRef = useRef(null);
   let interval = null;
 
   // Function to start fast navigation
   const startFastNavigation = (direction) => {
-    if (interval) return; // Prevent multiple intervals
+    if (interval) return;
 
     interval = setInterval(() => {
       if (swiperRef.current) {
@@ -33,6 +35,28 @@ export default function SwiperCoverflow() {
     clearInterval(interval);
     interval = null;
   };
+
+  const categories =
+    data &&
+    data.map((path, index) => {
+      return (
+        <SwiperSlide className="mt-[3%]" key={index}>
+          <div className="w-full flex items-center justify-center rounded-lg">
+            <img src={path} alt="Category" className="h-full" />
+          </div>
+        </SwiperSlide>
+      );
+    });
+
+  const products =
+    pickleballProducts &&
+    pickleballProducts.map((item) => {
+      return (
+        <SwiperSlide className="mt-[3%]">
+          <Product data={item} />
+        </SwiperSlide>
+      );
+    });
 
   return (
     <div className="relative w-[80%] h-auto mx-auto mt-4">
@@ -66,7 +90,6 @@ export default function SwiperCoverflow() {
         centeredSlides={true}
         slidesPerView={5} // Display 5 slides at a time
         spaceBetween={20}
-        pagination={{ clickable: true }}
         modules={[EffectCoverflow, Pagination, Navigation]}
         breakpoints={{
           640: {
@@ -92,16 +115,7 @@ export default function SwiperCoverflow() {
         onSwiper={(swiper) => (swiperRef.current = swiper)} // Store swiper instance
         className="mySwiper"
       >
-        {categoryImages &&
-          categoryImages.map((path, index) => {
-            return (
-              <SwiperSlide key={index}>
-                <div className="w-full flex items-center justify-center rounded-lg">
-                  <img src={path} alt="Category" className="h-full" />
-                </div>
-              </SwiperSlide>
-            );
-          })}
+        {from === "categories" ? categories : products}
       </Swiper>
     </div>
   );

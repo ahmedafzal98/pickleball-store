@@ -18,7 +18,7 @@ const Navbar = () => {
   const options = ["Brands", "Paddles", "Balls", "Shoes", "More", "Deals"];
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && showAllCategories) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -26,7 +26,7 @@ const Navbar = () => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isOpen]);
+  }, [isOpen, showAllCategories]);
 
   const handleMouseEnter = (category) => {
     setActiveCategory(category);
@@ -57,27 +57,33 @@ const Navbar = () => {
             className="relative text-base font-sans font-semibold p-3"
             onMouseEnter={handleAllCategoriesMouseEnter}
             onMouseLeave={handleAllCategoriesMouseLeave}
+            style={{ position: "static" }} // 👈 Add this
           >
             <Tooltip title="All Categories">
               <CategoryIcon className="cursor-pointer" />
             </Tooltip>
 
+            {/* Mega Menu */}
             {showAllCategories && (
-              <div className="absolute top-full left-0 bg-black rounded-lg shadow-lg p-4 space-y-2 w-[200px] max-h-[300px] overflow-y-auto transition-all duration-300 ease-in-out opacity-100 transform translate-y-0">
-                {allCategories &&
-                  allCategories.map((item, index) => {
-                    return (
+              <div className="fixed left-0 right-0 top-[92px] w-full bg-black shadow-lg p-6 transition-all duration-300 ease-in-out opacity-100 max-h-[500px] overflow-y-auto z-50">
+                <div className="container mx-auto">
+                  {" "}
+                  {/* 👈 Add a container for alignment */}
+                  <div className="grid grid-cols-6 gap-3">
+                    {allCategories.map((item, index) => (
                       <span
                         key={index}
-                        className="text-white block p-2 rounded-md opacity-60 hover:bg-[#A8D60F] cursor-pointer transition-all duration-200"
+                        className="text-white block p-3 rounded-md text-base font-semibold opacity-80 hover:bg-[#B9E018] cursor-pointer transition-all duration-200"
                       >
                         {item}
                       </span>
-                    );
-                  })}
+                    ))}
+                  </div>
+                </div>
               </div>
             )}
           </li>
+
           {Object.keys(categories).map((category) => {
             return (
               <li

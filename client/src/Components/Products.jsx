@@ -6,55 +6,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import SwiperCoverflow from "./SwiperCoverflow";
+import pickleballProducts from "../../data/pickleballProducts";
 export default function App() {
   const [setSwiperRef] = useState(null);
   return (
-    <div className="">
-      {/* <span className="text-white font-semibold text-4xl mt-4">Products</span> */}
-      <Swiper
-        className="mt-[5%]"
-        ref={setSwiperRef}
-        modules={[Virtual, Navigation, Pagination]}
-        slidesPerView={2}
-        centeredSlides={true}
-        spaceBetween={30}
-        pagination={{
-          el: ".swiper-pagination",
-          clickable: true,
-        }}
-        breakpoints={{
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 40,
-          },
-          1024: {
-            slidesPerView: 5,
-            spaceBetween: 50,
-          },
-        }}
-        navigation={true}
-        virtual
-      >
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-      </Swiper>
+    <div className="flex flex-col items-center mt-[3%]">
+      <span className="text-4xl font-semibold text-white">
+        Explore Our Products
+      </span>
+      <SwiperCoverflow from="products" data={pickleballProducts} />
     </div>
   );
 }
