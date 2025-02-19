@@ -15,7 +15,7 @@ const Product = ({ data }) => {
           <img
             className="rounded-2xl w-[300px] h-auto md:w-auto"
             src={data.image}
-            alt={data.name} // Use meaningful alt text
+            alt={data.name}
           />
         </div>
         <div className="flex items-center p-2">

@@ -16,14 +16,22 @@ export default function SwiperCoverflow({ from, data }) {
   const [openModal, setOpenModal] = useState(false);
   const [path, setPath] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isLandscape, setIsLandscape] = useState(
+    window.matchMedia("(orientation: landscape)").matches
+  );
   const swiperRef = useRef(null);
   let interval = null;
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsLandscape(window.matchMedia("(orientation: landscape)").matches);
+    };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  console.log("isLandscape", isLandscape);
 
   const startFastNavigation = (direction) => {
     if (interval) return;
@@ -74,43 +82,33 @@ export default function SwiperCoverflow({ from, data }) {
   return (
     <>
       <BasicModal path={path} open={openModal} close={closeModal} />
+      {isMobile && !isLandscape && (
+        <div className="fixed bottom-0 left-0 right-0 bg-[#B9E018] text-center py-3 animate-slideUp shadow-lg border-t-2 border-white">
+          <p className="text-lg text-gray-800 font-medium">
+            Rotate your device to landscape mode for a better viewing
+            experience!
+          </p>
+        </div>
+      )}
       <div className="relative w-[80%] h-auto mx-auto mt-4">
-        {!isMobile && (
-          <>
-            <button
-              onClick={() => swiperRef.current?.slidePrev()}
-              onMouseDown={() => startFastNavigation("prev")}
-              onMouseUp={stopFastNavigation}
-              onMouseLeave={stopFastNavigation}
-              className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 cursor-pointer
-                z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] hover:text-[#B9E018] transition duration-300 shadow-lg"
-            >
-              <img src={leftPaddle} alt="Prev" />
-            </button>
-
-            <button
-              onClick={() => swiperRef.current?.slideNext()}
-              onMouseDown={() => startFastNavigation("next")}
-              onMouseUp={stopFastNavigation}
-              onMouseLeave={stopFastNavigation}
-              className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 
-                z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] cursor-pointer hover:text-[#B9E018] transition duration-300 shadow-lg"
-            >
-              <img src={rightPaddle} alt="Next" />
-            </button>
-          </>
+        {isMobile && !isLandscape && (
+          <div className="fixed bottom-0 left-0 right-0 bg-[#B9E018] text-gray-800 text-center py-3 animate-slideUp">
+            <p className="text-lg font-medium">
+              Rotate your device to landscape mode for a better viewing
+              experience!
+            </p>
+          </div>
         )}
-
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
           centeredSlides={true}
-          slidesPerView={2}
+          slidesPerView={isLandscape ? 3 : 2} // Adjust slides for landscape
           spaceBetween={20}
           modules={[EffectCoverflow, Pagination, Navigation]}
           breakpoints={{
             640: {
-              slidesPerView: 2,
+              slidesPerView: isLandscape ? 3 : 2, // Adjust for landscape
               spaceBetween: 20,
             },
             768: {
@@ -132,7 +130,13 @@ export default function SwiperCoverflow({ from, data }) {
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           className="mySwiper"
         >
-          {from === "categories" ? categories : products}
+          {from === "categories"
+            ? categories.map((category, index) => (
+                <SwiperSlide key={index}>{category}</SwiperSlide>
+              ))
+            : products.map((product, index) => (
+                <SwiperSlide key={index}>{product}</SwiperSlide>
+              ))}
         </Swiper>
       </div>
     </>
