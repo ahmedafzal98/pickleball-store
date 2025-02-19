@@ -94,31 +94,27 @@ export default function SwiperCoverflow({ from, data }) {
         )}
         {!isMobile && (
           <>
-            {!isLandscape && (
-              <>
-                <button
-                  onClick={() => swiperRef.current?.slidePrev()}
-                  onMouseDown={() => startFastNavigation("prev")}
-                  onMouseUp={stopFastNavigation}
-                  onMouseLeave={stopFastNavigation}
-                  className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 cursor-pointer
+            <button
+              onClick={() => swiperRef.current?.slidePrev()}
+              onMouseDown={() => startFastNavigation("prev")}
+              onMouseUp={stopFastNavigation}
+              onMouseLeave={stopFastNavigation}
+              className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 cursor-pointer
             z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] hover:text-[#B9E018] transition duration-300 shadow-lg"
-                >
-                  <img src={leftPaddle} alt="Prev" />
-                </button>
+            >
+              <img src={leftPaddle} alt="Prev" />
+            </button>
 
-                <button
-                  onClick={() => swiperRef.current?.slideNext()}
-                  onMouseDown={() => startFastNavigation("next")}
-                  onMouseUp={stopFastNavigation}
-                  onMouseLeave={stopFastNavigation}
-                  className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 
+            <button
+              onClick={() => swiperRef.current?.slideNext()}
+              onMouseDown={() => startFastNavigation("next")}
+              onMouseUp={stopFastNavigation}
+              onMouseLeave={stopFastNavigation}
+              className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 
             z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] cursor-pointer hover:text-[#B9E018] transition duration-300 shadow-lg"
-                >
-                  <img src={rightPaddle} alt="Next" />
-                </button>
-              </>
-            )}
+            >
+              <img src={rightPaddle} alt="Next" />
+            </button>
           </>
         )}
 
