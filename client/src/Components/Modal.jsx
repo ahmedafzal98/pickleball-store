@@ -17,8 +17,9 @@ const style = {
 
 export default function BasicModal({ path, open, close }) {
   return (
-    <div>
+    <div className="overflow-scroll">
       <Modal
+        sx={{ overflow: "scroll" }}
         open={open}
         onClose={close}
         aria-labelledby="modal-modal-title"
