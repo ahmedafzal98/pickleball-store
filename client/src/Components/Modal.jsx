@@ -17,7 +17,7 @@ const style = {
 
 export default function BasicModal({ path, open, close }) {
   return (
-    <div className="overflow-scroll">
+    <>
       <Modal
         sx={{ overflow: "scroll" }}
         open={open}
@@ -40,6 +40,6 @@ export default function BasicModal({ path, open, close }) {
           </Typography>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
