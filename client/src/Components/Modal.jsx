@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import CloseIcon from "@mui/icons-material/Close";
 
 const style = {
   position: "absolute",
@@ -10,7 +11,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -26,6 +26,9 @@ export default function BasicModal({ path, open, close }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <div onClick={close} className="cursor-pointer">
+            <CloseIcon className="absolute top-0 right-0 mt-1 mr-6" />
+          </div>
           <img src={path} alt="Category" className="h-full" />
           <Typography
             className="font-semibold"
