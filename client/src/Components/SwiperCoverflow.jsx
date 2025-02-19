@@ -82,9 +82,9 @@ export default function SwiperCoverflow({ from, data }) {
   return (
     <>
       <BasicModal path={path} open={openModal} close={closeModal} />
-      <div className="relative w-[80%] h-auto mx-auto mt-4">
+      <div className="relative w-[80%] z-60 h-auto mx-auto mt-4">
         {isMobile && !isLandscape && (
-          <div className="fixed bottom-0 left-0 right-0 bg-[#B9E018] text-gray-800 text-center py-3 animate-slideUp">
+          <div className="fixed bottom-0 left-0 right-0 bg-[#B9E018] text-gray-800 text-center py-3 animate-slideUp z-50 shadow-lg">
             <p className="text-lg font-medium">
               Rotate your device to landscape mode for a better viewing
               experience!
