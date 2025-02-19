@@ -84,31 +84,6 @@ export default function SwiperCoverflow({ from, data }) {
       <BasicModal path={path} open={openModal} close={closeModal} />
 
       <div className="relative w-[80%] z-60 h-auto mx-auto mt-4">
-        {!isMobile && (
-          <>
-            <button
-              onClick={() => swiperRef.current?.slidePrev()}
-              onMouseDown={() => startFastNavigation("prev")}
-              onMouseUp={stopFastNavigation}
-              onMouseLeave={stopFastNavigation}
-              className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 cursor-pointer
-                z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] hover:text-[#B9E018] transition duration-300 shadow-lg"
-            >
-              <img src={leftPaddle} alt="Prev" />
-            </button>
-
-            <button
-              onClick={() => swiperRef.current?.slideNext()}
-              onMouseDown={() => startFastNavigation("next")}
-              onMouseUp={stopFastNavigation}
-              onMouseLeave={stopFastNavigation}
-              className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 
-                z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] cursor-pointer hover:text-[#B9E018] transition duration-300 shadow-lg"
-            >
-              <img src={rightPaddle} alt="Next" />
-            </button>
-          </>
-        )}
         {isMobile && !isLandscape && (
           <div className="fixed bottom-0 left-0 right-0 bg-[#B9E018] text-gray-800 text-center py-3 animate-slideUp z-50 shadow-lg">
             <p className="text-lg font-medium">
@@ -117,6 +92,36 @@ export default function SwiperCoverflow({ from, data }) {
             </p>
           </div>
         )}
+        {!isMobile && (
+          <>
+            {!isLandscape && (
+              <>
+                <button
+                  onClick={() => swiperRef.current?.slidePrev()}
+                  onMouseDown={() => startFastNavigation("prev")}
+                  onMouseUp={stopFastNavigation}
+                  onMouseLeave={stopFastNavigation}
+                  className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 cursor-pointer
+            z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] hover:text-[#B9E018] transition duration-300 shadow-lg"
+                >
+                  <img src={leftPaddle} alt="Prev" />
+                </button>
+
+                <button
+                  onClick={() => swiperRef.current?.slideNext()}
+                  onMouseDown={() => startFastNavigation("next")}
+                  onMouseUp={stopFastNavigation}
+                  onMouseLeave={stopFastNavigation}
+                  className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 
+            z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] cursor-pointer hover:text-[#B9E018] transition duration-300 shadow-lg"
+                >
+                  <img src={rightPaddle} alt="Next" />
+                </button>
+              </>
+            )}
+          </>
+        )}
+
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
