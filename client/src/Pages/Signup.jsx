@@ -4,10 +4,10 @@ import googleIcon from "../assets/icons/Icon-Google.svg";
 import { Link } from "react-router-dom";
 const Signup = () => {
   return (
-    <div className="lg:flex items-center ml-[10%] h-screen">
+    <div className="lg:flex items-center justify-center gap-10 h-screen overflow-x-hidden">
       <img className="w-fit h-fit" src={authLogo} alt="" srcset="" />
-      <div className="flex flex-col ml-[10%] md:mt-4">
-        <span className="text-[#B9E018] text-4xl font-medium">
+      <div className="flex flex-col md:mt-4 ml-4">
+        <span className="text-[#B9E018] xl:text-4xl text-3xl font-medium">
           Create an account
         </span>
         <span className="text-[#B9E018] text-base font-normal mt-3">
@@ -82,7 +82,6 @@ const Signup = () => {
         <Button
           sx={{
             marginTop: "20px",
-            width: "370px",
             backgroundColor: "#B9E018",
             color: "black",
             marginRight: "20px",
@@ -96,9 +95,7 @@ const Signup = () => {
         <Button
           sx={{
             marginTop: "20px",
-            width: "370px",
             display: "flex",
-            justifyContent: "space-evenly",
             marginRight: "20px",
             alignItems: "center",
             border: "1px solid #B9E018",
@@ -107,10 +104,10 @@ const Signup = () => {
           }}
           variant="outlined"
         >
-          <img src={googleIcon} alt="Google Icon" srcset="" />
+          <img src={googleIcon} alt="Google Icon" className="mr-3" />
           Sign up with Google
         </Button>
-        <div className="flex text-whiteitems-center justify-center text-white opacity-50 mt-2">
+        <div className="flex text-whiteitems-center justify-center text-white opacity-50 mt-2 mb-4">
           <span>Already have account ? </span>
           <span>
             <Link to="/login" href="">

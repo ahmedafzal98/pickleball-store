@@ -3,10 +3,10 @@ import authLogo from "../assets/images/auth-img.png";
 import { Link } from "react-router-dom";
 const Login = () => {
   return (
-    <div className="flex items-center ml-[10%] h-screen">
+    <div className="lg:flex items-center justify-center h-screen gap-10 overflow-x-hidden">
       <img className="w-fit h-fit" src={authLogo} alt="" srcset="" />
-      <div className="flex flex-col ml-[10%]">
-        <span className="text-[#B9E018] text-4xl font-medium">
+      <div className="flex flex-col ml-4 mr-4">
+        <span className="text-[#B9E018] text-3xl xl:text-4xl font-medium">
           Log in to Exclusive
         </span>
         <span className="text-[#B9E018] text-base font-normal mt-4">
