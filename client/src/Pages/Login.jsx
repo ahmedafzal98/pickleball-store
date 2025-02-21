@@ -1,6 +1,5 @@
 import { Button, TextField } from "@mui/material";
 import authLogo from "../assets/images/auth-img.png";
-import googleIcon from "../assets/icons/icon-Google.svg";
 import { Link } from "react-router-dom";
 const Login = () => {
   return (
