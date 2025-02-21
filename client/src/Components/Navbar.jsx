@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import categories from "../../data/categories";
 import allCategories from "../../data/allCategories";
 import CategoryIcon from "@mui/icons-material/Category";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,11 +48,13 @@ const Navbar = () => {
   return (
     <nav className="flex flex-col justify-center items-center bg-black p-2">
       <div className="flex justify-around items-center w-4/5 text-white">
-        <img
-          className="w-[200px] xl:w-[295px] cursor-pointer hover:scale-125 transition-transform duration-300"
-          src={logo}
-          alt="Logo"
-        />
+        <Link to="/">
+          <img
+            className="w-[200px] xl:w-[295px] cursor-pointer hover:scale-125 transition-transform duration-300"
+            src={logo}
+            alt="Logo"
+          />
+        </Link>
         <ul className="hidden xl:flex">
           <li
             className="relative text-base font-sans font-semibold p-3"
@@ -128,17 +131,21 @@ const Navbar = () => {
           </Tooltip>
 
           <Tooltip title="Shopping Cart">
-            <img
-              className="cursor-pointer hover:scale-125 transition-transform duration-300"
-              src={cart}
-            />
+            <Link to={"/cart"}>
+              <img
+                className="cursor-pointer hover:scale-125 transition-transform duration-300"
+                src={cart}
+              />
+            </Link>
           </Tooltip>
 
           <Tooltip title="Signup">
-            <img
-              className="cursor-pointer hover:scale-125 transition-transform duration-300"
-              src={user}
-            />
+            <Link to={"/signup"}>
+              <img
+                className="cursor-pointer hover:scale-125 transition-transform duration-300"
+                src={user}
+              />
+            </Link>
           </Tooltip>
         </div>
         <div

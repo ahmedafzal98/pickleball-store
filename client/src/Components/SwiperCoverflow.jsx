@@ -31,8 +31,6 @@ export default function SwiperCoverflow({ from, data }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  console.log("isLandscape", isLandscape);
-
   const startFastNavigation = (direction) => {
     if (interval) return;
     interval = setInterval(() => {
