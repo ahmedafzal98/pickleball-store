@@ -178,17 +178,21 @@ const Navbar = () => {
               </Tooltip>
 
               <Tooltip title="Shopping Cart">
-                <img
-                  className="cursor-pointer hover:scale-125 transition-transform duration-300"
-                  src={cart}
-                />
+                <Link to="/cart">
+                  <img
+                    className="cursor-pointer hover:scale-125 transition-transform duration-300"
+                    src={cart}
+                  />
+                </Link>
               </Tooltip>
 
               <Tooltip title="Signup">
-                <img
-                  className="cursor-pointer hover:scale-125 transition-transform duration-300"
-                  src={user}
-                />
+                <Link to="/signup">
+                  <img
+                    className="cursor-pointer hover:scale-125 transition-transform duration-300"
+                    src={user}
+                  />
+                </Link>
               </Tooltip>
             </div>
             {options.map((item, index) => {
