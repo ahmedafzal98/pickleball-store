@@ -119,16 +119,23 @@ const Navbar = () => {
         </ul>
 
         <div className="hidden xl:flex gap-10">
-          <span className="text-base font-sans font-semibold">
+          {/* <span className="text-base font-sans font-semibold">
             (123) 456 7890
-          </span>
+          </span> */}
 
-          <Tooltip title="Search">
-            <img
-              className="cursor-pointer hover:scale-125 transition-transform duration-300"
-              src={search}
+          <div className="bg-[#F5F5F5] flex h-9 w-60 items-center justify-between p-2.5 rounded-md">
+            <input
+              type="text"
+              placeholder="What are you looking for ?"
+              className="h-9 text-black outline-none"
             />
-          </Tooltip>
+            <Tooltip title="Search">
+              <img
+                className="cursor-pointer hover:scale-125 transition-transform duration-300 h-5 w-5"
+                src={search}
+              />
+            </Tooltip>
+          </div>
 
           <Tooltip title="Shopping Cart">
             <Link to={"/cart"}>

@@ -1,15 +1,13 @@
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
-import NumberInput from "../Components/Counter";
 import image1 from "../assets/images/apparel.webp";
 import image2 from "../assets/images/apparel2.webp";
 import Counter from "../Components/Counter";
-import { useEffect, useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
-import { Badge, Button, ButtonBase, Tooltip } from "@mui/material";
+import { useState } from "react";
+import { Badge, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const [quantity, setQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -58,7 +56,7 @@ const Cart = () => {
     <>
       <Navbar />
       <div className="flex justify-center">
-        <div className="w-2/3 mt-4">
+        <div className="w-2/3 mt-8">
           <span className="text-4xl text-[#B9E018]">Cart</span>
 
           {/* Table Structure */}
@@ -124,7 +122,7 @@ const Cart = () => {
             sx={{
               width: "218px",
               height: "56px",
-              marginTop: "20px",
+              marginTop: "3%",
               border: "1px solid #B9E018",
               color: "white",
             }}
@@ -172,18 +170,20 @@ const Cart = () => {
               <span className="text-base font-normal text-white">$1750</span>
             </div>
             <div className="flex justify-center items-center">
-              <Button
-                sx={{
-                  width: "260px",
-                  height: "56px",
-                  marginTop: "20px",
-                  color: "black",
-                  backgroundColor: "#B9E018",
-                }}
-                variant="contained"
-              >
-                Process To Checkout
-              </Button>
+              <Link to="/checkout">
+                <Button
+                  sx={{
+                    width: "260px",
+                    height: "56px",
+                    marginTop: "20px",
+                    color: "black",
+                    backgroundColor: "#B9E018",
+                  }}
+                  variant="contained"
+                >
+                  Process To Checkout
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

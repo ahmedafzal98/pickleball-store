@@ -4,9 +4,9 @@ import googleIcon from "../assets/icons/Icon-Google.svg";
 import { Link } from "react-router-dom";
 const Signup = () => {
   return (
-    <div className="flex items-center ml-[10%] h-screen">
+    <div className="lg:flex items-center ml-[10%] h-screen">
       <img className="w-fit h-fit" src={authLogo} alt="" srcset="" />
-      <div className="flex flex-col ml-[10%]">
+      <div className="flex flex-col ml-[10%] md:mt-4">
         <span className="text-[#B9E018] text-4xl font-medium">
           Create an account
         </span>
@@ -17,6 +17,7 @@ const Signup = () => {
           variant="standard"
           label="Name"
           sx={{
+            marginRight: "20px",
             marginTop: "20px",
             "& .MuiInput-underline:before": {
               borderBottomColor: "white",
@@ -39,6 +40,7 @@ const Signup = () => {
           label="Email or Phone Number"
           sx={{
             marginTop: "20px",
+            marginRight: "20px",
             "& .MuiInput-underline:before": {
               borderBottomColor: "white",
               opacity: 0.42,
@@ -60,6 +62,7 @@ const Signup = () => {
           label="Password"
           sx={{
             marginTop: "20px",
+            marginRight: "20px",
             "& .MuiInput-underline:before": {
               borderBottomColor: "white",
               opacity: 0.42,
@@ -82,6 +85,7 @@ const Signup = () => {
             width: "370px",
             backgroundColor: "#B9E018",
             color: "black",
+            marginRight: "20px",
             fontSize: "16px",
             fontWeight: 400,
           }}
@@ -95,6 +99,7 @@ const Signup = () => {
             width: "370px",
             display: "flex",
             justifyContent: "space-evenly",
+            marginRight: "20px",
             alignItems: "center",
             border: "1px solid #B9E018",
             color: "white",
