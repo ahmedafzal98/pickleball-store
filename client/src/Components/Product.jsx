@@ -13,25 +13,36 @@ const Product = ({ data }) => {
           </div>
 
           <img
-            className="rounded-2xl w-[300px] h-auto md:w-auto"
+            className="h-full"
+            style={{
+              WebkitBoxReflect:
+                "below 10px linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.05), transparent)",
+              filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.3))",
+              transition: "transform 0.3s ease-in-out",
+              borderRadius: "10px",
+            }}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.transform = "scale(1.05)")
+            }
+            onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
             src={data.image}
             alt={data.name}
           />
         </div>
         <div className="flex items-center p-2">
           <Rating name="half-rating" value={data.rating} precision={1} />
-          <span className="text-white opacity-60 text-base xl:text-2xl">
+          <span className="text-white opacity-60 text-base xl:text-1xl">
             (1,203)
           </span>
         </div>
-        <span className="font-semibold text-base lg:text-3xl xl:text-4xl text-white">
+        <span className="font-semibold text-base xl:text-2xl text-white">
           {data.name}
         </span>
         <div className="flex items-center gap-2 p-2">
-          <span className="text-[#B9E018] font-bold xl:text-[28px]">
+          <span className="text-[#B9E018] font-bold text-base xl:text-2xl">
             ${data.price}
           </span>
-          <span className="text-white font-normal xl:text-[26px] opacity-60 line-through">
+          <span className="text-white font-normal text-base xl:text-1xl opacity-60 line-through">
             $350.99
           </span>
         </div>

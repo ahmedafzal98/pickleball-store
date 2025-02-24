@@ -41,13 +41,13 @@ const Checkout = () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center">
-        <div className="w-2/3 mt-[3%]">
-          <span className="text-4xl text-[#B9E018] font-medium">
+      <div className="flex ml-3 md:justify-center">
+        <div className="xl:w-2/3 mt-[3%] mr-6">
+          <span className="text-3xl xl:text-4xl text-[#B9E018] font-medium">
             Billing Details
           </span>
 
-          <form className="flex justify-between" action="">
+          <form className="lg:flex justify-between" action="">
             <div className="mt-[2%] flex flex-col">
               <div className="mt-[4%] flex flex-col">
                 <label className="text-base text-white opacity-60">
@@ -55,7 +55,7 @@ const Checkout = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-[470px] outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
                 />
               </div>
               <div className="mt-[5%] flex flex-col">
@@ -64,7 +64,7 @@ const Checkout = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-[470px] outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
                 />
               </div>
               <div className="mt-[5%] flex flex-col">
@@ -73,7 +73,7 @@ const Checkout = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-[470px] outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
                 />
               </div>
               <div className="mt-[5%] flex flex-col">
@@ -82,7 +82,7 @@ const Checkout = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-[470px] outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
                 />
               </div>
               <div className="mt-[5%] flex flex-col">
@@ -91,7 +91,7 @@ const Checkout = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-[470px] outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
                 />
               </div>
               <div className="mt-[5%] flex flex-col">
@@ -100,7 +100,7 @@ const Checkout = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-[470px] outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
                 />
               </div>
               <div className="mt-[5%] flex flex-col">
@@ -109,7 +109,7 @@ const Checkout = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-[470px] outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
                 />
               </div>
               <div className="flex flex-col">
@@ -122,7 +122,7 @@ const Checkout = () => {
                 </label>
               </div>
             </div>
-            <div className="flex flex-col items-center w-[500px] h-[600px]">
+            <div className="flex flex-col items-center">
               <div className="w-4/5">
                 {order &&
                   order.map((item) => {
@@ -169,7 +169,7 @@ const Checkout = () => {
                   <FormControl>
                     <RadioGroup name="radio-buttons">
                       {/* First Radio Button with Label and Image */}
-                      <div className="flex items-center justify-between">
+                      <div className="xl:flex items-center justify-between">
                         <FormControlLabel
                           value="ahmed"
                           control={
@@ -204,9 +204,9 @@ const Checkout = () => {
                   </FormControl>
                 </Box>
 
-                <div className="flex justify-between mt-3 gap-2">
+                <div className="flex justify-between mt-3 gap-2 w-fit">
                   <input
-                    className="w-[300px] h-14 text-white pl-3 border border-[#B9E018] outline-none bg-transparent rounded-sm"
+                    className="w-auto h-14 text-white pl-3 border border-[#B9E018] outline-none bg-transparent rounded-sm"
                     type="text"
                     placeholder="Coupon Code"
                   />
@@ -215,7 +215,6 @@ const Checkout = () => {
                       color: "black",
                       backgroundColor: "#B9E018",
                       height: "56px",
-                      width: "211px",
                     }}
                     variant="contained"
                   >

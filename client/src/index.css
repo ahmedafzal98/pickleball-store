@@ -50,6 +50,22 @@ body {
   background-color: #A0C814 !important; /* Slightly darker green */
 }
 
+/* Custom scrollbar styles */
+.custom-scrollbar {
+  background: rgba(255, 255, 255, 0.1); /* Light gray track with transparency */
+  border-radius: 10px; /* Rounded corners */
+  height: 6px; /* Adjust height as needed */
+  position: relative;
+  margin-top: 20px; /* Space above the scrollbar */
+}
+
+.custom-scrollbar .swiper-scrollbar-drag {
+  background: #B9E018; /* Bright green handle */
+  border-radius: 10px; /* Rounded corners */
+  height: 100%; /* Full height of the track */
+}
+
+
 @keyframes slideUp {
   from {
     transform: translateY(100%);

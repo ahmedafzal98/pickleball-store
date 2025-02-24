@@ -55,8 +55,8 @@ const Cart = () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center">
-        <div className="w-2/3 mt-8">
+      <div className="flex justify-center overflow-x-hidden">
+        <div className="xl:w-2/3 mt-8 ml-2 mr-2">
           <span className="text-4xl text-[#B9E018]">Cart</span>
 
           {/* Table Structure */}
@@ -67,7 +67,7 @@ const Cart = () => {
                 cartOptions.map((option, index) => (
                   <span
                     key={index}
-                    className="text-white text-base font-semibold text-center"
+                    className="text-white text-[12px] xl:text-base font-semibold text-center"
                   >
                     {option}
                   </span>
@@ -120,7 +120,7 @@ const Cart = () => {
           </div>
           <Button
             sx={{
-              width: "218px",
+              width: "auto",
               height: "56px",
               marginTop: "3%",
               border: "1px solid #B9E018",
@@ -131,16 +131,16 @@ const Cart = () => {
             Return To Shop
           </Button>
 
-          <div className="flex justify-between mt-[5%] bg-[#B9E0181F] w-[527px] h-[56px]">
+          <div className="flex justify-between mt-[5%] bg-[#B9E0181F] w-fit h-[56px]">
             <input
-              className="text-white w-[300px] h-full pl-2"
+              className="text-white w-fit h-full pl-2"
               type="text"
               placeholder="Coupon Code"
             />
             <Button
               sx={{
                 height: "auto",
-                width: "211px",
+                width: "auto",
                 backgroundColor: "#B9E018",
                 color: "black",
               }}
@@ -149,7 +149,7 @@ const Cart = () => {
               Apply Coupon
             </Button>
           </div>
-          <div className="w-[470px] h-[324px] float-right">
+          <div className="w-auto h-[324px] xl:float-right mt-4">
             <span className="text-white text-2xl font-medium">Cart Total</span>
             <div className="flex justify-between mt-[5%]">
               <span className="text-base font-normal text-white">

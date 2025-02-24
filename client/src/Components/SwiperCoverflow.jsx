@@ -1,18 +1,24 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import {
+  EffectCoverflow,
+  Pagination,
+  Navigation,
+  Scrollbar,
+} from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 import leftPaddle from "../assets/icons/leftPaddle.svg";
-import rightPaddle from "../assets/icons/rightPaddle.svg";
+import rightPickleball from "../assets/icons/rightPaddle.svg";
 import Product from "./Product";
 import pickleballProducts from "../../data/pickleballProducts";
 import BasicModal from "./Modal";
 
-export default function SwiperCoverflow({ from, data }) {
+export default function SwiperCoverflow({ from, data, title }) {
   const [openModal, setOpenModal] = useState(false);
   const [path, setPath] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -27,6 +33,7 @@ export default function SwiperCoverflow({ from, data }) {
       setIsMobile(window.innerWidth <= 768);
       setIsLandscape(window.matchMedia("(orientation: landscape)").matches);
     };
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -59,12 +66,30 @@ export default function SwiperCoverflow({ from, data }) {
   const categories =
     data &&
     data.map((path, index) => (
-      <SwiperSlide className="mt-[3%]" key={index}>
+      <SwiperSlide className="" key={index}>
         <div
+          style={{ height: "500px", perspective: "250px" }}
           onClick={() => handleModal(path)}
           className="w-full flex items-center justify-center rounded-lg"
         >
-          <img src={path} alt="Category" className="h-full" />
+          <a href="#" style={{ width: "450px", display: "block" }}>
+            <img
+              style={{
+                WebkitBoxReflect:
+                  "below 10px linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.05), transparent)",
+                filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.3))",
+                transition: "transform 0.3s ease-in-out",
+                borderRadius: "10px",
+              }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.transform = "scale(1.05)")
+              }
+              onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+              src={path}
+              alt="Category"
+              className="h-full"
+            />
+          </a>
         </div>
       </SwiperSlide>
     ));
@@ -81,15 +106,22 @@ export default function SwiperCoverflow({ from, data }) {
     <>
       <BasicModal path={path} open={openModal} close={closeModal} />
 
-      <div className="relative w-[80%] z-60 h-auto mx-auto mt-4">
-        {isMobile && !isLandscape && (
-          <div className="fixed bottom-0 left-0 right-0 bg-[#B9E018] text-gray-800 text-center py-3 animate-slideUp z-50 shadow-lg">
-            <p className="text-lg font-medium">
-              Rotate your device to landscape mode for a better viewing
-              experience!
-            </p>
-          </div>
-        )}
+      {/* Rotate Device Message for Mobile Portrait Mode */}
+      {isMobile && !isLandscape && (
+        <div className="fixed bottom-0 left-0 right-0 bg-[#B9E018] text-gray-800 text-center py-3 animate-slideUp z-50 shadow-lg">
+          <p className="text-lg font-medium">
+            Rotate your device to landscape mode for a better viewing
+            experience!
+          </p>
+        </div>
+      )}
+
+      {/* Cover Flow Container */}
+      <span className="text-white font-semibold text-base xl:text-4xl">
+        {title}
+      </span>
+      <div className="relative w-[80%] h-auto mx-auto mt-4">
+        {/* Navigation Buttons */}
         {!isMobile && (
           <>
             <button
@@ -98,9 +130,9 @@ export default function SwiperCoverflow({ from, data }) {
               onMouseUp={stopFastNavigation}
               onMouseLeave={stopFastNavigation}
               className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 cursor-pointer
-            z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] hover:text-[#B9E018] transition duration-300 shadow-lg"
+                z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] hover:bg-[#A0C816] transition duration-300 shadow-lg"
             >
-              <img src={leftPaddle} alt="Prev" />
+              <img src={leftPaddle} alt="Previous" className="w-8 h-8" />
             </button>
 
             <button
@@ -109,20 +141,25 @@ export default function SwiperCoverflow({ from, data }) {
               onMouseUp={stopFastNavigation}
               onMouseLeave={stopFastNavigation}
               className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 
-            z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] cursor-pointer hover:text-[#B9E018] transition duration-300 shadow-lg"
+                z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] cursor-pointer hover:bg-[#A0C816] transition duration-300 shadow-lg"
             >
-              <img src={rightPaddle} alt="Next" />
+              <img src={rightPickleball} alt="Next" className="w-8 h-8" />
             </button>
           </>
         )}
 
+        {/* Swiper Component */}
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
           centeredSlides={true}
           slidesPerView={isLandscape ? 3 : 2} // Adjust slides for landscape
           spaceBetween={20}
-          modules={[EffectCoverflow, Pagination, Navigation]}
+          modules={[EffectCoverflow, Pagination, Navigation, Scrollbar]}
+          scrollbar={{
+            draggable: true,
+            el: ".custom-scrollbar", // Add a custom class
+          }}
           breakpoints={{
             640: {
               slidesPerView: isLandscape ? 3 : 2, // Adjust for landscape
@@ -142,10 +179,10 @@ export default function SwiperCoverflow({ from, data }) {
             stretch: 0,
             depth: 150,
             modifier: 1,
-            slideShadows: true,
+            slideShadows: true, // Enable slide shadows
           }}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
-          className="mySwiper"
+          className="mySwiper shadow-lg" // Add shadow to the Cover Flow
         >
           {from === "categories"
             ? categories.map((category, index) => (
@@ -155,6 +192,8 @@ export default function SwiperCoverflow({ from, data }) {
                 <SwiperSlide key={index}>{product}</SwiperSlide>
               ))}
         </Swiper>
+
+        <div className="custom-scrollbar mt-4"></div>
       </div>
     </>
   );
