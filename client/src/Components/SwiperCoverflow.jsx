@@ -68,7 +68,7 @@ export default function SwiperCoverflow({ from, data, title }) {
     data.map((path, index) => (
       <SwiperSlide className="" key={index}>
         <div
-          style={{ height: "500px", perspective: "250px" }}
+          style={{ height: "800px", perspective: "250px" }}
           onClick={() => handleModal(path)}
           className="w-full flex items-center justify-center rounded-lg"
         >
