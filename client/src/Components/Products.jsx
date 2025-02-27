@@ -9,7 +9,6 @@ import "swiper/css/navigation";
 import SwiperCoverflow from "./SwiperCoverflow";
 import pickleballProducts from "../../data/pickleballProducts";
 export default function App() {
-  const [setSwiperRef] = useState(null);
   return (
     <div className="flex flex-col items-center mt-[3%]">
       <SwiperCoverflow from="products" data={pickleballProducts} />

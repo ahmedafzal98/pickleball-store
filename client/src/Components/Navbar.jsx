@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import categories from "../../data/categories";
 import allCategories from "../../data/allCategories";
 import CategoryIcon from "@mui/icons-material/Category";
+import { categoriesInfo } from "../../data/catrgoriesInfo";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -60,18 +61,15 @@ const Navbar = () => {
             className="relative text-base font-sans font-semibold p-3"
             onMouseEnter={handleAllCategoriesMouseEnter}
             onMouseLeave={handleAllCategoriesMouseLeave}
-            style={{ position: "static", overscrollBehavior: "contain" }} // 👈 Add this
+            style={{ position: "static", overscrollBehavior: "contain" }}
           >
             <Tooltip title="All Categories">
               <CategoryIcon className="cursor-pointer" />
             </Tooltip>
 
-            {/* Mega Menu */}
             {showAllCategories && (
               <div className="fixed left-0 right-0 top-[92px] w-full bg-black shadow-lg p-6 transition-all duration-300 ease-in-out opacity-100 max-h-[500px] overflow-y-auto z-50">
                 <div className="container mx-auto">
-                  {" "}
-                  {/* 👈 Add a container for alignment */}
                   <div className="grid grid-cols-6 gap-3">
                     {allCategories.map((item, index) => (
                       <span
@@ -118,7 +116,7 @@ const Navbar = () => {
           })}
         </ul>
 
-        <div className="hidden xl:flex gap-10">
+        <div className="items-center hidden xl:flex gap-10">
           {/* <span className="text-base font-sans font-semibold">
             (123) 456 7890
           </span> */}
@@ -131,7 +129,7 @@ const Navbar = () => {
             />
             <Tooltip title="Search">
               <img
-                className="cursor-pointer hover:scale-125 transition-transform duration-300 h-5 w-5"
+                className="cursor-pointer hover:scale-125 transition-transform duration-300 h-4 w-4"
                 src={search}
               />
             </Tooltip>

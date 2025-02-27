@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "./Button";
 import SearchBar from "./SearchBar";
 
@@ -15,7 +16,9 @@ const Banner = () => {
           </span>
           <SearchBar />`
           <div className="flex space-x-4">
-            <Button title="CART" backgroundColor="bg-[#B9E018]" />
+            <Link to="/cart">
+              <Button title="CART" backgroundColor="bg-[#B9E018]" />
+            </Link>
             <Button title="ABOUT US" textColor="#B9E018" isIcon="true" />
           </div>
           `

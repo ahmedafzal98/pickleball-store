@@ -98,7 +98,7 @@ const Cart = () => {
                         className="w-12 h-12"
                         src={cart.image}
                         alt="Product"
-                      />
+                      ></img>
                     </Badge>
                   </div>
 
