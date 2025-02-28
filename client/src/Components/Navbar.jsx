@@ -47,7 +47,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex flex-col justify-center items-center bg-black p-2">
+    <nav className="flex flex-col justify-center items-center bg-black p-2 relative z-[1000]">
       <div className="flex justify-around items-center w-4/5 text-white">
         <Link to="/">
           <img

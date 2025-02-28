@@ -9,7 +9,6 @@ import SwiperCoverflow from "../Components/SwiperCoverflow";
 const Home = () => {
   return (
     <>
-      <Navbar />
       <Banner />
       <Categories />
       <Products />
