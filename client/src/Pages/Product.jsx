@@ -5,8 +5,8 @@ import { Button, Rating } from "@mui/material";
 import { useState } from "react";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import delieveryIcon from "../assets/icons/icon-delivery.svg";
-import returnIcon from "../assets/icons/Icon-return.svg";
+import DelieveryIcon from "../assets/icons/icon-delivery.svg";
+import ReturnIcon from "../assets/icons/Icon-return.svg";
 import SwiperCoverflow from "../Components/SwiperCoverflow";
 const Product = () => {
   const sizes = ["XS", "S", "M", "L", "XL"];
@@ -132,7 +132,7 @@ const Product = () => {
               <div className="w-full h-[180px] flex flex-col items-center justify-evenly border rounded-sm mt-[8%] border-[rgba(255,255,255,0.5)]">
                 <div className="w-[332px] h-[50px] flex justify-start items-center">
                   <div className="flex">
-                    <img src={delieveryIcon} alt="Delievery Icon" srcset="" />
+                    <img src={DelieveryIcon} alt="Delievery Icon" srcset="" />
                   </div>
                   <div className="flex flex-col ml-3">
                     <span className="text-white font-medium text-[16px]">
@@ -148,7 +148,7 @@ const Product = () => {
                 <div className="w-[100%] h-[1px] bg-white opacity-45"></div>
                 <div className="w-[332px] h-[50px] flex justify-start items-center">
                   <div className="flex">
-                    <img src={returnIcon} alt="Delievery Icon" srcset="" />
+                    <img src={ReturnIcon} alt="Delievery Icon" srcset="" />
                   </div>
                   <div className="flex flex-col ml-3">
                     <span className="text-white font-medium text-[16px]">
