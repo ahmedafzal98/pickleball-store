@@ -5,8 +5,8 @@ import { Button, Rating } from "@mui/material";
 import { useState } from "react";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import DelieveryIcon from "../assets/icons/icon-delivery.svg";
-import ReturnIcon from "../assets/icons/icon-return.svg";
+import DelieveryIcon from "../assets/icons/icon_delivery.svg";
+import ReturnIcon from "../assets/icons/icon_return.svg";
 import SwiperCoverflow from "../Components/SwiperCoverflow";
 const Product = () => {
   const sizes = ["XS", "S", "M", "L", "XL"];
