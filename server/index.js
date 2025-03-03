@@ -19,6 +19,14 @@ app.post("/ebay-deletion", (req, res) => {
   res.status(200).send("Received");
 });
 
+app.get("/ebay-deletion", (req, res) => {
+  console.log("Received GET request from eBay:", req);
+
+  // eBay sends a challenge request during verification
+
+  res.status(200).send(VERIFICATION_TOKEN);
+});
+
 // Listen on the correct port for Render
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
