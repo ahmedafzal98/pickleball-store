@@ -8,7 +8,13 @@ import AddIcon from "@mui/icons-material/Add";
 import DelieveryIcon from "../assets/icons/icon_delivery.svg";
 import ReturnIcon from "../assets/icons/icon_return.svg";
 import SwiperCoverflow from "../Components/SwiperCoverflow";
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Product = () => {
+  const selectedProduct = useSelector(
+    (state) => state.products.selectedProduct
+  );
+
   const sizes = ["XS", "S", "M", "L", "XL"];
 
   const [activeSize, setActiveSize] = useState();
@@ -17,7 +23,6 @@ const Product = () => {
 
   const handleActiveSize = (index) => {
     setActiveSize(index);
-    console.log(index);
   };
   const handleIncrement = () => {
     setActiveOperator("+");
@@ -38,7 +43,7 @@ const Product = () => {
         <div className="w-2/3">
           <div className="flex flex-col w-2/5 gap-4">
             <span className="text-white font-semibold text-2xl tracking-widest">
-              Havic HV G-92 Gamepad
+              {selectedProduct.title}
             </span>
             <div className="flex w-3/4 justify-between">
               <Rating defaultValue={5} />
@@ -50,7 +55,9 @@ const Product = () => {
                 In Stock
               </span>
             </div>
-            <span className="text-white text-2xl font-normal">$192.00</span>
+            <span className="text-white text-2xl font-normal">
+              {`$${selectedProduct.price.value}`}
+            </span>
             <div className="w-100 h-20 overflow-auto">
               <span className="text-white whitespace-normal">
                 PlayStation 5 Controller Skin High quality vinyl with air
@@ -119,6 +126,8 @@ const Product = () => {
                 </div>
                 {/* <div className="w-[1px] h-full bg-white"></div> */}
                 <Button
+                  href={`${selectedProduct.itemWebUrl}&campid=5339094537`}
+                  target="_blank"
                   sx={{
                     marginLeft: "20px",
                     backgroundColor: "#B9E018",

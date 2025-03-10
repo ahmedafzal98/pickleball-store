@@ -17,8 +17,11 @@ import rightPickleball from "../assets/icons/rightPaddle.svg";
 import Product from "./Product";
 import pickleballProducts from "../../data/pickleballProducts";
 import BasicModal from "./Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { setSelectedProduct } from "../../store/features/productSlice";
 
-export default function SwiperCoverflow({ from, data, title }) {
+export default function SwiperCoverflow({ from, data, title, items }) {
   const [openModal, setOpenModal] = useState(false);
   const [path, setPath] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -27,6 +30,13 @@ export default function SwiperCoverflow({ from, data, title }) {
   );
   const swiperRef = useRef(null);
   let interval = null;
+
+  const selectedProduct = useSelector(
+    (state) => state.products.selectedProduct
+  );
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,6 +47,14 @@ export default function SwiperCoverflow({ from, data, title }) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const getProduct = (id) => {
+    const product = items.find((item) => item.itemId === id);
+    dispatch(setSelectedProduct(product));
+    navigate("/product");
+
+    // navigate("/product", { state: { product: selectedProduct } });
+  };
 
   const startFastNavigation = (direction) => {
     if (interval) return;
@@ -95,9 +113,13 @@ export default function SwiperCoverflow({ from, data, title }) {
     ));
 
   const products =
-    pickleballProducts &&
-    pickleballProducts.map((item) => (
-      <SwiperSlide className="mt-[3%]" key={item.id}>
+    items &&
+    items.map((item) => (
+      <SwiperSlide
+        onClick={() => getProduct(item.itemId)}
+        className="mt-[3%]"
+        key={item.itemId}
+      >
         <Product data={item} />
       </SwiperSlide>
     ));
@@ -153,7 +175,7 @@ export default function SwiperCoverflow({ from, data, title }) {
           effect={"coverflow"}
           grabCursor={true}
           centeredSlides={true}
-          slidesPerView={isLandscape ? 3 : 2} // Adjust slides for landscape
+          slidesPerView={2} // Adjust slides for landscape
           spaceBetween={20}
           modules={[EffectCoverflow, Pagination, Navigation, Scrollbar]}
           scrollbar={{
@@ -185,10 +207,12 @@ export default function SwiperCoverflow({ from, data, title }) {
           className="mySwiper shadow-lg" // Add shadow to the Cover Flow
         >
           {from === "categories"
-            ? categories.map((category, index) => (
+            ? categories &&
+              categories.map((category, index) => (
                 <SwiperSlide key={index}>{category}</SwiperSlide>
               ))
-            : products.map((product, index) => (
+            : products &&
+              products.map((product, index) => (
                 <SwiperSlide key={index}>{product}</SwiperSlide>
               ))}
         </Swiper>

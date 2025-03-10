@@ -8,8 +8,16 @@ import "swiper/css/thumbs";
 import categoryImages from "../../data/categoryImages";
 
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { useSelector } from "react-redux";
 
 export default function SwiperGallery() {
+  const selectedProduct = useSelector(
+    (state) => state.products.selectedProduct
+  );
+
+  const { additionalImages } = selectedProduct;
+  console.log(selectedProduct);
+
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
@@ -26,13 +34,13 @@ export default function SwiperGallery() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {categoryImages &&
-          categoryImages.map((path) => {
+        {additionalImages &&
+          additionalImages.map((image) => {
             return (
               <SwiperSlide className="w-full h-[600px] overflow-x-hidden">
                 <img
                   className="w-full h-full object-contain rounded-md"
-                  src={path}
+                  src={image.imageUrl}
                 />
               </SwiperSlide>
             );
@@ -48,11 +56,14 @@ export default function SwiperGallery() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        {categoryImages &&
-          categoryImages.map((path) => {
+        {additionalImages &&
+          additionalImages.map((image) => {
             return (
               <SwiperSlide className="mt-4 opacity-50 cursor-pointer overflow-x-hidden">
-                <img className="rounded-sm w-fit" src={path} />
+                <img
+                  className="w-full h-full object-contain rounded-md"
+                  src={image.imageUrl}
+                />
               </SwiperSlide>
             );
           })}
