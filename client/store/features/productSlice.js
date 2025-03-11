@@ -1,11 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import loadash from "lodash";
 
-const API_URL = "https://pickleball-store-backend.onrender.com/api/ebay";
+const API_URL = "http://localhost:3000/api/ebay";
+
+export const debouncedFetch = loadash.debounce((dispatch, query) => {
+  dispatch(debouncedSearchProducts(query));
+}, 500);
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const response = fetch(API_URL);
-    return (await response).json();
+    const response = await fetch(API_URL);
+    return response.json();
+  }
+);
+
+export const debouncedSearchProducts = createAsyncThunk(
+  "debounce/fetchProducts",
+  async (query) => {
+    const response = await fetch(`${API_URL}?q=pickleball ${query || ""}`);
+
+    return await response.json();
   }
 );
 
@@ -14,6 +28,8 @@ const productSlice = createSlice({
   initialState: {
     products: [],
     status: "idle",
+    searchStatus: "idle",
+    searchedProducts: [],
     error: null,
     selectedProduct: null,
   },
@@ -33,6 +49,17 @@ const productSlice = createSlice({
       })
       .addCase(fetchProducts.rejected, (state) => {
         state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(debouncedSearchProducts.pending, (state) => {
+        state.searchStatus = "loading";
+      })
+      .addCase(debouncedSearchProducts.fulfilled, (state, action) => {
+        state.searchStatus = "success";
+        state.searchedProducts = action.payload;
+      })
+      .addCase(debouncedSearchProducts.rejected, (state) => {
+        state.searchStatus = "failed";
         state.error = action.error.message;
       });
   },

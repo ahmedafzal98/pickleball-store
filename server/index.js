@@ -49,27 +49,36 @@ app.get("/ebay-deletion", (req, res) => {
 
 // POST endpoint to handle deletion notifications
 app.post("/ebay-deletion", (req, res) => {
-  console.log("Received eBay Account Deletion Notification:", req.body);
   // Process deletion notification here if needed
   res.status(200).send("Received");
 });
 
 app.get("/api/ebay", async (req, res) => {
   try {
+    const query = req.query.q || "";
+    const finalQuery = query ? `pickleball ${query}` : `pickleball`;
+
     const response = await axios.get(
-      "https://api.ebay.com/buy/browse/v1/item_summary/search",
+      `https://api.ebay.com/buy/browse/v1/item_summary/search`,
       {
-        params: { q: "pickleball" },
+        params: { q: finalQuery, limit: 50, offset: 0 },
         headers: {
           Authorization:
-            "Bearer v^1.1#i^1#f^0#I^3#p^1#r^0#t^H4sIAAAAAAAA/+VYbWwURRju9dqShpZaBDQNP45FmkC9vf24vdvb3B25UqBXem3hri1FlOztzrYL+3Hdmeu1TYi1KMQQ+RBiimCs/NH6gTHR+BlMJCKgUTFoaoj1I6goBIxIiIak7l6Pcq0EkF5iE+/PZd55553neeZ9Z2aH6CsqXrK1duuVUtuM/ME+oi/fZiNnEsVFhVWz7PkVhXlEloNtsO++voJ++1k/5FUlwa0BMKFrEDi6VUWDXNoYwJKGxuk8lCGn8SqAHBK4aChSz1E4wSUMHemCrmCOcE0AkzwE7xUoH2AA4ZYAa1q1azFjegDziqzA+GiWB4AUPDRt9kOYBGENIl5DAYwiKMZJ0E6SiJEsx3g4yov7GO86zNECDCjrmumCE1gwDZdLjzWysN4cKg8hMJAZBAuGQyuijaFwzfKGmN+VFSuY0SGKeJSEE1vLdBE4WnglCW4+DUx7c9GkIAAIMVdwbIaJQbnQNTB3AD8ttYcmSGBOwVKMKSVD5UTKFbqh8ujmOCyLLDqltCsHNCSjnlspaqoR3wgElGk1mCHCNQ7rb3WSV2RJBkYAW14dags1NWHBUIcKxJDU64wBiJxNa2qckggEkiJp3ilKbh/rFqXMJGORMhJPmmWZromyJRh0NOioGpiIwWRd3Fm6mE6NWqMRkpCFJsuPIsb1I9dZCzq2gknUoVlrClRTBEe6eWv1x0cjZMjxJALjESZ3pOUJYHwiIYvY5M50HmZSpxsGsA6EEpzLlUql8BSN60a7iyII0rU2Uh8VOoDKYxlfq9a7oXzrAU45TUUA5kgoc6gnYWLpNvPUBKC1Y0GGZD20L6P7RFjBydZ/GLI4uyZWQ66qg5HirJsVJOCl4oyXJXNRHcFMgrosHCDO9zhV3tgEUELhBeAUzDxLqsCQRY5mJIpmJeAUPT7J6fZJkjPOiB4nKQFAABCPCz72/1Ikt5vmUSAYAOUsz3OS41XVtdUtdcv53i7QiXpJTzzSpkU9hlC/tnNVlIJSV1sr0yR11qhuPXC7lXBD8ssU2VQmZs6fSwGsWp+6CLU6RECcEr2ooCdAk67IQs/0WmDaEJt4A/VEgaKYhimRDCUS4dzt0zmh9y+2iDvjnNuz6T84l27IClrpOr1YWeOhGYBPyLh18uCCrrp03rxyWKYNULBq3UQ9Jd6yeVudVqxNkmNsZXHsmomnKeOwS8ANAPWkYd6w8Ubr5hXTNwHNPMuQoSsKMFrIKdeyqiYRH1fAdCvqHCS4zE+zg5b0ukkPTflY75R4CeljdMN025JyuQ1bhgLvbV6lXRM/6oN56R/Zb/uA6LcdzrfZCD+xiFxILCiyNxfYSyqgjAAu8xIO5XbN/FY1AL4J9CR42ci/O++zWfXiI7X1l/viyTdb/1jK5pVmvSkMPkjcO/6qUGwnZ2Y9MRDzr/cUkmX3lFIMQZMEyTIeyruOWHi9t4CcVzDnSL6yYFdX9Gd1m/DYu0vU9cPbNpcTpeNONlthXkG/LQ92fD37zxHs15OnZxwech3wD24GR+ZUv0VcPhR5Z3Zs7YqPStSnT3c8D4/X1Z36pauySrHzp574aW6t9kY49Gx5e7hkeOS5T/kz+/ZeGDhbkTr+Rdnc0UsHWqWiqhNP3n9x7+LhFwb2K2dG7to1+t5Jxw+txypPpEYPvnJutHjz8PaHhhL9QX/vys7zNJi345v9zbtXOhw7jN+YyOKXj5IvrbqwteJq76vrG546u6u8zocfeu3Lv/xXR9qbV1V9d/n1k1dWP5qKnNrfvOfFLTuH7G2VH5ZtGSh5YPfSc48/s9A7dKn/4MVvy7dvPF/28Nsrvyc+ObZo/oAa+WpPvPNj/44fa3Fy387f7Z8ffb9rbC3/Bl4p2MjtEQAA",
+            "Bearer v^1.1#i^1#I^3#r^0#p^1#f^0#t^H4sIAAAAAAAA/+VYbWwURRjuXa8lhZZqQEsQzbHUH4Xc3uzt3vVu0zu8tmCv33BHofUD92O2Xbtf3Zlre00MpT9QooSIhgRBKfIRv/CHRv2BwQRiYlCCMdKA/JBUFMUACWIkJRp3r0e5VgJIL7GJl00u88477zzPM+87M7tgsLBo6aa6TX+UOGY5hwfBoNPhoOaAosKCZXPznQsL8kCWg2N4sHzQNZT/cxXiVMVgV0Nk6BqC7n5V0RCbNoaJpKmxOodkxGqcChGLBTYebWpkfSRgDVPHuqArhDtWGyYYUBmkQ1RQ9AuSWAl5y6rdiJnQw4RASz4e+oHAMZwoMKLVj1ASxjSEOQ2HCR/w+T2A9lBUwkexDLAekvL7Owh3GzSRrGuWCwmISBoumx5rZmG9PVQOIWhiKwgRiUVXxluisdoVzYkqb1asSEaHOOZwEk1u1egidLdxShLefhqU9mbjSUGACBHeyPgMk4Oy0Rtg7gF+Wmro4zmKoQTACX6B4gI5kXKlbqocvj0O2yKLHintykINyzh1J0UtNfhnoYAzrWYrRKzWbf+tSnKKLMnQDBMrqqPt0dZWIhLtUqEYlQY8CYiwp3V1rUcSoUD5KJrziBITCjKilJlkPFJG4imz1OiaKNuCIXezjquhhRhO1YXO0sVyatFazKiEbTTZfvQN/Zhgh72g4yuYxF2avaZQtURwp5t3Vn9iNMamzCcxnIgwtSMtT5jgDEMWiamd6TzMpE4/ChNdGBus19vX10f20aRudnp9AFDedU2NcaELqhyR8bVrvR/Jdx7gkdNUBGiNRDKLU4aFpd/KUwuA1klE/FQwQIcyuk+GFZlq/Ychi7N3cjXkqjp4PkDRDOAZAINByVeZi+qIZBLUa+OAPJfyqJzZDbGhcAL0CFaeJVVoyiJL+yUfHZSgRwyEJA8TkiQP7xcDHkqCEEDI80Io+H8pkrtN8zgUTIhzluc5yfFl1XXVbfUruIFe2IMHqADf1K7FA6bQuK6nIe5DUm/7Wn+r1FOrMnr4bivhluRrFNlSJmHNn0sB7Fqfvgh1OsJQnBa9uKAbsFVXZCE1sxaYNsVWzsSpOFQUyzAtklHDiOVun84JvX+xRdwb59yeTf/BuXRLVshO15nFyh6PrACcIZP2yUMKuurVOevKYZvWI8GudQv1tHjL1m11RrG2SI6zlcXxayaZpkyiXoE0IdKTpnXDJlvsm1dC74aadZZhU1cUaLZR065lVU1ijlfgTCvqHCS4zM2wg5aqZKhKX8jHgGnxEtLH6PqZtiXlchu2Da7Ku7xKeye/1Efy0j9qyHEEDDkOOx0OUAUepZaAxYX5a1z5xQuRjCEpcxKJ5E7Nelc1IdkNUwYnm855eSfmNoob6xp/H+STn6y9ujyYV5L1TWH4KbBg4qtCUT41J+sTA1h0s6eAKi0r8fkBTVn0GcCADrDkZq+LetA1f9en5Zev7X7x5M6yml1nL5y5tvSs4AYlE04OR0Gea8iRd3T53scWd7xb+sjpKwuPnxjbULxoy+ix7s3yn9cPb2+rNSteL95zruj7z4TCNXtf85oDvaXXZw1tPd9JKiPqS8a+o6O7nZcubN93cefKPUffPvbrW28ullvGjr+646HZ8tLnyzvG1IsL7msuHjmyzbg8Fj/ZdbD+mFjx7byvzgVcGwaePDD7tHFqVdmZhpdZR1PFGN1+qqLiQuyVz1Nwf8WVg2VdjoZt330wfHUuv3vHvJ75Xxyq7612fLx8UbP7gZHfCkfXB7fO3livOze1PF5S/oP+8OZfBp57GpR+eP6nS/d/Ezy1V3qi8NAb7/sBCkXjJz4iEs+8532h4Z32/aMdVVt+bCg98PXpv5xflo+v5d+frEg27REAAA==",
           Accept: "application/json",
         },
       }
     );
-    console.log(response.data);
 
-    res.json(response.data);
+    const totalItems = response.data.itemSummaries?.length || 0;
+
+    const adjustedLimit = totalItems < 50 ? totalItems : 50;
+
+    res.json({
+      totalItems,
+      limitUsed: adjustedLimit,
+      items: response.data.itemSummaries || [],
+    });
   } catch (error) {
     res.status(500).json({ error: error });
   }

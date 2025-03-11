@@ -1,23 +1,39 @@
-import { Tooltip, Backdrop } from "@mui/material";
+import { Tooltip, Backdrop, CircularProgress } from "@mui/material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import logo from "../assets/images/logo.png";
 import search from "../assets/icons/search.svg";
 import cart from "../assets/icons/cart.svg";
 import user from "../assets/icons/user.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import categories from "../../data/categories";
 import allCategories from "../../data/allCategories";
 import CategoryIcon from "@mui/icons-material/Category";
 import { categoriesInfo } from "../../data/catrgoriesInfo";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import loadash from "lodash";
+import {
+  debouncedFetch,
+  fetchProducts,
+} from "../../store/features/productSlice";
+import useDebouncedSearch from "../hooks/useDebouncedSearch";
+import Loader from "./Loader";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   const [showAllCategories, setShowAllCategories] = useState(false);
+  const [query, setQuery] = useState("");
 
   const options = ["Brands", "Paddles", "Balls", "Shoes", "More", "Deals"];
+
+  const { searchedProducts, searchStatus } = useSelector(
+    (state) => state.products
+  );
+  const debounceSearch = useDebouncedSearch();
+
+  const { items } = searchedProducts;
 
   useEffect(() => {
     if (isOpen) {
@@ -44,6 +60,14 @@ const Navbar = () => {
 
   const handleAllCategoriesMouseLeave = () => {
     setShowAllCategories(false);
+  };
+
+  const handleSearch = (e) => {
+    setQuery(e.target.value);
+    // debouncedFetch(dispatch, searchQuery);
+    if (query.length > 2) {
+      debounceSearch(query);
+    }
   };
 
   return (
@@ -121,18 +145,57 @@ const Navbar = () => {
             (123) 456 7890
           </span> */}
 
-          <div className="bg-[#F5F5F5] flex h-9 w-60 items-center justify-between p-2.5 rounded-md">
-            <input
-              type="text"
-              placeholder="What are you looking for ?"
-              className="h-9 text-black outline-none"
-            />
-            <Tooltip title="Search">
-              <img
-                className="cursor-pointer hover:scale-125 transition-transform duration-300 h-4 w-4"
-                src={search}
+          <div className="relative w-60">
+            {/* Search Box */}
+            <div className="bg-[#F5F5F5] flex h-9 w-full items-center justify-between p-2.5 rounded-md">
+              <input
+                type="text"
+                placeholder="What are you looking for?"
+                className="h-9 w-full text-black outline-none bg-transparent"
+                onChange={handleSearch}
               />
-            </Tooltip>
+              <Tooltip title="Search">
+                {searchStatus === "loading" ? (
+                  <CircularProgress
+                    sx={{ height: "16px", width: "16px", color: "#B9E018" }}
+                  />
+                ) : (
+                  <img
+                    className="cursor-pointer hover:scale-125 transition-transform duration-300 h-4 w-4"
+                    src={search}
+                  />
+                )}
+              </Tooltip>
+            </div>
+
+            {/* Suggestions Dropdown */}
+            {query && items && items.length > 0 && (
+              <div className="absolute top-10 left-1/2 transform -translate-x-1/2 w-86 bg-white/90 border border-gray-300 shadow-xl rounded-lg max-h-64 overflow-y-auto z-50 transition-all">
+                {items.map((product, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center p-4 hover:bg-gray-200 cursor-pointer transition-all"
+                  >
+                    <img
+                      src={
+                        product.image?.imageUrl ||
+                        "https://via.placeholder.com/50"
+                      }
+                      alt={product.title}
+                      className="w-12 h-12 object-cover rounded-md mr-4"
+                    />
+                    <div>
+                      <p className="text-gray-800 font-semibold">
+                        {product.title}
+                      </p>
+                      <p className="text-gray-600 text-sm">
+                        ${product.price?.value} {product.price?.currency}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <Tooltip title="Shopping Cart">

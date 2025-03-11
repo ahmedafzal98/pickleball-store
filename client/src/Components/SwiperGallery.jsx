@@ -16,7 +16,6 @@ export default function SwiperGallery() {
   );
 
   const { additionalImages } = selectedProduct;
-  console.log(selectedProduct);
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
