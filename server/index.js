@@ -112,11 +112,8 @@ const getNewToken = async () => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error:", error.response?.data || error.message);
-    res.status(500).json({
-      error: "Failed to authenticate with eBay",
-      details: error.response?.data || error.message,
-    });
+    console.error("Token fetch failed:", error.message);
+    throw error;
   }
 };
 app.post("/api/auth", async (req, res) => {});
