@@ -45,7 +45,7 @@ const Product = () => {
             <span className="text-white font-semibold text-2xl tracking-widest">
               {selectedProduct.title}
             </span>
-            <div className="flex w-3/4 justify-between">
+            {/* <div className="flex w-3/4 justify-between">
               <Rating defaultValue={5} />
               <span className="text-white font-normal text-[14px] opacity-60">
                 (150 Reviews)
@@ -54,17 +54,17 @@ const Product = () => {
               <span className="text-[#B9E018] font-normal text-[14px] opacity-60">
                 In Stock
               </span>
-            </div>
+            </div> */}
             <span className="text-white text-2xl font-normal">
               {`$${selectedProduct.price.value}`}
             </span>
-            <div className="w-100 h-20 overflow-auto">
+            {/* <div className="w-100 h-20 overflow-auto">
               <span className="text-white whitespace-normal">
                 PlayStation 5 Controller Skin High quality vinyl with air
                 channel adhesive for easy bubble free install & mess free
                 removal Pressure sensitive.
               </span>
-            </div>
+            </div> */}
             <div className="flex mt-7 items-center">
               <span className="text-white fon">Size:</span>
               <div className="flex ml-5 w-1/2 justify-between">
