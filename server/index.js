@@ -94,7 +94,7 @@ const getNewToken = async () => {
     const clientSecret = process.env.EBAY_CLIENT_SECRET;
 
     if (!clientId || !clientSecret) {
-      return res.status(500).json({ error: "Missing eBay API credentials" });
+      throw new Error("Missing eBay API credentials");
     }
     const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString(
       "base64"
@@ -110,7 +110,9 @@ const getNewToken = async () => {
         },
       }
     );
-    return response.data;
+    console.log("eBay Token Fetched Successfully!");
+
+    return response.data.access_token;
   } catch (error) {
     console.error("Token fetch failed:", error.message);
     throw error;
