@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import loadash from "lodash";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "https://pickleball-store-backend.onrender.com/api/ebay";
 
 export const debouncedFetch = loadash.debounce((dispatch, query) => {
   dispatch(debouncedSearchProducts(query));
