@@ -73,7 +73,6 @@ app.get("/api/ebay", async (req, res) => {
     );
 
     const totalItems = response.data.itemSummaries?.length || 0;
-
     const adjustedLimit = totalItems < 50 ? totalItems : 50;
 
     res.json({
@@ -82,9 +81,13 @@ app.get("/api/ebay", async (req, res) => {
       items: response.data.itemSummaries || [],
     });
   } catch (error) {
-    res.status(500).json({ error: error });
+    console.error("🔥 ERROR:", error.response?.data || error.message); // Log the error properly
+    res
+      .status(500)
+      .json({ error: error.response?.data || "Internal Server Error" });
   }
 });
+
 const getNewToken = async () => {
   try {
     const clientId = process.env.EBAY_CLIENT_ID;
