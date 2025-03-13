@@ -57,6 +57,7 @@ app.post("/ebay-deletion", (req, res) => {
 app.get("/api/ebay", async (req, res) => {
   try {
     const token = await getToken();
+    console.log(token);
 
     const query = req.query.q || "";
     const finalQuery = query ? `pickleball ${query}` : `pickleball`;
@@ -112,7 +113,7 @@ const getNewToken = async () => {
     );
     console.log("eBay Token Fetched Successfully!");
 
-    return response.data.access_token;
+    return response.data;
   } catch (error) {
     console.error("Token fetch failed:", error.message);
     throw error;
