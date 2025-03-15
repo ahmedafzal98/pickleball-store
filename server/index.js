@@ -5,7 +5,7 @@ const axios = require("axios");
 const app = express();
 require("dotenv").config();
 
-const VERIFICATION_TOKEN = "e3201657169c22ff56df27ff881ee04d";
+const VERIFICATION_TOKEN = process.env.EBAY_VERIFICATION_TOKEN;
 // Replace with your chosen token
 
 const allowedOrigins = [
