@@ -92,6 +92,7 @@ export default function SwiperCoverflow({
   };
   const selectCategory = (category) => {
     if (category) {
+      console.log(category);
       dispatch(setSelectedCategory(category));
     }
   };
@@ -100,35 +101,44 @@ export default function SwiperCoverflow({
     allCategories.map((category, index) => (
       <SwiperSlide className="" key={index}>
         <div
-          style={{ height: "200px", perspective: "250px" }}
-          onClick={() => handleModal(path)}
-          className="w-full flex items-center justify-center rounded-lg"
+          style={{ height: "auto", perspective: "250px" }}
+          className="w-full flex flex-col items-center justify-center rounded-lg cursor-pointer"
         >
-          <h1
-            onClick={() => selectCategory(category)}
-            className="text-white font-bold cursor-pointer"
+          <div
+            onClick={() => selectCategory(category.name)}
+            style={{ width: "400px", display: "block" }}
           >
-            {category}
-          </h1>
-          {/* <a href="#" style={{ width: "450px", display: "block" }}>
             <img
               style={{
+                width: "350px",
+                height: "250px",
+                objectFit: "cover",
                 WebkitBoxReflect:
                   "below 10px linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.05), transparent)",
                 filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.3))",
-                transition: "transform 0.3s ease-in-out",
-                borderRadius: "10px",
+                transition:
+                  "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+                borderRadius: "15px", // More rounded corners for a sleek look
+                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)", // Better shadow effect
               }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.transform = "scale(1.05)")
-              }
-              onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
-              src={path}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = "scale(1.08)";
+                e.currentTarget.style.boxShadow =
+                  "0 15px 30px rgba(0, 0, 0, 0.5)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.boxShadow =
+                  "0 10px 20px rgba(0, 0, 0, 0.3)";
+              }}
+              src={category.image_url}
               alt="Category"
               className="h-full"
-              />
-            
-              </a> */}
+            />
+          </div>
+          <h1 className="text-white font-bold cursor-pointer text-3xl w-auto mt-3">
+            {category.name}
+          </h1>
         </div>
       </SwiperSlide>
     ));

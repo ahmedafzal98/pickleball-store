@@ -26,6 +26,7 @@ export const fetchCategoryProducts = createAsyncThunk(
   "category/fetchProducts",
   async (category) => {
     const response = await fetch(`${API_URL}?q=pickleball ${category || ""}`);
+
     return await response.json();
   }
 );
