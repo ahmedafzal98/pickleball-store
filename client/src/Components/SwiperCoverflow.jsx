@@ -19,9 +19,19 @@ import pickleballProducts from "../../data/pickleballProducts";
 import BasicModal from "./Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setSelectedProduct } from "../../store/features/productSlice";
+import {
+  fetchCategoryProducts,
+  setSelectedCategory,
+  setSelectedProduct,
+} from "../../store/features/productSlice";
 
-export default function SwiperCoverflow({ from, data, title, items }) {
+export default function SwiperCoverflow({
+  from,
+  data,
+  allCategories,
+  title,
+  items,
+}) {
   const [openModal, setOpenModal] = useState(false);
   const [path, setPath] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -80,17 +90,27 @@ export default function SwiperCoverflow({ from, data, title, items }) {
   const closeModal = () => {
     setOpenModal(false);
   };
-
+  const selectCategory = (category) => {
+    if (category) {
+      dispatch(setSelectedCategory(category));
+    }
+  };
   const categories =
-    data &&
-    data.map((path, index) => (
+    allCategories &&
+    allCategories.map((category, index) => (
       <SwiperSlide className="" key={index}>
         <div
-          style={{ height: "800px", perspective: "250px" }}
+          style={{ height: "200px", perspective: "250px" }}
           onClick={() => handleModal(path)}
           className="w-full flex items-center justify-center rounded-lg"
         >
-          <a href="#" style={{ width: "450px", display: "block" }}>
+          <h1
+            onClick={() => selectCategory(category)}
+            className="text-white font-bold cursor-pointer"
+          >
+            {category}
+          </h1>
+          {/* <a href="#" style={{ width: "450px", display: "block" }}>
             <img
               style={{
                 WebkitBoxReflect:
@@ -106,8 +126,9 @@ export default function SwiperCoverflow({ from, data, title, items }) {
               src={path}
               alt="Category"
               className="h-full"
-            />
-          </a>
+              />
+            
+              </a> */}
         </div>
       </SwiperSlide>
     ));
@@ -126,7 +147,7 @@ export default function SwiperCoverflow({ from, data, title, items }) {
 
   return (
     <>
-      <BasicModal path={path} open={openModal} close={closeModal} />
+      {/* <BasicModal path={path} open={openModal} close={closeModal} /> */}
 
       {/* Rotate Device Message for Mobile Portrait Mode */}
       {isMobile && !isLandscape && (

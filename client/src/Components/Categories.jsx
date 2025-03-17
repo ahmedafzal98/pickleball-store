@@ -1,5 +1,6 @@
 import SwiperCoverflow from "./SwiperCoverflow";
 import categoryImages from "../../data/categoryImages";
+import allCategories from "../../data/allCategories";
 
 const Categories = () => {
   return (
@@ -7,6 +8,7 @@ const Categories = () => {
       <SwiperCoverflow
         from="categories"
         data={categoryImages}
+        allCategories={allCategories}
         title="All Categories"
       />
     </div>

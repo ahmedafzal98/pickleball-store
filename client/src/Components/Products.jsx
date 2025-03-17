@@ -9,26 +9,29 @@ import "swiper/css/navigation";
 import SwiperCoverflow from "./SwiperCoverflow";
 import pickleballProducts from "../../data/pickleballProducts";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../store/features/productSlice";
+import {
+  fetchCategoryProducts,
+  fetchProducts,
+} from "../../store/features/productSlice";
 import { Backdrop, Box, CircularProgress } from "@mui/material";
 import Loader from "./Loader";
 export default function App() {
   const dispatch = useDispatch();
-  const { products, status, error } = useSelector((state) => state.products);
-
+  const { products, status, error, selectedCategory } = useSelector(
+    (state) => state.products
+  );
   const { items } = products;
-
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchProducts());
+    if (selectedCategory) {
+      dispatch(fetchCategoryProducts(selectedCategory));
     }
-  }, [status, dispatch]);
+  }, [selectedCategory, dispatch]);
 
   if (status === "loading") return <Loader />;
   if (status === "failed") return <h2>Error: {error}</h2>;
   return (
     <div className="flex flex-col items-center mt-[3%]">
-      <SwiperCoverflow from="products" items={items} />
+      {items && <SwiperCoverflow from="products" items={items} />}
     </div>
   );
 }

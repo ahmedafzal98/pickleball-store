@@ -22,6 +22,13 @@ export const debouncedSearchProducts = createAsyncThunk(
     return await response.json();
   }
 );
+export const fetchCategoryProducts = createAsyncThunk(
+  "category/fetchProducts",
+  async (category) => {
+    const response = await fetch(`${API_URL}?q=pickleball ${category || ""}`);
+    return await response.json();
+  }
+);
 
 const productSlice = createSlice({
   name: "products",
@@ -32,22 +39,26 @@ const productSlice = createSlice({
     searchedProducts: [],
     error: null,
     selectedProduct: null,
+    selectedCategory: null,
   },
   reducers: {
     setSelectedProduct: (state, action) => {
       state.selectedProduct = action.payload;
     },
+    setSelectedCategory: (state, action) => {
+      state.selectedCategory = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProducts.pending, (state) => {
+      .addCase(fetchCategoryProducts.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchProducts.fulfilled, (state, action) => {
+      .addCase(fetchCategoryProducts.fulfilled, (state, action) => {
         state.status = "success";
         state.products = action.payload;
       })
-      .addCase(fetchProducts.rejected, (state) => {
+      .addCase(fetchCategoryProducts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
@@ -65,5 +76,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { setSelectedProduct } = productSlice.actions;
+export const { setSelectedProduct, setSelectedCategory } = productSlice.actions;
 export default productSlice.reducer;
