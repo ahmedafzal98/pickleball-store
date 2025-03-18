@@ -131,43 +131,53 @@ const allCategories = [
   },
   {
     name: "Coolers and Ice Chests",
-    image_url: "https://example.com/images/coolers.jpg",
+    image_url:
+      "https://www.istockphoto.com/photo/bottles-of-beer-in-cooler-box-with-ice-gm504698822-83257369?utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fpickleball-Coolers-and-Ice-Chests&utm_medium=affiliate&utm_source=unsplash&utm_term=pickleball+Coolers+and+Ice+Chests%3A%3A%3A",
   },
   {
     name: "Court Cleaning Accessories",
-    image_url: "https://example.com/images/court-cleaning.jpg",
+    image_url:
+      "https://plus.unsplash.com/premium_photo-1661663379320-213541539ec8?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGlja2xlYmFsbCUyMENvdXJ0JTIwQ2xlYW5pbmclMjBBY2Nlc3Nvcmllc3xlbnwwfHwwfHx8MA%3D%3D",
   },
   {
     name: "Cups and Coffee Mugs",
-    image_url: "https://example.com/images/cups-mugs.jpg",
+    image_url:
+      "https://plus.unsplash.com/premium_photo-1719289799245-f2a2ed05ba12?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGlja2xlYmFsbCUyMEN1cHMlMjBhbmQlMjBDb2ZmZWUlMjBNdWdzfGVufDB8fDB8fHww",
   },
   {
     name: "Decals/Stickers",
-    image_url: "https://example.com/images/decals.jpg",
+    image_url:
+      "https://plus.unsplash.com/premium_photo-1675367606363-c21693655176?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGlja2xlYmFsbCUyMERlY2FscyUyRlN0aWNrZXJzfGVufDB8fDB8fHww",
   },
   {
     name: "Detox Foot Spas",
-    image_url: "https://example.com/images/foot-spas.jpg",
+    image_url:
+      "https://media.istockphoto.com/id/2148627193/photo/elderly-person-holding-a-pickleball-raquet-and-shooting-the-ball-during-a-match-play.jpg?s=612x612&w=0&k=20&c=Ezhzyr6Jr3EdtqTGp9Oiqhp5cINN10k6OCJ_eyxi6UM=",
   },
   {
     name: "Door/Dust Removing Mats",
-    image_url: "https://example.com/images/door-mats.jpg",
+    image_url:
+      "https://media.istockphoto.com/id/2184911514/photo/pickleball-court.jpg?s=612x612&w=0&k=20&c=2PpB8Yvy-HHuQO1tfUgHqObrXwZEAlsjYhDM-XhpRFs=",
   },
   {
     name: "Drilling and Practice Accessories",
-    image_url: "https://example.com/images/drilling-accessories.jpg",
+    image_url:
+      "https://media.istockphoto.com/id/2187558547/photo/kids-pickleball.jpg?s=612x612&w=0&k=20&c=V2HEuNfD1LAMgD8gvOyWUxoi_ZjQJfKQf5oVpJ9Uzn0=",
   },
   {
     name: "Edge Guard",
-    image_url: "https://example.com/images/edge-guard.jpg",
+    image_url:
+      "https://media.istockphoto.com/id/2201739802/photo/male-pickleball-player-is-next-to-pickleball-net-horizontal-pickleball-still.jpg?s=612x612&w=0&k=20&c=9yvfjZdZumI4dXum5yt3ApC5nOHehzRtKWFphuikIU4=",
   },
   {
     name: "Electrical Muscle Stimulation Suits",
-    image_url: "https://example.com/images/ems-suits.jpg",
+    image_url:
+      "https://media.istockphoto.com/id/1333370008/photo/female-athlete-wearing-electro-muscle-stimulation-suit-outdoors.jpg?s=612x612&w=0&k=20&c=nDsQWdfbo7eeKt8ugHA7cS1Wrbdgo7UTW22Srd8hrm4=",
   },
   {
     name: "Electrolytes",
-    image_url: "https://example.com/images/electrolytes.jpg",
+    image_url:
+      "https://media.istockphoto.com/id/2183287183/photo/cheerful-man-playing-pickleball.jpg?s=612x612&w=0&k=20&c=v2R7tc2HdeUHF4pc3S4BSwEvGfQ2ctQmbFBfwtXl4dQ=",
   },
   {
     name: "Emergency Contact Tags",
