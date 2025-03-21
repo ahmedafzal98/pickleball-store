@@ -14,8 +14,7 @@ const allowedOrigins = [
   "https://pickleball-store-frontend.onrender.com",
   "http://localhost:5173",
 ];
-const ENDPOINT_URL =
-  "https://pickleball-store-backend.onrender.com/ebay-deletion";
+const ENDPOINT_URL = process.env.ENDPOINT_URL;
 
 app.use(
   cors({
