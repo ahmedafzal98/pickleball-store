@@ -22,11 +22,11 @@ export default function App() {
   );
 
   const { items } = products;
-  // useEffect(() => {
-  //   if (selectedCategory) {
-  //     dispatch(fetchCategoryProducts(selectedCategory));
-  //   }
-  // }, [selectedCategory, dispatch]);
+  useEffect(() => {
+    if (selectedCategory) {
+      dispatch(fetchCategoryProducts(selectedCategory));
+    }
+  }, [selectedCategory, dispatch]);
 
   if (status === "loading") return <Loader />;
   if (status === "failed") return <h2>Error: {error}</h2>;
