@@ -3,6 +3,8 @@ const crypto = require("crypto");
 const cors = require("cors");
 const axios = require("axios");
 const app = express();
+const mongoose = require("mongoose");
+const userRoutes = require("./routes/user");
 require("dotenv").config();
 
 const VERIFICATION_TOKEN = process.env.EBAY_VERIFICATION_TOKEN;
@@ -12,8 +14,7 @@ const allowedOrigins = [
   "https://pickleball-store-frontend.onrender.com",
   "http://localhost:5173",
 ];
-const ENDPOINT_URL =
-  "https://pickleball-store-backend.onrender.com/ebay-deletion";
+const ENDPOINT_URL = process.env.BACKEND_URL;
 
 app.use(
   cors({
@@ -30,10 +31,14 @@ app.use(
 );
 app.use(express.json());
 
+//Routes
+
+app.use("/api/user", userRoutes);
+
 // GET endpoint for verification
 app.get("/ebay-deletion", (req, res) => {
   const challengeCode = req.query.challenge_code;
-  if (!challengeCode) {
+  if (!challengeCode || !VERIFICATION_TOKEN || !ENDPOINT_URL) {
     return res.status(400).send("Missing challenge_code query parameter.");
   }
 
@@ -142,4 +147,11 @@ const getToken = async () => {
 };
 // Listen on the appropriate port (Render provides the PORT env variable)
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+mongoose
+  .connect(process.env.MONGO_DB_CONNECTION_STRING)
+  .then(() => {
+    console.log("Connected To Database");
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch(() => console.log("Failed To cannect Database"));

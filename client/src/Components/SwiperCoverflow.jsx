@@ -29,6 +29,7 @@ export default function SwiperCoverflow({
   from,
   data,
   allCategories,
+  subcategories,
   title,
   items,
 }) {
@@ -47,6 +48,8 @@ export default function SwiperCoverflow({
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  console.log(allCategories);
 
   useEffect(() => {
     const handleResize = () => {
@@ -91,8 +94,9 @@ export default function SwiperCoverflow({
     setOpenModal(false);
   };
   const selectCategory = (category) => {
-    if (category) {
-      console.log(category);
+    if (category.length === 0) {
+      dispatch(setSelectedCategory(category.name));
+    } else {
       dispatch(setSelectedCategory(category));
     }
   };
@@ -105,7 +109,7 @@ export default function SwiperCoverflow({
           className="w-full flex flex-col items-center justify-center rounded-lg cursor-pointer"
         >
           <div
-            onClick={() => selectCategory(category.name)}
+            onClick={() => selectCategory(category)}
             style={{ width: "400px", display: "block" }}
           >
             <img
@@ -136,7 +140,59 @@ export default function SwiperCoverflow({
               className="h-full"
             />
           </div>
-          <h1 className="text-white font-bold cursor-pointer text-3xl w-auto mt-3">
+          <h1
+            onClick={() => selectCategory(category.subcategories)}
+            className="text-white font-bold cursor-pointer text-3xl w-auto mt-3"
+          >
+            {category.name}
+          </h1>
+        </div>
+      </SwiperSlide>
+    ));
+  const subCategories =
+    subcategories &&
+    subcategories.map((category, index) => (
+      <SwiperSlide className="" key={index}>
+        <div
+          style={{ height: "auto", perspective: "250px" }}
+          className="w-full flex flex-col items-center justify-center rounded-lg cursor-pointer"
+        >
+          <div
+            onClick={() => selectCategory(category)}
+            style={{ width: "400px", display: "block" }}
+          >
+            <img
+              style={{
+                width: "350px",
+                height: "250px",
+                objectFit: "cover",
+                WebkitBoxReflect:
+                  "below 10px linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.05), transparent)",
+                filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.3))",
+                transition:
+                  "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+                borderRadius: "15px", // More rounded corners for a sleek look
+                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)", // Better shadow effect
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = "scale(1.08)";
+                e.currentTarget.style.boxShadow =
+                  "0 15px 30px rgba(0, 0, 0, 0.5)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.boxShadow =
+                  "0 10px 20px rgba(0, 0, 0, 0.3)";
+              }}
+              src={category.image_url}
+              alt="Category"
+              className="h-full"
+            />
+          </div>
+          <h1
+            onClick={() => selectCategory(category.subcategories)}
+            className="text-white font-bold cursor-pointer text-3xl w-auto mt-3"
+          >
             {category.name}
           </h1>
         </div>
@@ -154,6 +210,34 @@ export default function SwiperCoverflow({
         <Product data={item} />
       </SwiperSlide>
     ));
+
+  const renderSlides = () => {
+    switch (from) {
+      case "categories":
+        return (
+          categories &&
+          categories.map((category, index) => (
+            <SwiperSlide key={index}>{category}</SwiperSlide>
+          ))
+        );
+      case "subcategories":
+        return (
+          subCategories &&
+          subCategories.map((subcategory, index) => (
+            <SwiperSlide key={index}>{subcategory}</SwiperSlide>
+          ))
+        );
+      case "products":
+        return (
+          products &&
+          products.map((product, index) => (
+            <SwiperSlide key={index}>{product}</SwiperSlide>
+          ))
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -237,15 +321,7 @@ export default function SwiperCoverflow({
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           className="mySwiper shadow-lg" // Add shadow to the Cover Flow
         >
-          {from === "categories"
-            ? categories &&
-              categories.map((category, index) => (
-                <SwiperSlide key={index}>{category}</SwiperSlide>
-              ))
-            : products &&
-              products.map((product, index) => (
-                <SwiperSlide key={index}>{product}</SwiperSlide>
-              ))}
+          {renderSlides()}
         </Swiper>
 
         <div className="custom-scrollbar mt-4"></div>
