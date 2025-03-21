@@ -38,8 +38,14 @@ app.use("/api/user", userRoutes);
 // GET endpoint for verification
 app.get("/ebay-deletion", (req, res) => {
   const challengeCode = req.query.challenge_code;
-  if (!challengeCode || !VERIFICATION_TOKEN || !ENDPOINT_URL) {
+  if (!challengeCode) {
     return res.status(400).send("Missing challenge_code query parameter.");
+  }
+  if (!VERIFICATION_TOKEN) {
+    return res.status(400).send("Missing VERIFICATION_TOKEN.");
+  }
+  if (!ENDPOINT_URL) {
+    return res.status(400).send("Missing ENDPOINT_URL ");
   }
 
   // Compute the hash: SHA256(challengeCode + verificationToken + endpoint URL)
