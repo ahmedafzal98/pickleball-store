@@ -5,21 +5,11 @@ import { useEffect } from "react";
 const Subcategories = ({ items }) => {
   const { selectedCategory } = useSelector((state) => state.products);
 
-  // const subcategories = selectedCategory?.subcategories;
-  console.log(selectedCategory);
+  let isSubcategories = Array.isArray(selectedCategory);
 
-  // useEffect(() => {
-  //   console.log("Updated selectedCategory:", selectedCategory);
-  // }, [selectedCategory]);
-
-  console.log(items);
-
-  return selectedCategory ? (
+  return selectedCategory && isSubcategories ? (
     <div className="flex flex-col items-center mt-[3%]">
-      <SwiperCoverflow
-        from="subcategories"
-        subcategories={selectedCategory.subcategories}
-      />
+      <SwiperCoverflow from="subcategories" subcategories={selectedCategory} />
     </div>
   ) : null;
 };

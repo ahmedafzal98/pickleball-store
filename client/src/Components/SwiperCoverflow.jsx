@@ -49,8 +49,6 @@ export default function SwiperCoverflow({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(allCategories);
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -94,10 +92,15 @@ export default function SwiperCoverflow({
     setOpenModal(false);
   };
   const selectCategory = (category) => {
-    if (category.length === 0) {
+    if (!category.hasOwnProperty("subcategories")) {
+      dispatch(setSelectedCategory(category.name));
+      return;
+    }
+    const { subcategories } = category;
+    if (subcategories.length === 0) {
       dispatch(setSelectedCategory(category.name));
     } else {
-      dispatch(setSelectedCategory(category));
+      dispatch(setSelectedCategory(subcategories));
     }
   };
   const categories =
@@ -140,10 +143,7 @@ export default function SwiperCoverflow({
               className="h-full"
             />
           </div>
-          <h1
-            onClick={() => selectCategory(category.subcategories)}
-            className="text-white font-bold cursor-pointer text-3xl w-auto mt-3"
-          >
+          <h1 className="text-white font-bold cursor-pointer text-3xl w-auto mt-3">
             {category.name}
           </h1>
         </div>

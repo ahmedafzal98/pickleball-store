@@ -25,7 +25,9 @@ export const debouncedSearchProducts = createAsyncThunk(
 export const fetchCategoryProducts = createAsyncThunk(
   "category/fetchProducts",
   async (category) => {
-    const response = await fetch(`${API_URL}?q=pickleball ${category || ""}`);
+    const url = `${API_URL}?q=${category || ""}`;
+
+    const response = await fetch(url);
 
     return await response.json();
   }

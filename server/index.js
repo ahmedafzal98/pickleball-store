@@ -68,7 +68,6 @@ app.post("/ebay-deletion", (req, res) => {
 app.get("/api/ebay", async (req, res) => {
   try {
     const token = await getToken();
-    console.log(token);
 
     const query = req.query.q || "";
     const finalQuery = query ? `pickleball ${query}` : `pickleball`;
@@ -86,6 +85,8 @@ app.get("/api/ebay", async (req, res) => {
 
     const totalItems = response.data.itemSummaries?.length || 0;
     const adjustedLimit = totalItems < 50 ? totalItems : 50;
+
+    console.log(response.data);
 
     res.json({
       totalItems,

@@ -23,7 +23,9 @@ export default function App() {
 
   const { items } = products;
   useEffect(() => {
-    if (selectedCategory) {
+    let isSelectedCategories = Array.isArray(selectedCategory);
+
+    if (selectedCategory && !isSelectedCategories) {
       dispatch(fetchCategoryProducts(selectedCategory));
     }
   }, [selectedCategory, dispatch]);
