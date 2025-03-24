@@ -100,7 +100,7 @@ const Navbar = () => {
                         key={index}
                         className="text-white block p-3 rounded-md text-base font-semibold opacity-80 hover:bg-[#B9E018] cursor-pointer transition-all duration-200"
                       >
-                        {item}
+                        {item.name}
                       </span>
                     ))}
                   </div>
@@ -109,7 +109,7 @@ const Navbar = () => {
             )}
           </li>
 
-          {Object.keys(categories).map((category) => {
+          {/* {Object.keys(categories).map((category) => {
             return (
               <li
                 key={category}
@@ -137,8 +137,18 @@ const Navbar = () => {
                 )}
               </li>
             );
-          })}
+          })} */}
         </ul>
+
+        {options.map((item, index) => {
+          return (
+            <ul key={index} className="mt-2.5">
+              <li className="text-base font-sans font-semibold p-3">
+                <a href="">{item}</a>
+              </li>
+            </ul>
+          );
+        })}
 
         <div className="items-center hidden xl:flex gap-10">
           {/* <span className="text-base font-sans font-semibold">

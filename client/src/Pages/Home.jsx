@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Banner />
       <Categories />
       <Subcategories />

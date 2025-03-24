@@ -32,77 +32,17 @@ const Signup = () => {
           <span className="text-[#B9E018] text-base font-normal mt-3">
             Enter your details below
           </span>
-          <TextField
-            variant="standard"
-            label="Name"
-            sx={{
-              color: "white",
-              marginRight: "20px",
-              marginTop: "20px",
-              "& .MuiInput-underline:before": {
-                borderBottomColor: "white",
-                opacity: 0.42,
-              },
-              "& .MuiInput-underline:hover:before": {
-                borderBottomColor: "white",
-                opacity: 0.42,
-              },
-              "& .MuiInput-underline:after": {
-                borderBottomColor: "white",
-                opacity: 0.42,
-              },
-              "& .MuiInputLabel-root": { color: "white", opacity: 0.42 }, // Label color
-              "& .MuiInputLabel-root.Mui-focused": { color: "white" }, // Label color when focused
-            }}
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="Enter Name"
+            className="text-white"
           />
-          <TextField
-            variant="standard"
-            label="Email or Phone Number"
-            onChange={(e) => setEmail(e.target.value)}
-            sx={{
-              color: "white",
-              marginTop: "20px",
-              marginRight: "20px",
-              "& .MuiInput-underline:before": {
-                borderBottomColor: "white",
-                opacity: 0.42,
-              }, // Default state
-              "& .MuiInput-underline:hover:before": {
-                borderBottomColor: "white",
-                opacity: 0.42,
-              }, // Hover state
-              "& .MuiInput-underline:after": {
-                borderBottomColor: "white",
-                opacity: 0.42,
-              }, // Focus state
-              "& .MuiInputLabel-root": { color: "white", opacity: 0.42 }, // Label color
-              "& .MuiInputLabel-root.Mui-focused": { color: "white" }, // Label color when focused
-            }}
-          />
-          <TextField
-            variant="standard"
-            label="Password"
-            onChange={(e) => setPassword(e.target.value)}
-            sx={{
-              color: "white",
-              marginTop: "20px",
-              marginRight: "20px",
-              "& .MuiInput-underline:before": {
-                borderBottomColor: "white",
-                opacity: 0.42,
-              }, // Default state
-              "& .MuiInput-underline:hover:before": {
-                borderBottomColor: "white",
-                opacity: 0.42,
-              }, // Hover state
-              "& .MuiInput-underline:after": {
-                borderBottomColor: "white",
-                opacity: 0.42,
-              }, // Focus state
-              "& .MuiInputLabel-root": { color: "white", opacity: 0.42 }, // Label color
-              "& .MuiInputLabel-root.Mui-focused": { color: "white" }, // Label color when focused
-            }}
-          />
+
+          <input type="text" name="" id="" placeholder="Enter Email" />
+
+          <input type="password" name="" id="" placeholder="Enter Password" />
           <Button
             sx={{
               marginTop: "20px",
