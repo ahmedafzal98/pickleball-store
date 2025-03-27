@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const login = async (email, password) => {
     setIsLoading(true);
@@ -18,7 +20,8 @@ export const useLogin = () => {
       setError(data.error);
     } else {
       localStorage.setItem("user", JSON.stringify(data));
-      isLoading(false);
+      setIsLoading(false);
+      navigate("/");
     }
   };
   return { login, error, isLoading };

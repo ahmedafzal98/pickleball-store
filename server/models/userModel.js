@@ -5,6 +5,10 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -18,10 +22,10 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-userSchema.statics.signup = async function (email, password) {
+userSchema.statics.signup = async function (name, email, password) {
   //validation
-  if (!email || !password) {
-    throw Error("Email and Password are required");
+  if (!name || !email || !password) {
+    throw Error("all fields are required");
   }
   if (!validator.isEmail(email)) {
     throw Error("Email is not valid");

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 
 const Signup = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,7 +18,7 @@ const Signup = () => {
 
     e.preventDefault();
 
-    await signup(email, password);
+    await signup(name, email, password);
 
     console.log(error);
   };
@@ -32,19 +33,35 @@ const Signup = () => {
           <span className="text-[#B9E018] text-base font-normal mt-3">
             Enter your details below
           </span>
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Enter Name"
-            className="text-white"
-          />
+          <div className="flex flex-col mt-5 gap-5">
+            <input
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              placeholder="Enter Name"
+              className="text-white border border-white placeholder-white rounded-md p-2"
+            />
 
-          <input type="text" name="" id="" placeholder="Enter Email" />
+            <input
+              type="text"
+              onChange={(e) => setEmail(e.target.value)}
+              name=""
+              id=""
+              placeholder="Enter Email"
+              className="text-white border border-white placeholder-white rounded-md p-2"
+            />
 
-          <input type="password" name="" id="" placeholder="Enter Password" />
+            <input
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              name=""
+              id=""
+              placeholder="Enter Password"
+              className="text-white border border-white placeholder-white rounded-md p-2"
+            />
+          </div>
           <Button
             sx={{
+              width: "100%",
               marginTop: "20px",
               backgroundColor: "#B9E018",
               color: "black",
@@ -60,6 +77,7 @@ const Signup = () => {
           <Button
             sx={{
               marginTop: "20px",
+              width: "100%",
               display: "flex",
               marginRight: "20px",
               alignItems: "center",

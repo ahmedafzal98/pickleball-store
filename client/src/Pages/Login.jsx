@@ -23,51 +23,25 @@ const Login = () => {
         <span className="text-[#B9E018] text-base font-normal mt-4">
           Enter your details below
         </span>
-        <TextField
-          variant="standard"
-          label="Email or Phone Number"
-          onChange={(e) => setEmail(e.target.value)}
-          sx={{
-            marginTop: "20px",
-            "& .MuiInput-underline:before": {
-              borderBottomColor: "white",
-              opacity: 0.42,
-            }, // Default state
-            "& .MuiInput-underline:hover:before": {
-              borderBottomColor: "white",
-              opacity: 0.42,
-            }, // Hover state
-            "& .MuiInput-underline:after": {
-              borderBottomColor: "white",
-              opacity: 0.42,
-            }, // Focus state
-            "& .MuiInputLabel-root": { color: "white", opacity: 0.42 }, // Label color
-            "& .MuiInputLabel-root.Mui-focused": { color: "white" }, // Label color when focused
-          }}
-        />
-        <TextField
-          variant="standard"
-          label="Password"
-          onChange={(e) => setPassword(e.target.value)}
-          sx={{
-            marginTop: "20px",
-            "& .MuiInput-underline:before": {
-              borderBottomColor: "white",
-              opacity: 0.42,
-            },
-            "& .MuiInput-underline:hover:before": {
-              borderBottomColor: "white",
-              opacity: 0.42,
-            },
+        <div className="flex flex-col mt-5 gap-5">
+          <input
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+            name=""
+            id=""
+            placeholder="Enter Email"
+            className="text-white border border-white placeholder-white rounded-md p-2"
+          />
 
-            "& .MuiInput-underline:after": {
-              borderBottomColor: "white",
-              opacity: 0.42,
-            }, // Focus state
-            "& .MuiInputLabel-root": { color: "white", opacity: 0.42 },
-            "& .MuiInputLabel-root.Mui-focused": { color: "white" },
-          }}
-        />
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            name=""
+            id=""
+            placeholder="Enter Password"
+            className="text-white border border-white placeholder-white rounded-md p-2"
+          />
+        </div>
         <div className="flex justify-between items-center mt-3">
           {!isLoading && (
             <Button
