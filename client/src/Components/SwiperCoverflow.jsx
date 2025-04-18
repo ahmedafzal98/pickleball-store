@@ -290,33 +290,29 @@ export default function SwiperCoverflow({
           effect={"coverflow"}
           grabCursor={true}
           centeredSlides={true}
-          slidesPerView={2} // Adjust slides for landscape
+          slidesPerView={isLandscape ? 3 : 2}
           spaceBetween={20}
           modules={[EffectCoverflow, Pagination, Navigation, Scrollbar]}
-          scrollbar={{
-            draggable: true,
-            el: ".custom-scrollbar", // Add a custom class
-          }}
-          breakpoints={{
-            640: {
-              slidesPerView: isLandscape ? 3 : 2, // Adjust for landscape
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 40,
-            },
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 50,
-            },
-          }}
+          // breakpoints={{
+          //   640: {
+          //     slidesPerView: isLandscape ? 3 : 2, // Adjust for landscape
+          //     spaceBetween: 20,
+          //   },
+          //   768: {
+          //     slidesPerView: 4,
+          //     spaceBetween: 40,
+          //   },
+          //   1024: {
+          //     slidesPerView: 5,
+          //     spaceBetween: 50,
+          //   },
+          // }}
           coverflowEffect={{
             rotate: 30,
             stretch: 0,
             depth: 150,
             modifier: 1,
-            slideShadows: true, // Enable slide shadows
+            slideShadows: false,
           }}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           className="mySwiper shadow-lg" // Add shadow to the Cover Flow
