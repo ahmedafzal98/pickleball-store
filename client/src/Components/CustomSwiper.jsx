@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 const CoverflowSlider = ({ allCategories, items }) => {
@@ -7,6 +7,44 @@ const CoverflowSlider = ({ allCategories, items }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [subcategories, setSubcategories] = useState([]);
+
+  const dragX = useRef(0);
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragCurrentX = useRef(0);
+
+  const handleDragStart = (e) => {
+    dragStartX.current = e.clientX || (e.touches && e.touches[0].clientX);
+    dragCurrentX.current = dragStartX.current;
+    isDragging.current = true;
+  };
+
+  const handleDragMove = (e) => {
+    if (!isDragging.current) return;
+    const currentX = e.clientX || (e.touches && e.touches[0].clientX);
+    dragCurrentX.current = currentX;
+  };
+
+  const handleDragEnd = (type) => {
+    if (!isDragging.current) return;
+    const delta = dragStartX.current - dragCurrentX.current;
+    if (Math.abs(delta) > 100) {
+      if (delta > 0) {
+        type === "main" ? nextSlide() : nextSubSlide();
+      } else {
+        type === "main" ? prevSlide() : prevSubSlide();
+      }
+    }
+    isDragging.current = false;
+  };
+
+  const handleWheel = (e, type) => {
+    if (e.deltaY > 0) {
+      type === "main" ? nextSlide() : nextSubSlide();
+    } else {
+      type === "main" ? prevSlide() : prevSubSlide();
+    }
+  };
 
   const nextSlide = () => {
     setActiveIndex((prev) => (prev + 1) % allCategories.length);
@@ -66,12 +104,20 @@ const CoverflowSlider = ({ allCategories, items }) => {
           }}
           onClick={() => onClickHandler && onClickHandler(items[index])}
         >
-          <img
-            src={image_url || "/fallback.jpg"}
-            alt={name}
-            className="rounded-xl object-cover shadow-lg"
-            style={{ width: "300px", height: "200px" }}
-          />
+          <div className="relative">
+            <img
+              src={image_url || "/fallback.jpg"}
+              alt={name}
+              className="rounded-xl object-cover shadow-lg"
+              style={{ width: "300px", height: "200px" }}
+            />
+            <img
+              src={image_url || "/fallback.jpg"}
+              alt={`${name} reflection`}
+              className="rounded-xl object-cover opacity-20 blur-md rotate-180"
+              style={{ width: "300px", height: "100px", marginTop: "-10px" }}
+            />
+          </div>
           <p className="mt-2 text-center text-white font-semibold bg-black/60 w-full py-1 rounded-md">
             {name}
           </p>
@@ -105,10 +151,20 @@ const CoverflowSlider = ({ allCategories, items }) => {
   return (
     <div className="w-full flex flex-col items-center space-y-10">
       {/* Main Category Slider */}
-      <div className="relative flex items-center justify-center h-[400px] w-full overflow-hidden">
+      <div
+        className="relative flex items-center justify-center h-[400px] w-full overflow-hidden"
+        onMouseDown={handleDragStart}
+        onMouseMove={handleDragMove}
+        onMouseUp={() => handleDragEnd("main")}
+        onMouseLeave={() => handleDragEnd("main")}
+        onTouchStart={handleDragStart}
+        onTouchMove={handleDragMove}
+        onTouchEnd={() => handleDragEnd("main")}
+        onWheel={(e) => handleWheel(e, "main")}
+      >
         <button
           onClick={prevSlide}
-          className="cursor-pointer absolute left-4 z-20 w-[80px] h-[80px] bg-[#B9E018] rounded-full flex items-center justify-center shadow-md hover:bg-[#A0C814]"
+          className="hidden md:flex cursor-pointer absolute left-4 z-20 w-[80px] h-[80px] bg-[#B9E018] rounded-full items-center justify-center shadow-md hover:bg-[#A0C814]"
         >
           ←
         </button>
@@ -119,7 +175,7 @@ const CoverflowSlider = ({ allCategories, items }) => {
 
         <button
           onClick={nextSlide}
-          className="cursor-pointer absolute right-4 z-20 w-[80px] h-[80px] bg-[#B9E018] rounded-full flex items-center justify-center shadow-md hover:bg-[#A0C814]"
+          className="hidden md:flex cursor-pointer absolute right-4 z-20 w-[80px] h-[80px] bg-[#B9E018] rounded-full items-center justify-center shadow-md hover:bg-[#A0C814]"
         >
           →
         </button>
@@ -127,10 +183,20 @@ const CoverflowSlider = ({ allCategories, items }) => {
 
       {/* Subcategory Slider */}
       {subcategories.length > 0 && (
-        <div className="relative flex items-center justify-center h-[300px] w-full overflow-hidden mt-4">
+        <div
+          className="relative flex items-center justify-center h-[300px] w-full overflow-hidden mt-4"
+          onMouseDown={handleDragStart}
+          onMouseMove={handleDragMove}
+          onMouseUp={() => handleDragEnd("sub")}
+          onMouseLeave={() => handleDragEnd("sub")}
+          onTouchStart={handleDragStart}
+          onTouchMove={handleDragMove}
+          onTouchEnd={() => handleDragEnd("sub")}
+          onWheel={(e) => handleWheel(e, "sub")}
+        >
           <button
             onClick={prevSubSlide}
-            className="cursor-pointer absolute left-4 z-20 w-[60px] h-[60px] bg-[#FDD835] rounded-full flex items-center justify-center shadow-md hover:bg-[#FBC02D]"
+            className="hidden md:flex cursor-pointer absolute left-4 z-20 w-[60px] h-[60px] bg-[#FDD835] rounded-full items-center justify-center shadow-md hover:bg-[#FBC02D]"
           >
             ←
           </button>
@@ -145,7 +211,7 @@ const CoverflowSlider = ({ allCategories, items }) => {
 
           <button
             onClick={nextSubSlide}
-            className="cursor-pointer absolute right-4 z-20 w-[60px] h-[60px] bg-[#FDD835] rounded-full flex items-center justify-center shadow-md hover:bg-[#FBC02D]"
+            className="hidden md:flex cursor-pointer absolute right-4 z-20 w-[60px] h-[60px] bg-[#FDD835] rounded-full items-center justify-center shadow-md hover:bg-[#FBC02D]"
           >
             →
           </button>
