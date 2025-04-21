@@ -2,16 +2,19 @@ import SwiperCoverflow from "./SwiperCoverflow";
 import categoryImages from "../../data/categoryImages";
 import allCategories from "../../data/allCategories";
 import categories from "../../data/categories";
+import CustomSwiper from "./CustomSwiper";
 
 const Categories = () => {
   return (
-    <div className="flex flex-col items-center justify-centerm mt-4">
-      <SwiperCoverflow
+    <div className="min-h-screen bg-transparent flex items-center justify-center">
+      {/* <SwiperCoverflow
         from="categories"
         data={categoryImages}
         allCategories={categories}
         title="All Categories"
-      />
+      /> */}
+
+      <CustomSwiper allCategories={categories} />
     </div>
   );
 };

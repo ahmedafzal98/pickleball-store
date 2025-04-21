@@ -6,30 +6,28 @@
 @import "tailwindcss";
 
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: radial-gradient(
-        circle at left center,
-        #b8e01873 0.25%,
-        transparent 40%
-    ), radial-gradient(
-        circle at right center,
-        #b8e01873 0.25%,
-        transparent 40%
-    ), #000000fb;
-    background-size: 50% 100%;
-    background-position: left, right;
-    background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: radial-gradient(
+      circle at left center,
+      #b8e01873 0.25%,
+      transparent 40%
+    ),
+    radial-gradient(circle at right center, #b8e01873 0.25%, transparent 40%),
+    #000000fb;
+  background-size: 50% 100%;
+  background-position: left, right;
+  background-repeat: no-repeat;
 
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 /* Default styles (applies to all screen sizes) */
 .swiper-button-prev,
 .swiper-button-next {
-  width: 118px !important;  /* Set width */
+  width: 118px !important; /* Set width */
   height: 118px !important; /* Set height */
-  background-color: #B9E018 !important; /* Set background color */
+  background-color: #b9e018 !important; /* Set background color */
   border-radius: 50% !important; /* Make it a circle */
   display: flex !important;
   align-items: center !important;
@@ -47,7 +45,7 @@ body {
 /* Hover Effect */
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-  background-color: #A0C814 !important; /* Slightly darker green */
+  background-color: #a0c814 !important; /* Slightly darker green */
 }
 
 /* Custom scrollbar styles */
@@ -60,11 +58,10 @@ body {
 }
 
 .custom-scrollbar .swiper-scrollbar-drag {
-  background: #B9E018; /* Bright green handle */
+  background: #b9e018; /* Bright green handle */
   border-radius: 10px; /* Rounded corners */
   height: 100%; /* Full height of the track */
 }
-
 
 @keyframes slideUp {
   from {

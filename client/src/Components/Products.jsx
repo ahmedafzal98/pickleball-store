@@ -14,6 +14,7 @@ import {
   fetchProducts,
 } from "../../store/features/productSlice";
 import { Backdrop, Box, CircularProgress } from "@mui/material";
+import CustomSwiper from "./CustomSwiper";
 import Loader from "./Loader";
 export default function App() {
   const dispatch = useDispatch();
@@ -34,7 +35,9 @@ export default function App() {
   if (status === "failed") return <h2>Error: {error}</h2>;
   return (
     <div className="flex flex-col items-center mt-[3%]">
-      {items && <SwiperCoverflow from="products" items={items} />}
+      {/* {items && <SwiperCoverflow from="products" items={items} />}
+       */}
+      {items && <CustomSwiper from="products" items={items} />}
     </div>
   );
 }
