@@ -160,7 +160,6 @@ const CoverflowSlider = ({ allCategories, items }) => {
         onTouchStart={handleDragStart}
         onTouchMove={handleDragMove}
         onTouchEnd={() => handleDragEnd("main")}
-        onWheel={(e) => handleWheel(e, "main")}
       >
         <button
           onClick={prevSlide}

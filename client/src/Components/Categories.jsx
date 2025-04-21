@@ -6,7 +6,7 @@ import CustomSwiper from "./CustomSwiper";
 
 const Categories = () => {
   return (
-    <div className="min-h-screen bg-transparent flex items-center justify-center">
+    <div className="bg-transparent flex items-center justify-center">
       {/* <SwiperCoverflow
         from="categories"
         data={categoryImages}
