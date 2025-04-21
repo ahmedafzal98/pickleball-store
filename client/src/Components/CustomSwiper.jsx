@@ -7,6 +7,8 @@ const CoverflowSlider = ({ allCategories, items }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [subcategories, setSubcategories] = useState([]);
+  const [dragging, setDragging] = useState(false);
+  const [offset, setOffset] = useState(0);
 
   const dragX = useRef(0);
   const isDragging = useRef(false);
@@ -26,6 +28,8 @@ const CoverflowSlider = ({ allCategories, items }) => {
   };
 
   const handleDragEnd = (type) => {
+    setDragging(false);
+    setOffset(offset + 300);
     if (!isDragging.current) return;
     const delta = dragStartX.current - dragCurrentX.current;
     if (Math.abs(delta) > 100) {
@@ -96,12 +100,17 @@ const CoverflowSlider = ({ allCategories, items }) => {
             opacity: absOffset > 3 ? 0 : 1,
           }}
           transition={{ type: "tween", duration: 0.2, ease: "linear" }}
-          className="absolute flex flex-col items-center cursor-pointer"
+          className="absolute flex flex-col items-center cursor-pointer flex-shrink-0"
           style={{
             width: "300px",
             transformStyle: "preserve-3d",
             zIndex: 10 - absOffset,
           }}
+          drag="x" // Use drag functionality for the x-axis
+          onDragStart={() => setDragging(true)}
+          onDragEnd={handleDragEnd}
+          dragConstraints={{ left: -300, right: 300 }} // Set constraints to prevent going off-screen
+          dragElastic={0.2} // Add some elasticity for smoother drag
           onClick={() => onClickHandler && onClickHandler(items[index])}
         >
           <div className="relative">
@@ -152,7 +161,7 @@ const CoverflowSlider = ({ allCategories, items }) => {
     <div className="w-full flex flex-col items-center space-y-10">
       {/* Main Category Slider */}
       <div
-        className="relative flex items-center justify-center h-[400px] w-full overflow-hidden"
+        className="relative flex items-center justify-center h-[400px] w-full overflow-hidden max-w-full"
         onMouseDown={handleDragStart}
         onMouseMove={handleDragMove}
         onMouseUp={() => handleDragEnd("main")}
