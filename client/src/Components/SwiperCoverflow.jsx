@@ -310,9 +310,9 @@ export default function SwiperCoverflow({
           coverflowEffect={{
             rotate: 30,
             stretch: 0,
-            depth: 150,
+            depth: 300,
             modifier: 1,
-            slideShadows: false,
+            slideShadows: true,
           }}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           className="mySwiper shadow-lg" // Add shadow to the Cover Flow
