@@ -6,15 +6,15 @@ import CustomSwiper from "./CustomSwiper";
 
 const Categories = () => {
   return (
-    <div className="bg-transparent flex items-center justify-center">
-      {/* <SwiperCoverflow
+    <div className="bg-transparent flex flex-col mb-3 items-center justify-center">
+      <SwiperCoverflow
         from="categories"
         data={categoryImages}
         allCategories={categories}
         title="All Categories"
-      /> */}
+      />
 
-      <CustomSwiper allCategories={categories} />
+      {/* <CustomSwiper allCategories={categories} /> */}
     </div>
   );
 };

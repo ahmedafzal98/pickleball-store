@@ -63,11 +63,10 @@ export default function SwiperCoverflow({
     const product = items.find((item) => item.itemId === id);
     dispatch(setSelectedProduct(product));
     navigate("/product");
-
-    // navigate("/product", { state: { product: selectedProduct } });
   };
 
   const startFastNavigation = (direction) => {
+    if (isMobile) return; // Don't start fast navigation on mobile
     if (interval) return;
     interval = setInterval(() => {
       if (swiperRef.current) {
@@ -79,6 +78,7 @@ export default function SwiperCoverflow({
   };
 
   const stopFastNavigation = () => {
+    if (isMobile) return; // Don't stop fast navigation on mobile
     clearInterval(interval);
     interval = null;
   };
@@ -91,109 +91,54 @@ export default function SwiperCoverflow({
   const closeModal = () => {
     setOpenModal(false);
   };
+
   const selectCategory = (category) => {
     if (!category.hasOwnProperty("subcategories")) {
       dispatch(setSelectedCategory(category.name));
+      dispatch(fetchCategoryProducts(category.name)); // Fetch products for the category
       return;
     }
     const { subcategories } = category;
     if (subcategories.length === 0) {
       dispatch(setSelectedCategory(category.name));
+      dispatch(fetchCategoryProducts(category.name)); // Fetch products for the category
     } else {
       dispatch(setSelectedCategory(subcategories));
+      // Assuming you have a mechanism to display subcategory products
     }
   };
+
   const categories =
     allCategories &&
     allCategories.map((category, index) => (
-      <SwiperSlide className="" key={index}>
+      <SwiperSlide key={index}>
         <div
           style={{ height: "auto", perspective: "250px" }}
           className="w-full flex flex-col items-center justify-center rounded-lg cursor-pointer"
         >
-          <div
+          <h1
             onClick={() => selectCategory(category)}
-            style={{ width: "400px", display: "block" }}
+            className="text-white font-bold cursor-pointer text-3xl w-auto mt-3"
           >
-            <img
-              style={{
-                width: "350px",
-                height: "250px",
-                objectFit: "cover",
-                WebkitBoxReflect:
-                  "below 10px linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.05), transparent)",
-                filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.3))",
-                transition:
-                  "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-                borderRadius: "15px", // More rounded corners for a sleek look
-                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)", // Better shadow effect
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = "scale(1.08)";
-                e.currentTarget.style.boxShadow =
-                  "0 15px 30px rgba(0, 0, 0, 0.5)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow =
-                  "0 10px 20px rgba(0, 0, 0, 0.3)";
-              }}
-              src={category.image_url}
-              alt="Category"
-              className="h-full"
-            />
-          </div>
-          <h1 className="text-white font-bold cursor-pointer text-3xl w-auto mt-3">
             {category.name}
           </h1>
         </div>
       </SwiperSlide>
     ));
+
   const subCategories =
     subcategories &&
-    subcategories.map((category, index) => (
-      <SwiperSlide className="" key={index}>
+    subcategories.map((subcategory, index) => (
+      <SwiperSlide key={index}>
         <div
           style={{ height: "auto", perspective: "250px" }}
           className="w-full flex flex-col items-center justify-center rounded-lg cursor-pointer"
         >
-          <div
-            onClick={() => selectCategory(category)}
-            style={{ width: "400px", display: "block" }}
-          >
-            <img
-              style={{
-                width: "350px",
-                height: "250px",
-                objectFit: "cover",
-                WebkitBoxReflect:
-                  "below 10px linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.05), transparent)",
-                filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.3))",
-                transition:
-                  "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-                borderRadius: "15px", // More rounded corners for a sleek look
-                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)", // Better shadow effect
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = "scale(1.08)";
-                e.currentTarget.style.boxShadow =
-                  "0 15px 30px rgba(0, 0, 0, 0.5)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow =
-                  "0 10px 20px rgba(0, 0, 0, 0.3)";
-              }}
-              src={category.image_url}
-              alt="Category"
-              className="h-full"
-            />
-          </div>
           <h1
-            onClick={() => selectCategory(category.subcategories)}
+            onClick={() => selectCategory(subcategory)} // Updated to select subcategory
             className="text-white font-bold cursor-pointer text-3xl w-auto mt-3"
           >
-            {category.name}
+            {subcategory.name}
           </h1>
         </div>
       </SwiperSlide>
@@ -241,8 +186,6 @@ export default function SwiperCoverflow({
 
   return (
     <>
-      {/* <BasicModal path={path} open={openModal} close={closeModal} /> */}
-
       {/* Rotate Device Message for Mobile Portrait Mode */}
       {isMobile && !isLandscape && (
         <div className="fixed bottom-0 left-0 right-0 bg-[#B9E018] text-gray-800 text-center py-3 animate-slideUp z-50 shadow-lg">
@@ -266,8 +209,7 @@ export default function SwiperCoverflow({
               onMouseDown={() => startFastNavigation("prev")}
               onMouseUp={stopFastNavigation}
               onMouseLeave={stopFastNavigation}
-              className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 cursor-pointer
-                z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] hover:bg-[#A0C816] transition duration-300 shadow-lg"
+              className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 cursor-pointer z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] hover:bg-[#A0C816] transition duration-300 shadow-lg"
             >
               <img src={leftPaddle} alt="Previous" className="w-8 h-8" />
             </button>
@@ -277,8 +219,7 @@ export default function SwiperCoverflow({
               onMouseDown={() => startFastNavigation("next")}
               onMouseUp={stopFastNavigation}
               onMouseLeave={stopFastNavigation}
-              className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 
-                z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] cursor-pointer hover:bg-[#A0C816] transition duration-300 shadow-lg"
+              className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 z-10 flex items-center justify-center w-30 h-30 rounded-full bg-[#B9E018] cursor-pointer hover:bg-[#A0C816] transition duration-300 shadow-lg"
             >
               <img src={rightPickleball} alt="Next" className="w-8 h-8" />
             </button>
@@ -293,20 +234,7 @@ export default function SwiperCoverflow({
           slidesPerView={isLandscape ? 3 : 2}
           spaceBetween={20}
           modules={[EffectCoverflow, Pagination, Navigation, Scrollbar]}
-          // breakpoints={{
-          //   640: {
-          //     slidesPerView: isLandscape ? 3 : 2, // Adjust for landscape
-          //     spaceBetween: 20,
-          //   },
-          //   768: {
-          //     slidesPerView: 4,
-          //     spaceBetween: 40,
-          //   },
-          //   1024: {
-          //     slidesPerView: 5,
-          //     spaceBetween: 50,
-          //   },
-          // }}
+          touchEventsTarget="container"
           coverflowEffect={{
             rotate: 30,
             stretch: 0,
@@ -315,7 +243,7 @@ export default function SwiperCoverflow({
             slideShadows: true,
           }}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
-          className="mySwiper shadow-lg" // Add shadow to the Cover Flow
+          className="mySwiper shadow-lg"
         >
           {renderSlides()}
         </Swiper>

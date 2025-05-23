@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import CustomSwiper from "./CustomSwiper";
 import { useEffect } from "react";
+import SwiperCoverflow from "./SwiperCoverflow";
 
 const Subcategories = ({ items }) => {
   const { selectedCategory } = useSelector((state) => state.products);
@@ -9,7 +10,7 @@ const Subcategories = ({ items }) => {
 
   return selectedCategory && isSubcategories ? (
     <div className="flex flex-col items-center mt-[3%]">
-      <CustomSwiper from="subcategories" subcategories={selectedCategory} />
+      <SwiperCoverflow from="subcategories" subcategories={selectedCategory} />
     </div>
   ) : null;
 };

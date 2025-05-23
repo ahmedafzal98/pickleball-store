@@ -7,6 +7,9 @@ const Product = ({ data }) => {
   const selectedProduct = useSelector(
     (state) => state.products.selectedProduct
   );
+
+  console.log(data);
+
   return (
     <section>
       <div
@@ -37,9 +40,12 @@ const Product = ({ data }) => {
             (1,203)
           </span>
         </div> */}
-        <span className="font-semibold text-base xl:text-2xl text-white">
-          {data.title}
-        </span>
+        <div className="max-w-md">
+          <span className="font-semibold text-base xl:text-2xl text-white whitespace-normal break-words line-clamp-4">
+            {data.title}
+          </span>
+        </div>
+
         <div className="flex items-center gap-2 p-2">
           <span className="text-[#B9E018] font-bold text-base xl:text-2xl">
             ${data.price.value}
