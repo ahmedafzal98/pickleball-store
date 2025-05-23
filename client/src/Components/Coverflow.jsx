@@ -1,199 +1,147 @@
-import React, { useEffect, useRef, useState } from "react";
-
+import React, { useState } from "react";
 import categories from "../../data/categories";
 import rightArrow from "../assets/icons/rightArrow.png";
 import leftArrow from "../assets/icons/leftArrow.png";
 
 const Coverflow = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-  const sliderTimeout = useRef(null);
-  const targetIndex = useRef(activeIndex);
+  const [scrollInterval, setScrollInterval] = useState(null);
+  const [speed, setSpeed] = useState(500);
 
-  // Accelerated navigation on hold
-  const intervalId = useRef(null);
-  const delay = useRef(500);
-  const accelerationFactor = 0.85;
-  const minDelay = 50;
-
-  const next = () => setActiveIndex((prev) => (prev + 1) % categories.length);
   const prev = () =>
     setActiveIndex(
-      (prev) => (prev - 1 + categories.length) % categories.length
+      (prevIndex) => (prevIndex - 1 + categories.length) % categories.length
     );
 
-  const startContinuousMove = (directionFunc) => {
-    if (intervalId.current) return;
-    delay.current = 500;
+  const next = () =>
+    setActiveIndex((prevIndex) => (prevIndex + 1) % categories.length);
 
-    const step = () => {
-      directionFunc();
-      delay.current = Math.max(minDelay, delay.current * accelerationFactor);
-      clearInterval(intervalId.current);
-      intervalId.current = setInterval(step, delay.current);
+  // Start Auto Scroll (Click and Hold)
+  const startScrolling = (direction) => {
+    if (scrollInterval) return;
+
+    let currentSpeed = speed;
+
+    const scroll = () => {
+      if (direction === "left") prev();
+      else next();
+
+      currentSpeed = Math.max(50, currentSpeed - 50); // Speed up
+      const interval = setTimeout(scroll, currentSpeed);
+      setScrollInterval(interval);
     };
 
-    intervalId.current = setInterval(step, delay.current);
+    scroll();
   };
 
-  const stopContinuousMove = () => {
-    if (intervalId.current) {
-      clearInterval(intervalId.current);
-      intervalId.current = null;
+  // Stop Auto Scroll
+  const stopScrolling = () => {
+    if (scrollInterval) {
+      clearTimeout(scrollInterval);
+      setScrollInterval(null);
+      setSpeed(500);
     }
   };
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    const diff = touchStartX.current - touchEndX.current;
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? next() : prev();
-    }
-  };
-
-  const handleSliderChange = (e) => {
-    const newTarget = parseInt(e.target.value);
-    targetIndex.current = newTarget;
-
-    if (sliderTimeout.current) {
-      clearTimeout(sliderTimeout.current);
-    }
-
-    const animate = () => {
-      setActiveIndex((prev) => {
-        if (prev === targetIndex.current) return prev;
-        const step = targetIndex.current > prev ? 1 : -1;
-        sliderTimeout.current = setTimeout(animate, 500);
-        return prev + step;
-      });
-    };
-
-    animate();
-  };
-
-  useEffect(() => {
-    return () => {
-      if (sliderTimeout.current) clearTimeout(sliderTimeout.current);
-      if (intervalId.current) clearInterval(intervalId.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === "ArrowRight") next();
-      else if (e.key === "ArrowLeft") prev();
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, []);
 
   return (
-    <div
-      className="relative flex flex-col items-center mt-[100px] min-h-screen bg-black overflow-hidden max-w-full"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
-      {/* Background Blur */}
-      <div
-        className="absolute opacity-20 scale-110 z-0 transition-all duration-500"
-        style={{
-          backgroundImage: `url(${categories[activeIndex]?.image_url})`,
-        }}
-      ></div>
-
-      {/* Navigation Arrows (hidden on mobile/tablet) */}
-      <button
-        onClick={prev}
-        onMouseDown={() => startContinuousMove(prev)}
-        onMouseUp={stopContinuousMove}
-        onMouseLeave={stopContinuousMove}
-        className="hidden sm:block cursor-pointer absolute left-2 sm:left-4 top-[80px] sm:top-[150px] text-white text-2xl sm:text-4xl font-bold z-50 hover:scale-110 sm:hover:scale-125 transition select-none w-10 h-10 sm:w-16 sm:h-16"
-      >
-        <img
-          src={leftArrow}
-          alt="leftArrow"
-          className="w-full h-full object-contain"
-        />
-      </button>
-
-      <button
-        onClick={next}
-        onMouseDown={() => startContinuousMove(next)}
-        onMouseUp={stopContinuousMove}
-        onMouseLeave={stopContinuousMove}
-        className="hidden sm:block cursor-pointer absolute right-2 sm:right-4 top-[80px] sm:top-[150px] text-white text-2xl sm:text-4xl font-bold z-50 hover:scale-110 sm:hover:scale-125 transition select-none w-10 h-10 sm:w-16 sm:h-16"
-      >
-        <img
-          src={rightArrow}
-          alt="rightArrow"
-          className="w-full h-full object-contain"
-        />
-      </button>
-
-      {/* Cards Container */}
-      <div className="relative flex items-center justify-center w-full max-w-6xl h-[350px] perspective-[1200px] z-10">
+    <div className="relative min-h-screen w-full mx-auto md:w-[100%] flex flex-col mt-5 overflow-hidden">
+      {/* Navigation Arrows */}
+      <div className="absolute top-[17%] left-4 z-50 hidden sm:block">
+        <button
+          className="cursor-pointer"
+          onClick={prev}
+          onMouseDown={() => startScrolling("left")}
+          onMouseUp={stopScrolling}
+          onMouseLeave={stopScrolling}
+          onTouchStart={() => startScrolling("left")}
+          onTouchEnd={stopScrolling}
+        >
+          <img src={leftArrow} alt="Prev" className="w-12 h-12" />
+        </button>
+      </div>
+      <div className="absolute top-[17%] right-4 z-50 hidden sm:block">
+        <button
+          className="cursor-pointer"
+          onClick={next}
+          onMouseDown={() => startScrolling("right")}
+          onMouseUp={stopScrolling}
+          onMouseLeave={stopScrolling}
+          onTouchStart={() => startScrolling("right")}
+          onTouchEnd={stopScrolling}
+        >
+          <img src={rightArrow} alt="Next" className="w-12 h-12" />
+        </button>
+      </div>
+      {/* Coverflow Cards */}
+      <div className="relative flex items-center justify-center w-full max-w-7xl h-[350px] perspective-[1200px] z-10 overflow-hidden">
         {categories.map((item, index) => {
           const offset = index - activeIndex;
-          const isActive = index === activeIndex;
-          const translateX = offset * 220;
-          const rotateY = offset * 25;
-          const scale = isActive ? 1.1 : 0.9;
+          if (Math.abs(offset) > 5) return null;
+
+          const baseX = offset * 80 + (offset > 0 ? 20 : offset < 0 ? -20 : 0);
+          const rotateY = offset === 0 ? 0 : offset < 0 ? 25 : -25;
+          const scale = offset === 0 ? 1.15 : 0.9;
 
           return (
             <div
               key={index}
+              className="absolute rounded-xl overflow-hidden transition-all duration-500 cursor-pointer bg-transparent"
               onClick={() => setActiveIndex(index)}
-              className="absolute transition-all duration-500 ease-in-out rounded-2xl overflow-hidden cursor-pointer group"
               style={{
-                transform: `translateX(${translateX}px) rotateY(${rotateY}deg) scale(${scale})`,
-                zIndex: 100 - Math.abs(offset),
-                opacity: Math.abs(offset) > 3 ? 0 : 1,
-                border: isActive ? "2px solid #a8ff00" : "2px solid white",
+                transform: `translateX(${baseX}px) rotateY(${rotateY}deg) scale(${scale})`,
+                zIndex: offset === 0 ? 999 : 100 - Math.abs(offset),
+                border:
+                  offset === 0
+                    ? "2px solid #B9E018"
+                    : "1px solid rgba(255,255,255,0.3)",
+                backfaceVisibility: "hidden",
+                transformStyle: "preserve-3d",
+                willChange: "transform",
               }}
             >
-              <img
-                src={item.image_url}
-                alt={item.name}
-                className="w-[150px] h-[220px] md:w-[200px] opacity-20 md:h-[220px] object-cover rounded-2xl group-hover:scale-105 group-hover:shadow-2xl transition duration-300 ease-in-out"
-              />
-              <div className="absolute bottom-3 w-full text-center text-white font-bold text-sm md:text-lg drop-shadow-md">
-                {item.name}
+              <div className="relative w-[140px] h-[200px] md:w-[180px] md:h-[220px]">
+                <img
+                  src={item.image_url}
+                  alt={item.name}
+                  className="w-full h-full object-cover rounded-xl"
+                  style={{
+                    filter: offset === 0 ? "none" : "brightness(50%)",
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center z-20">
+                  <span className="text-white font-bold text-center text-sm px-2">
+                    {item.name}
+                  </span>
+                </div>
               </div>
             </div>
           );
         })}
       </div>
-
-      {/* Scrollbar */}
-      <div className="w-full flex mt-[50px] justify-center z-50">
-        <div
-          className="w-[85%] p-4 border border-white opacity-80 rounded-md shadow-md"
-          style={{
-            background: `
-              radial-gradient(circle at left center, #b8e01873 0.25%, transparent 40%),
-              radial-gradient(circle at right center, #b8e01873 0.25%, transparent 40%),
-              #000000fb
-            `,
-          }}
-        >
-          <input
-            type="range"
-            min={0}
-            max={categories.length - 1}
-            value={activeIndex}
-            onChange={handleSliderChange}
-            className="w-full accent-[#B9E018] transition-all duration-300 overflow-x-hidden"
-          />
-        </div>
+      {/* A-Z Alphabet Strip */}
+      {/* // Alphabet Bar with Scroll */}
+      <div
+        className="mt-10 max-w-[95%] mx-auto z-50 py-4 px-6 rounded-full overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-gray-800"
+        style={{
+          background: `radial-gradient(circle at left center, #b8e01873 0.25%, transparent 40%), 
+                 radial-gradient(circle at right center, #b8e01873 0.25%, transparent 40%), 
+                 #000000fb`,
+        }}
+      >
+        {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((letter) => (
+          <button
+            key={letter}
+            onClick={() => {
+              const index = categories.findIndex((cat) =>
+                cat.name.toUpperCase().startsWith(letter)
+              );
+              if (index !== -1) setActiveIndex(index);
+            }}
+            className="inline-block text-[#B9E018] cursor-pointer  font-bold mx-3 text-lg hover:scale-110 transition"
+          >
+            {letter}
+          </button>
+        ))}
       </div>
     </div>
   );
