@@ -82,30 +82,32 @@ const Coverflow = () => {
           const rotateY = offset === 0 ? 0 : offset < 0 ? 25 : -25;
           const scale = offset === 0 ? 1.15 : 0.9;
 
+          const isActive = offset === 0;
+
           return (
             <div
               key={index}
-              className="absolute rounded-xl overflow-hidden transition-all duration-500 cursor-pointer bg-transparent"
+              className={`absolute rounded-xl overflow-hidden transition-all duration-500 cursor-pointer bg-transparent ${
+                isActive
+                  ? "border-4 border-[#B9E018]"
+                  : "border border-white/30"
+              }`}
               onClick={() => setActiveIndex(index)}
               style={{
                 transform: `translateX(${baseX}px) rotateY(${rotateY}deg) scale(${scale})`,
-                zIndex: offset === 0 ? 999 : 100 - Math.abs(offset),
-                border:
-                  offset === 0
-                    ? "2px solid #B9E018"
-                    : "1px solid rgba(255,255,255,0.3)",
+                zIndex: isActive ? 999 : 100 - Math.abs(offset),
                 backfaceVisibility: "hidden",
                 transformStyle: "preserve-3d",
                 willChange: "transform",
               }}
             >
-              <div className="relative w-[140px] h-[200px] md:w-[180px] md:h-[220px]">
+              <div className="relative w-[180px] h-[180px] md:w-[200px] md:h-[200px]">
                 <img
                   src={item.image_url}
                   alt={item.name}
                   className="w-full h-full object-cover rounded-xl"
                   style={{
-                    filter: offset === 0 ? "none" : "brightness(50%)",
+                    filter: isActive ? "none" : "brightness(50%)",
                   }}
                 />
                 <div className="absolute inset-0 flex items-center justify-center z-20">
@@ -118,6 +120,7 @@ const Coverflow = () => {
           );
         })}
       </div>
+
       {/* A-Z Alphabet Strip */}
       {/* // Alphabet Bar with Scroll */}
       <div
