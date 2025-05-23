@@ -97,7 +97,7 @@ const Coverflow = () => {
 
   return (
     <div
-      className="relative flex flex-col items-center mt-[100px] min-h-screen overflow-hidden"
+      className="relative flex flex-col items-center mt-[100px] min-h-screen bg-black overflow-hidden max-w-full"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -191,7 +191,7 @@ const Coverflow = () => {
             max={categories.length - 1}
             value={activeIndex}
             onChange={handleSliderChange}
-            className="w-full accent-[#B9E018] transition-all duration-300"
+            className="w-full accent-[#B9E018] transition-all duration-300 overflow-x-hidden"
           />
         </div>
       </div>
