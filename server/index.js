@@ -13,6 +13,7 @@ const VERIFICATION_TOKEN = process.env.EBAY_VERIFICATION_TOKEN;
 const allowedOrigins = [
   "https://pickleball-store-frontend.onrender.com",
   "http://localhost:5173",
+  "https://wesellpickleball.xyz",
 ];
 const ENDPOINT_URL = process.env.ENDPOINT_URL;
 
