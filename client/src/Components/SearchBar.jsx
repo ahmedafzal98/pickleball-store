@@ -1,6 +1,6 @@
 function SearchBar() {
   return (
-    <div className="flex items-center border border-[#B9E018] rounded-2xl px-4 mt-6 py-2 sm:w-1xl md:w-2xl lg:w-3xl xl:w-4xl">
+    <div className="flex items-center border border-[#B9E018] rounded-2xl px-4 mt-6 py-2 sm:w-1xl md:w-2xl lg:w-3xl xl:w-2xl">
       {/* Search Icon on the left */}
       <svg
         className="w-5 h-5 text-gray-500 mr-2"

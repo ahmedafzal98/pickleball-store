@@ -10,6 +10,7 @@ import SwiperCoverflow from "../Components/SwiperCoverflow";
 import Subcategories from "../Components/Subcategories";
 import { useSelector } from "react-redux";
 import Coverflow from "../Components/Coverflow";
+import CoverflowManager from "../Components/CoverflowManager";
 
 const Home = () => {
   const { selectedCategory } = useSelector((state) => state.products);
@@ -21,7 +22,8 @@ const Home = () => {
       <Navbar />
       <Banner />
       {/* <Categories /> */}
-      <Coverflow />
+      {/* <Coverflow /> */}
+      <CoverflowManager />
       <Subcategories />
       <Products />
       <NewsLetter />
