@@ -1,8 +1,9 @@
+import category1 from "../src/assets/images/categories/category1.png";
+
 const allCategories = [
   {
     name: "Online Premier Schools",
-    image_url:
-      "https://media.istockphoto.com/id/1458093871/photo/focus-on-foreground-with-multiracial-couple-active-retirees-playing-pickleball-outdoors.jpg?s=1024x1024&w=is&k=20&c=W7k9xPCt7AtY72k9PapVLuzhlkuJoYpJB3WKndfk_-s=",
+    image_url: category1,
   },
   {
     name: "Air Fresheners",
