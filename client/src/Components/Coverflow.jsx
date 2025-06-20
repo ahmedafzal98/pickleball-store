@@ -130,7 +130,24 @@ const Coverflow = ({ categories = [], onItemClick }) => {
               ? 0.8
               : 0.7;
 
-          const translateX = offset * 150;
+          const translateX =
+            offset === -4
+              ? -620
+              : offset === -3
+              ? -480
+              : offset === -2
+              ? -330
+              : offset === -1
+              ? -190
+              : offset === 1
+              ? 190
+              : offset === 2
+              ? 330
+              : offset === 3
+              ? 480
+              : offset === 4
+              ? 620
+              : 0;
           const rotateY = offset === 0 ? 0 : offset < 0 ? 60 : -60;
           const translateZ = offset === 0 ? 0 : -Math.abs(offset) * 80;
 
