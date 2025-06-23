@@ -186,9 +186,7 @@ const Coverflow = ({ categories = [], onItemClick }) => {
                   }}
                 />
                 <div
-                  className={`absolute inset-0 flex items-center justify-center ${
-                    isActive ? "bg-black/30" : "bg-black/50"
-                  }`}
+                  className={`absolute inset-0 flex items-center justify-center`}
                 >
                   <span
                     className={`text-white text-center drop-shadow-md px-4 ${
