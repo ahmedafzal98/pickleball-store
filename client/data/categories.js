@@ -1,42 +1,47 @@
+import category1 from "../src/assets/images/categories/category1.png";
+import category2 from "../src/assets/images/categories/category2.png";
+import category3 from "../src/assets/images/categories/category3.png";
+import category4 from "../src/assets/images/categories/category4.png";
+import category5 from "../src/assets/images/categories/category5.png";
+import category6 from "../src/assets/images/categories/category6.png";
+import category7 from "../src/assets/images/categories/category7.png";
+import category8 from "../src/assets/images/categories/category8.png";
+import category9 from "../src/assets/images/categories/category9.png";
+import category10 from "../src/assets/images/categories/category10.png";
+
 const categories = [
   {
     name: "Online Premier Pickleball Schools",
-    image_url:
-      "https://media.istockphoto.com/id/1458093871/photo/focus-on-foreground-with-multiracial-couple-active-retirees-playing-pickleball-outdoors.jpg?s=1024x1024&w=is&k=20&c=W7k9xPCt7AtY72k9PapVLuzhlkuJoYpJB3WKndfk_-s=",
+    image_url: category1,
     subcategories: [],
   },
   {
     name: "Air Fresheners",
-    image_url:
-      "https://media.istockphoto.com/id/1458877296/photo/pickleball-pedestal.jpg?s=1024x1024&w=is&k=20&c=dFCmhk_ox2GBEmfvLts3c5GBILf7E7HwIbni43F0yBY=",
+    image_url: category2,
     subcategories: [{ name: "Pickle Fragrances", image_url: "" }],
   },
   {
     name: "Bags and Backpacks",
-    image_url:
-      "https://media.istockphoto.com/id/1089296964/photo/smiling-sportswoman-with-racket-for-squash.jpg?s=612x612&w=0&k=20&c=I2O6wbdwzSz2VedwtA4ssvfJg36brufAjdffLNKi8os=",
+    image_url: category3,
     subcategories: [
-      { name: "Backpacks", image_url: "" },
-      { name: "Duffel Bags", image_url: "" },
-      { name: "Fanny Packs", image_url: "" },
+      { name: "Backpacks", image_url: category4 },
+      { name: "Duffel Bags", image_url: category5 },
+      { name: "Fanny Packs", image_url: category6 },
     ],
   },
   {
     name: "Ball Machines",
-    image_url:
-      "https://media.istockphoto.com/id/1251373918/photo/the-balls-are-in-a-basket-on-the-hardcourt-and-picking-up-the-ball.jpg?s=612x612&w=0&k=20&c=oaMzq8sqtUm-u2oVB_CFSs0EiwAn5X8mnnZwzxcYEtM=",
+    image_url: category6,
     subcategories: [],
   },
   {
     name: "Ball Picker Uppers",
-    image_url:
-      "https://media.istockphoto.com/id/2200641666/photo/athletic-male-pickleball-player-is-on-return-on-hardcourt-horizontal-pickleball-still.jpg?s=612x612&w=0&k=20&c=xxX442a2VBYCGP6TlXR8vZkxpC5YlbQFly4RAyZPGiQ=",
+    image_url: category7,
     subcategories: [],
   },
   {
     name: "Balls",
-    image_url:
-      "https://media.istockphoto.com/id/1462212999/photo/pickleball-are-many-sports-balls-top-view-closeup-3d-rendering.jpg?s=612x612&w=0&k=20&c=iDF_bho0vt85Ombjn4rk7VQm7UHV0xeeWYuF2w7XVE8=",
+    image_url: category8,
     subcategories: [
       { name: "Dura", image_url: "" },
       { name: "Engage", image_url: "" },
@@ -47,14 +52,12 @@ const categories = [
   },
   {
     name: "Ball Holders/Baskets",
-    image_url:
-      "https://media.istockphoto.com/id/959987076/photo/pickleballs-in-basket.jpg?s=612x612&w=0&k=20&c=c6e4_Fa4S28i8AgbPmvxYccTZhlnGKidZ7vDI0aHKB0=",
+    image_url: category9,
     subcategories: [],
   },
   {
     name: "Batteries",
-    image_url:
-      "https://media.istockphoto.com/id/1371557308/vector/industrial-energy-and-power-logo-design-concept-battery-and-gear-icon-vector-logo-design.jpg?s=612x612&w=0&k=20&c=GXqNvCL8ynOH8FOmvpB8Ps0EB87jZKsAmkpU7A-KE3g=",
+    image_url: category10,
     subcategories: [
       { name: "Alkaline", image_url: "" },
       { name: "Car", image_url: "" },
@@ -65,8 +68,7 @@ const categories = [
   },
   {
     name: "Better Sleep and Relaxation",
-    image_url:
-      "https://media.istockphoto.com/id/2169465588/photo/woman-laying-on-court-after-playing-pickleball.jpg?s=612x612&w=0&k=20&c=OpbKXN305Z7CtwnasD7D4ut4Dt444cHyIFv4bPxlhQw=",
+    image_url: category1,
     subcategories: [
       { name: "Acupressure/Acupuncture", image_url: "" },
       { name: "Airplane Pillows", image_url: "" },
@@ -81,8 +83,7 @@ const categories = [
   },
   {
     name: "Bikes, Scooters and Accessories",
-    image_url:
-      "https://media.istockphoto.com/id/667439248/vector/isolated-electric-scooter-one-and-two-wheeled-mobility-vehicle-vector-illustration-eco.jpg?s=612x612&w=0&k=20&c=RcHZSlnJiGFZinGdUW1fxREmR9gHEqD36NkP02sEbOU=",
+    image_url: category2,
     subcategories: [
       { name: "Bikes", image_url: "" },
       { name: "Electric", image_url: "" },
@@ -93,20 +94,17 @@ const categories = [
   },
   {
     name: "Body Scan Machines",
-    image_url:
-      "https://media.istockphoto.com/id/1345238514/photo/people-test-out-a-vbx-vibration-wellness-exercise-equipment-at-the-minnesota-state-fair.jpg?s=612x612&w=0&k=20&c=giWApT9svYgx13kFEQUB2YdK-pq3gchG29ZvRoR7s0w=",
+    image_url: category3,
     subcategories: [],
   },
   {
     name: "Books and Magazines",
-    image_url:
-      "https://media.istockphoto.com/id/2196723262/vector/pickleball-cards-set3.jpg?s=612x612&w=0&k=20&c=3e9TDAfLHkOCmKa-72aBtrEoikInlIJHEuIOBLqdP0s=",
+    image_url: category4,
     subcategories: [],
   },
   {
     name: "Braces and Supports",
-    image_url:
-      "https://media.istockphoto.com/id/1448546591/photo/colombian-american-hispanic-couple-playing-pickle-ball-on-sunny-autumn-day-photo-series.jpg?s=612x612&w=0&k=20&c=kNfUYSUAM2kOKwA9ywvxuypNMAEh1WylC3OjN7DO3hs=",
+    image_url: category5,
     subcategories: [
       { name: "Ankle", image_url: "" },
       { name: "Arm and Elbow", image_url: "" },
