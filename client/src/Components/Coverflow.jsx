@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import rightArrow from "../assets/icons/rightPickleball.png";
 import leftArrow from "../assets/icons/leftPickleball.png";
 
-// Import fallback images
+// Category image imports
 import category1 from "../assets/images/categories/category1.png";
 import category2 from "../assets/images/categories/category2.png";
 import category3 from "../assets/images/categories/category3.png";
@@ -14,7 +14,7 @@ import category8 from "../assets/images/categories/category8.png";
 import category9 from "../assets/images/categories/category9.png";
 import category10 from "../assets/images/categories/category10.png";
 
-// Fallback image pool
+// Local fallback images
 const fallbackImages = [
   category1,
   category2,
@@ -28,40 +28,49 @@ const fallbackImages = [
   category10,
 ];
 
-// Helper to rotate through fallback images
-let fallbackCounter = 0;
-const getFallbackImage = () => {
-  const image = fallbackImages[fallbackCounter % fallbackImages.length];
-  fallbackCounter++;
-  return image;
-};
+// Fallback generator
+const getFallbackImage = () =>
+  fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
 
-// Main component
+// Get proper image for each item
+const getImageUrl = (item) =>
+  item?.image_url?.trim()
+    ? item.image_url
+    : item?.image?.imageUrl?.trim()
+    ? item.image.imageUrl
+    : getFallbackImage();
+
 const Coverflow = ({ categories = [], onItemClick }) => {
+  // Sort A-Z
+  const sortedCategories = [...categories].sort((a, b) =>
+    (a?.name || "").localeCompare(b?.name || "")
+  );
+
+  // Ensure at least 9 items (repeat if needed)
+  const loopedCategories =
+    sortedCategories.length === 0
+      ? []
+      : sortedCategories.length >= 9
+      ? sortedCategories
+      : Array(Math.ceil(9 / sortedCategories.length))
+          .fill(sortedCategories)
+          .flat();
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [scrollInterval, setScrollInterval] = useState(null);
   const [speed, setSpeed] = useState(500);
 
-  // Get all available image_urls
-  const availableImages = categories
-    .map((item) => item.image_url)
-    .filter((url) => !!url?.trim());
+  const total = loopedCategories.length;
 
-  // Get image for each item (prioritize own > others > fallback)
-  const getImageUrl = (item, index) => {
-    if (item?.image_url?.trim()) return item.image_url;
-    if (availableImages.length > 0)
-      return availableImages[index % availableImages.length];
-    return getFallbackImage();
+  const mod = (n, m) => ((n % m) + m) % m;
+
+  const prev = () => {
+    setActiveIndex((prevIndex) => mod(prevIndex - 1, total));
   };
 
-  const prev = () =>
-    setActiveIndex(
-      (prevIndex) => (prevIndex - 1 + categories.length) % categories.length
-    );
-
-  const next = () =>
-    setActiveIndex((prevIndex) => (prevIndex + 1) % categories.length);
+  const next = () => {
+    setActiveIndex((prevIndex) => mod(prevIndex + 1, total));
+  };
 
   const startScrolling = (direction) => {
     if (scrollInterval) return;
@@ -112,10 +121,11 @@ const Coverflow = ({ categories = [], onItemClick }) => {
 
       {/* Coverflow Cards */}
       <div className="relative flex items-center justify-center w-full max-w-7xl h-[400px] perspective-[1200px] z-10 overflow-visible">
-        {categories.map((item, index) => {
-          const offset = index - activeIndex;
-          if (Math.abs(offset) > 4) return null;
-
+        {[...Array(9)].map((_, i) => {
+          const offset = i - 4;
+          const index = mod(activeIndex + offset, total);
+          const item = loopedCategories[index];
+          if (!item) return null;
           const isActive = offset === 0;
 
           const scale =
@@ -173,10 +183,14 @@ const Coverflow = ({ categories = [], onItemClick }) => {
             >
               <div className="relative w-[180px] h-[180px] md:w-[200px] md:h-[200px]">
                 <img
-                  src={getImageUrl(item, index)}
+                  src={getImageUrl(item)}
                   alt={item?.name || "category"}
+                  onError={(e) => {
+                    const target = e.target;
+                    target.src = getFallbackImage();
+                  }}
                   className="w-full h-full object-cover"
-                  onError={(e) => (e.target.src = getFallbackImage())}
+                  style={{ filter: "brightness(100%)" }}
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span
@@ -210,7 +224,7 @@ const Coverflow = ({ categories = [], onItemClick }) => {
           <button
             key={letter}
             onClick={() => {
-              const index = categories.findIndex((cat) =>
+              const index = loopedCategories.findIndex((cat) =>
                 cat.name?.toUpperCase().startsWith(letter)
               );
               if (index !== -1) setActiveIndex(index);
