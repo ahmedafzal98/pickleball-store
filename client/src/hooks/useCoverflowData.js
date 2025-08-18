@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCategoryProducts } from "../../store/features/productSlice";
+import {
+  fetchCategoryProducts,
+  setSelectedProduct,
+} from "../../store/features/productSlice";
 
-export function useCoverflowData() {
+export function useCoverflowData(navigate) {
   const dispatch = useDispatch();
 
   const [layerData, setLayerData] = useState({
@@ -12,44 +15,65 @@ export function useCoverflowData() {
   });
 
   const setInitialCategories = (categories) => {
-    setLayerData((prev) => ({
-      ...prev,
-      layer1: categories,
+    const cleanCategories = categories.map((cat) => ({
+      ...cat,
+      subcategories: cat.subcategories || [],
+    }));
+
+    setLayerData({
+      layer1: cleanCategories,
       layer2: [],
       layer3: [],
-    }));
+    });
   };
 
-  const handleLayerClick = (item, currentLayer = 1) => {
+  const handleLayerClick = async (item, currentLayer = 0) => {
+    if (!item) return;
+
+    console.log(`Layer ${currentLayer} item clicked:`, item);
+
     const hasSubcategories =
       Array.isArray(item.subcategories) && item.subcategories.length > 0;
 
-    if (hasSubcategories) {
-      const nextLayer = currentLayer + 1;
+    if (currentLayer === 1) {
+      // Layer 1 -> Layer 2
+      if (hasSubcategories) {
+        setLayerData((prev) => ({
+          ...prev,
+          layer2: item.subcategories,
+          layer3: [], // Clear layer 3
+        }));
+      } else {
+        // No subcategories, this is a final item
+        console.log("Final item selected from Layer 1:", item);
+        dispatch(setSelectedProduct(item));
+        dispatch(fetchCategoryProducts(item.name));
+        navigate("/product");
+      }
+    } else if (currentLayer === 2) {
+      console.log("Hello 2");
 
-      // Show subcategories in the next layer
-      setLayerData((prev) => ({
-        ...prev,
-        [`layer${nextLayer}`]: item.subcategories,
-        // Clear layer3 if we are updating layer2
-        ...(nextLayer === 2 ? { layer3: [] } : {}),
-      }));
-    } else {
-      console.log("No subcategories");
+      // Layer 2 -> Layer 3 or final
+      if (hasSubcategories) {
+        setLayerData((prev) => ({
+          ...prev,
+          layer3: item.subcategories,
+        }));
+      } else {
+        // No subcategories, this is a final item
+        console.log("Final item selected from Layer 2:", item);
+        dispatch(setSelectedProduct(item));
+        dispatch(fetchCategoryProducts(item.name));
+        // navigate("/product");
+      }
+    } else if (currentLayer === 3) {
+      console.log("Hello 3");
 
-      // Fetch products for this category
-      dispatch(fetchCategoryProducts(item.name));
-
-      // Clear deeper layers if no subcategories
-      setLayerData((prev) => {
-        if (currentLayer === 1) {
-          return { ...prev, layer2: [], layer3: [] };
-        } else if (currentLayer === 2) {
-          return { ...prev, layer3: [] };
-        } else {
-          return prev;
-        }
-      });
+      // Layer 3 is always final (no more subcategories)
+      // console.log("Final item selected from Layer 3:", item);
+      // dispatch(setSelectedProduct(item));
+      // dispatch(fetchCategoryProducts(item.name));
+      // navigate("/product");
     }
   };
 

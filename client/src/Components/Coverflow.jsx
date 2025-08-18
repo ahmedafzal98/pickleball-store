@@ -13,6 +13,7 @@ import category7 from "../assets/images/categories/category7.png";
 import category8 from "../assets/images/categories/category8.png";
 import category9 from "../assets/images/categories/category9.png";
 import category10 from "../assets/images/categories/category10.png";
+import { useNavigate } from "react-router-dom";
 
 // Local fallback images
 const fallbackImages = [
@@ -41,20 +42,13 @@ const getImageUrl = (item) =>
     : getFallbackImage();
 
 const Coverflow = ({ categories = [], onItemClick }) => {
+  const navigate = useNavigate();
   // Sort A-Z
   const sortedCategories = [...categories].sort((a, b) =>
     (a?.name || "").localeCompare(b?.name || "")
   );
 
-  // Ensure at least 9 items (repeat if needed)
-  const loopedCategories =
-    sortedCategories.length === 0
-      ? []
-      : sortedCategories.length >= 9
-      ? sortedCategories
-      : Array(Math.ceil(9 / sortedCategories.length))
-          .fill(sortedCategories)
-          .flat();
+  const loopedCategories = sortedCategories;
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [scrollInterval, setScrollInterval] = useState(null);
@@ -94,38 +88,84 @@ const Coverflow = ({ categories = [], onItemClick }) => {
     }
   };
 
+  // Calculate how many items to show based on available data
+  const maxVisibleItems = Math.min(9, total);
+  const sideItems = Math.floor((maxVisibleItems - 1) / 2);
+
   return (
     <div className="relative w-full flex flex-col items-center mt-5 overflow-hidden">
-      {/* Arrows */}
-      <div className="absolute top-[40%] left-2 z-50">
-        <button
-          onMouseDown={() => startScrolling("left")}
-          onMouseUp={stopScrolling}
-          onMouseLeave={stopScrolling}
-          className="w-10 h-10 md:w-12 md:h-12 cursor-pointer active:scale-90 transition-transform"
-        >
-          <img src={leftArrow} alt="Prev" className="w-full h-full" />
-        </button>
-      </div>
+      {/* Arrows - Show if there are multiple items */}
+      {total > 1 && (
+        <>
+          <div className="absolute top-[40%] left-2 z-50">
+            <button
+              onMouseDown={() => startScrolling("left")}
+              onMouseUp={stopScrolling}
+              onMouseLeave={stopScrolling}
+              className="w-10 h-10 md:w-12 md:h-12 cursor-pointer active:scale-90 transition-transform"
+            >
+              <img src={leftArrow} alt="Prev" className="w-full h-full" />
+            </button>
+          </div>
 
-      <div className="absolute top-[40%] right-2 z-50">
-        <button
-          onMouseDown={() => startScrolling("right")}
-          onMouseUp={stopScrolling}
-          onMouseLeave={stopScrolling}
-          className="w-10 h-10 md:w-12 md:h-12 cursor-pointer active:scale-90 transition-transform"
-        >
-          <img src={rightArrow} alt="Next" className="w-full h-full" />
-        </button>
-      </div>
+          <div className="absolute top-[40%] right-2 z-50">
+            <button
+              onMouseDown={() => startScrolling("right")}
+              onMouseUp={stopScrolling}
+              onMouseLeave={stopScrolling}
+              className="w-10 h-10 md:w-12 md:h-12 cursor-pointer active:scale-90 transition-transform"
+            >
+              <img src={rightArrow} alt="Next" className="w-full h-full" />
+            </button>
+          </div>
+        </>
+      )}
+
+      {/* Numbering below carousel */}
+      {total > 0 && (
+        <div className="mt-4 flex justify-center">
+          <div
+            className="px-4 py-2 rounded-full shadow-lg text-white font-bold text-lg flex items-center space-x-2 animate-fadeIn"
+            style={{
+              background: `
+          radial-gradient(circle at left center, #b8e01873 0.25%, transparent 80%),
+          radial-gradient(circle at right center, #b8e01873 0.25%, transparent 80%),
+          #000000fb
+        `,
+            }}
+          >
+            <span className="bg-white text-yellow-600 font-bold w-8 h-8 flex items-center justify-center rounded-full shadow">
+              {activeIndex + 1}
+            </span>
+            <span className="text-sm">of</span>
+            <span className="bg-white text-yellow-600 font-bold w-8 h-8 flex items-center justify-center rounded-full shadow">
+              {total}
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Coverflow Cards */}
       <div className="relative flex items-center justify-center w-full max-w-7xl h-[400px] perspective-[1200px] z-10 overflow-visible">
-        {[...Array(9)].map((_, i) => {
-          const offset = i - 4;
-          const index = mod(activeIndex + offset, total);
-          const item = loopedCategories[index];
-          if (!item) return null;
+        {loopedCategories.map((item, i) => {
+          // Calculate offset from active index
+          let offset;
+          if (total <= maxVisibleItems) {
+            offset = i - activeIndex;
+          } else {
+            offset = i - activeIndex;
+            if (Math.abs(offset) > sideItems) {
+              if (offset > sideItems) {
+                offset = offset - total;
+              } else if (offset < -sideItems) {
+                offset = offset + total;
+              }
+              if (Math.abs(offset) > sideItems) {
+                return null;
+              }
+            }
+          }
+
           const isActive = offset === 0;
 
           const scale =
@@ -163,15 +203,15 @@ const Coverflow = ({ categories = [], onItemClick }) => {
 
           return (
             <div
-              key={index}
+              key={`${item.id || item.name || i}-${i}`}
               className={`absolute transition-all duration-500 cursor-pointer rounded-xl overflow-hidden active:scale-95 hover:scale-[1.03] ${
                 isActive
                   ? "border-4 border-[#B9E018] shadow-[0_0_20px_#B9E018]"
                   : "border-2 border-white/30 shadow-[0_0_10px_rgba(255,255,255,0.2)]"
               }`}
               onClick={() => {
-                setActiveIndex(index);
                 onItemClick?.(item);
+                // navigate("/product");
               }}
               style={{
                 transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
@@ -192,7 +232,7 @@ const Coverflow = ({ categories = [], onItemClick }) => {
                   className="w-full h-full object-cover"
                   style={{ filter: "brightness(100%)" }}
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <span
                     className={`text-white text-center drop-shadow-md px-4 ${
                       isActive
@@ -210,31 +250,32 @@ const Coverflow = ({ categories = [], onItemClick }) => {
           );
         })}
       </div>
-
       {/* A-Z Strip */}
-      <div
-        className="mt-10 w-full max-w-5xl mx-auto z-50 py-4 px-4 rounded-full overflow-x-auto whitespace-nowrap text-center scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-gray-800"
-        style={{
-          background: `radial-gradient(circle at left center, #b8e01873 0.25%, transparent 40%),
-                      radial-gradient(circle at right center, #b8e01873 0.25%, transparent 40%),
-                      #000000fb`,
-        }}
-      >
-        {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((letter) => (
-          <button
-            key={letter}
-            onClick={() => {
-              const index = loopedCategories.findIndex((cat) =>
-                cat.name?.toUpperCase().startsWith(letter)
-              );
-              if (index !== -1) setActiveIndex(index);
-            }}
-            className="inline-block text-[#B9E018] cursor-pointer font-bold mx-2 sm:mx-3 text-base sm:text-lg hover:scale-110 transition"
-          >
-            {letter}
-          </button>
-        ))}
-      </div>
+      {total > 5 && (
+        <div
+          className="mt-10 w-full max-w-5xl mx-auto z-50 py-4 px-4 rounded-full overflow-x-auto whitespace-nowrap text-center scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-gray-800"
+          style={{
+            background: `radial-gradient(circle at left center, #b8e01873 0.25%, transparent 40%),
+                        radial-gradient(circle at right center, #b8e01873 0.25%, transparent 40%),
+                        #000000fb`,
+          }}
+        >
+          {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((letter) => (
+            <button
+              key={letter}
+              onClick={() => {
+                const index = loopedCategories.findIndex((cat) =>
+                  cat.name?.toUpperCase().startsWith(letter)
+                );
+                if (index !== -1) setActiveIndex(index);
+              }}
+              className="inline-block text-[#B9E018] cursor-pointer font-bold mx-2 sm:mx-3 text-base sm:text-lg hover:scale-110 transition"
+            >
+              {letter}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

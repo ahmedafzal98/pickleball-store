@@ -1,31 +1,43 @@
-const User = require("../models/userModel");
-const jwt = require("jsonwebtoken");
+const Joi = require("joi");
+const User = require("../models/UserModel");
+const { validateUser } = require("../validators/userValidators");
 
-const generateToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1h" });
-};
-
-const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+const addUser = async (req, res) => {
+  const { error } = validateUser(req.body);
+  if (error) return res.status(400).json({ errors: error.details });
 
   try {
-    const user = await User.login(email, password);
-    const token = generateToken(user._id);
-    res.status(200).json({ token, msg: "User Logged In Successfully" });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-const signupUser = async (req, res) => {
-  const { name, email, password } = req.body;
-  try {
-    const user = await User.signup(name, email, password);
-    const token = generateToken(user._id);
+    const { referralCode } = await User.create(req.body);
 
-    res.status(200).json({ token, msg: "User Signup Successfully" });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    if (!referralCode)
+      return res
+        .status(400)
+        .json({ message: "Issue while creating affiliate Link" });
+
+    const affiliateLink = `http://wesellpickleball.xyz/u/${referralCode}`;
+
+    res.json({ message: "User added successfully", affiliateLink });
+  } catch (err) {
+    res.status(500).json({
+      message: "Server error while creating user",
+      error: err.message,
+    });
   }
 };
 
-module.exports = { loginUser, signupUser };
+const redirectUser = async (req, res) => {
+  try {
+    const user = await User.findOne({ referralCode: req.params.id });
+
+    if (!user) return res.status(404).json({ message: "User Not Found" });
+
+    res.redirect("http://wesellpickleball.xyz");
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error while getting user",
+      error: err.message,
+    });
+  }
+};
+
+module.exports = { addUser, redirectUser };

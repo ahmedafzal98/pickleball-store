@@ -9,10 +9,10 @@ import {
   Button,
   FormControl,
   FormControlLabel,
-  FormLabel,
   Radio,
   RadioGroup,
 } from "@mui/material";
+
 const Checkout = () => {
   const order = [
     {
@@ -30,204 +30,293 @@ const Checkout = () => {
       quantity: 2,
     },
   ];
-  const styles = (theme) => ({
-    radio: {
-      "&$checked": {
-        color: "#4B8DF8",
-      },
-    },
-    checked: {},
-  });
+
   return (
     <>
       <Navbar />
-      <div className="flex ml-3 md:justify-center">
-        <div className="xl:w-2/3 mt-[3%] mr-6">
-          <span className="text-3xl xl:text-4xl text-[#B9E018] font-medium">
-            Billing Details
-          </span>
+      <div className="min-h-screen bg-black px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-8">
+          <div className="mb-8">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl text-[#B9E018] font-medium">
+              Billing Details
+            </h1>
+          </div>
 
-          <form className="lg:flex justify-between" action="">
-            <div className="mt-[2%] flex flex-col">
-              <div className="mt-[4%] flex flex-col">
-                <label className="text-base text-white opacity-60">
-                  First Name*
+          <form className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Billing Details Form - Left Side */}
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="flex flex-col">
+                  <label className="text-sm sm:text-base text-white opacity-60 mb-2">
+                    First Name*
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full outline-none text-white pl-3 py-3 h-12 bg-[#B9E0181F] rounded-sm focus:bg-[#B9E0182F] transition-colors"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label className="text-sm sm:text-base text-white opacity-60 mb-2">
+                    Last Name*
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full outline-none text-white pl-3 py-3 h-12 bg-[#B9E0181F] rounded-sm focus:bg-[#B9E0182F] transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col">
+                <label className="text-sm sm:text-base text-white opacity-60 mb-2">
+                  Company Name (Optional)
                 </label>
                 <input
                   type="text"
-                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  className="w-full outline-none text-white pl-3 py-3 h-12 bg-[#B9E0181F] rounded-sm focus:bg-[#B9E0182F] transition-colors"
                 />
               </div>
-              <div className="mt-[5%] flex flex-col">
-                <label className="text-base text-white opacity-60">
-                  Company Name*
-                </label>
-                <input
-                  type="text"
-                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
-                />
-              </div>
-              <div className="mt-[5%] flex flex-col">
-                <label className="text-base text-white opacity-60">
+
+              <div className="flex flex-col">
+                <label className="text-sm sm:text-base text-white opacity-60 mb-2">
                   Street Address*
                 </label>
                 <input
                   type="text"
-                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  className="w-full outline-none text-white pl-3 py-3 h-12 bg-[#B9E0181F] rounded-sm focus:bg-[#B9E0182F] transition-colors"
+                  placeholder="House number and street name"
                 />
               </div>
-              <div className="mt-[5%] flex flex-col">
-                <label className="text-base text-white opacity-60">
-                  Appartment, floor, etc (optional)
+
+              <div className="flex flex-col">
+                <label className="text-sm sm:text-base text-white opacity-60 mb-2">
+                  Apartment, suite, etc. (Optional)
                 </label>
                 <input
                   type="text"
-                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  className="w-full outline-none text-white pl-3 py-3 h-12 bg-[#B9E0181F] rounded-sm focus:bg-[#B9E0182F] transition-colors"
+                  placeholder="Apartment, suite, unit, building, floor, etc."
                 />
               </div>
-              <div className="mt-[5%] flex flex-col">
-                <label className="text-base text-white opacity-60">
-                  Town/City*
-                </label>
-                <input
-                  type="text"
-                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
-                />
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="flex flex-col">
+                  <label className="text-sm sm:text-base text-white opacity-60 mb-2">
+                    Town/City*
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full outline-none text-white pl-3 py-3 h-12 bg-[#B9E0181F] rounded-sm focus:bg-[#B9E0182F] transition-colors"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label className="text-sm sm:text-base text-white opacity-60 mb-2">
+                    ZIP Code*
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full outline-none text-white pl-3 py-3 h-12 bg-[#B9E0181F] rounded-sm focus:bg-[#B9E0182F] transition-colors"
+                  />
+                </div>
               </div>
-              <div className="mt-[5%] flex flex-col">
-                <label className="text-base text-white opacity-60">
+
+              <div className="flex flex-col">
+                <label className="text-sm sm:text-base text-white opacity-60 mb-2">
                   Phone Number*
                 </label>
                 <input
-                  type="text"
-                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  type="tel"
+                  className="w-full outline-none text-white pl-3 py-3 h-12 bg-[#B9E0181F] rounded-sm focus:bg-[#B9E0182F] transition-colors"
                 />
               </div>
-              <div className="mt-[5%] flex flex-col">
-                <label className="text-base text-white opacity-60">
+
+              <div className="flex flex-col">
+                <label className="text-sm sm:text-base text-white opacity-60 mb-2">
                   Email Address*
                 </label>
                 <input
-                  type="text"
-                  className="w-auto outline-none text-white pl-3 mt-2 h-12 bg-[#B9E0181F] rounded-sm"
+                  type="email"
+                  className="w-full outline-none text-white pl-3 py-3 h-12 bg-[#B9E0181F] rounded-sm focus:bg-[#B9E0182F] transition-colors"
                 />
               </div>
-              <div className="flex flex-col">
-                <label className="text-white flex items-center gap-3 mt-3">
-                  <input
-                    type="checkbox"
-                    className="w-6 outline-none text-white pl-3 mt-2 h-6"
-                  />
+
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  className="w-5 h-5 mt-1 accent-[#B9E018] bg-transparent border-white"
+                  id="save-info"
+                />
+                <label
+                  htmlFor="save-info"
+                  className="text-sm sm:text-base text-white cursor-pointer"
+                >
                   Save this information for faster check-out next time
                 </label>
               </div>
             </div>
-            <div className="flex flex-col items-center">
-              <div className="w-4/5">
-                {order &&
-                  order.map((item) => {
-                    return (
-                      <div className="flex justify-between mt-10">
-                        <img src={item.image} className="w-12 h-12" />
-                        <span className="text-white">{item.name}</span>
-                        <span className="text-white">{item.price}</span>
-                      </div>
-                    );
-                  })}
-                <div className="flex justify-between mt-[10%]">
-                  <span className="text-base font-normal text-white">
-                    Subtotal:
-                  </span>
-                  <span className="text-base font-normal text-white">
-                    $1750
-                  </span>
-                </div>
-                <div className="w-full h-0.5 bg-white mt-4 opacity-50"></div>
-                <div className="flex justify-between mt-[5%]">
-                  <span className="text-base font-normal text-white">
-                    Shipping:
-                  </span>
-                  <span className="text-base font-normal text-white">Free</span>
-                </div>
-                <div className="w-full h-0.5 bg-white mt-4 opacity-50"></div>
-                <div className="flex justify-between mt-[5%]">
-                  <span className="text-base font-normal text-white">
-                    Total:
-                  </span>
-                  <span className="text-base font-normal text-white">
-                    $1750
-                  </span>
-                </div>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 2,
-                    marginTop: "20px",
-                  }}
-                >
-                  <FormControl>
-                    <RadioGroup name="radio-buttons">
-                      {/* First Radio Button with Label and Image */}
-                      <div className="xl:flex items-center justify-between">
-                        <FormControlLabel
-                          value="ahmed"
-                          control={
-                            <Radio
-                              sx={{
-                                color: "white",
-                                "&.Mui-checked": { color: "white" }, // Checked state white color
-                              }}
-                            />
-                          }
-                          label="Bank"
-                          sx={{ color: "white" }} // Label text white
-                        />
-                        <img src={creditCard} alt="Credit Card" />
-                      </div>
 
-                      {/* Second Radio Button */}
-                      <FormControlLabel
-                        value="b"
-                        control={
-                          <Radio
+            {/* Order Summary - Right Side */}
+            <div className="lg:pl-8">
+              <div className="bg-[#1a1a1a] p-6 sm:p-8 rounded-lg">
+                <h2 className="text-xl sm:text-2xl text-white font-medium mb-6">
+                  Order Summary
+                </h2>
+
+                {/* Order Items */}
+                <div className="space-y-4 mb-6">
+                  {order &&
+                    order.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex items-center justify-between gap-4"
+                      >
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={item.image}
+                            className="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded"
+                            alt={item.name}
+                          />
+                          <div>
+                            <span className="text-white text-sm sm:text-base">
+                              {item.name}
+                            </span>
+                            <div className="text-white/60 text-xs sm:text-sm">
+                              Qty: {item.quantity}
+                            </div>
+                          </div>
+                        </div>
+                        <span className="text-white font-medium">
+                          ${item.price}
+                        </span>
+                      </div>
+                    ))}
+                </div>
+
+                {/* Price Breakdown */}
+                <div className="space-y-4 border-t border-white/20 pt-6">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm sm:text-base text-white">
+                      Subtotal:
+                    </span>
+                    <span className="text-sm sm:text-base text-white font-medium">
+                      $1750
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm sm:text-base text-white">
+                      Shipping:
+                    </span>
+                    <span className="text-sm sm:text-base text-[#B9E018]">
+                      Free
+                    </span>
+                  </div>
+                  <div className="border-t border-white/20 pt-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-base sm:text-lg text-white font-medium">
+                        Total:
+                      </span>
+                      <span className="text-base sm:text-lg text-[#B9E018] font-bold">
+                        $1750
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Payment Methods */}
+                <Box sx={{ marginTop: "24px" }}>
+                  <FormControl component="fieldset" className="w-full">
+                    <RadioGroup name="payment-method" defaultValue="bank">
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between p-3 border border-white/20 rounded-lg">
+                          <FormControlLabel
+                            value="bank"
+                            control={
+                              <Radio
+                                sx={{
+                                  color: "white",
+                                  "&.Mui-checked": { color: "#B9E018" },
+                                }}
+                              />
+                            }
+                            label="Bank Transfer"
                             sx={{
                               color: "white",
-                              "&.Mui-checked": { color: "white" }, // Checked state white color
+                              "& .MuiFormControlLabel-label": {
+                                fontSize: { xs: "14px", sm: "16px" },
+                              },
                             }}
                           />
-                        }
-                        label="Cash On Delievery"
-                        sx={{ color: "white" }}
-                      />
+                          <img
+                            src={creditCard}
+                            alt="Credit Card"
+                            className="h-6 sm:h-8"
+                          />
+                        </div>
+
+                        <div className="p-3 border border-white/20 rounded-lg">
+                          <FormControlLabel
+                            value="cod"
+                            control={
+                              <Radio
+                                sx={{
+                                  color: "white",
+                                  "&.Mui-checked": { color: "#B9E018" },
+                                }}
+                              />
+                            }
+                            label="Cash On Delivery"
+                            sx={{
+                              color: "white",
+                              "& .MuiFormControlLabel-label": {
+                                fontSize: { xs: "14px", sm: "16px" },
+                              },
+                            }}
+                          />
+                        </div>
+                      </div>
                     </RadioGroup>
                   </FormControl>
                 </Box>
 
-                <div className="flex justify-between mt-3 gap-2 w-fit">
-                  <input
-                    className="w-auto h-14 text-white pl-3 border border-[#B9E018] outline-none bg-transparent rounded-sm"
-                    type="text"
-                    placeholder="Coupon Code"
-                  />
-                  <Button
-                    sx={{
-                      color: "black",
-                      backgroundColor: "#B9E018",
-                      height: "56px",
-                    }}
-                    variant="contained"
-                  >
-                    Apply Coupon
-                  </Button>
+                {/* Coupon Code */}
+                <div className="mt-6">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      className="flex-1 h-12 sm:h-14 text-white pl-3 pr-3 border border-[#B9E018] outline-none bg-transparent rounded-sm focus:border-[#B9E018] focus:ring-1 focus:ring-[#B9E018]"
+                      type="text"
+                      placeholder="Coupon Code"
+                    />
+                    <Button
+                      sx={{
+                        color: "black",
+                        backgroundColor: "#B9E018",
+                        height: { xs: "48px", sm: "56px" },
+                        minWidth: { xs: "100%", sm: "140px" },
+                        fontSize: { xs: "14px", sm: "16px" },
+                        fontWeight: "600",
+                        "&:hover": {
+                          backgroundColor: "#A5CC16",
+                        },
+                      }}
+                      variant="contained"
+                    >
+                      Apply Coupon
+                    </Button>
+                  </div>
                 </div>
+
+                {/* Place Order Button */}
                 <Button
                   sx={{
                     color: "black",
-                    marginTop: "30px",
+                    marginTop: "24px",
                     backgroundColor: "#B9E018",
-                    height: "56px",
-                    width: "211px",
+                    height: { xs: "48px", sm: "56px" },
+                    width: "100%",
+                    fontSize: { xs: "16px", sm: "18px" },
+                    fontWeight: "700",
+                    "&:hover": {
+                      backgroundColor: "#A5CC16",
+                    },
                   }}
                   variant="contained"
                 >
@@ -242,4 +331,5 @@ const Checkout = () => {
     </>
   );
 };
+
 export default Checkout;

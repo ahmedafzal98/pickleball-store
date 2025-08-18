@@ -1,61 +1,51 @@
-import { Rating } from "@mui/material";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 const Product = ({ data }) => {
   const selectedProduct = useSelector(
     (state) => state.products.selectedProduct
   );
 
-  console.log(data);
+  if (!data) return null;
 
   return (
-    <section>
-      <div
-        key={data.itemId}
-        className="p-3 cursor-pointer hover:transition-transform duration-300"
-      >
-        <div className="relative">
-          <img
-            className="h-full"
-            style={{
-              WebkitBoxReflect:
-                "below 10px linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.05), transparent)",
-              filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.3))",
-              transition: "transform 0.3s ease-in-out",
-              borderRadius: "10px",
-            }}
-            onMouseOver={(e) =>
-              (e.currentTarget.style.transform = "scale(1.05)")
-            }
-            onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
-            src={data.image.imageUrl}
-            alt={data.title}
-          />
-        </div>
-        {/* <div className="flex items-center p-2">
-          <Rating name="half-rating" value={data.rating} precision={1} />
-          <span className="text-white opacity-60 text-base xl:text-1xl">
-            (1,203)
-          </span>
-        </div> */}
-        <div className="max-w-md">
-          <span className="font-semibold text-base xl:text-2xl text-white whitespace-normal break-words line-clamp-4">
-            {data.title}
-          </span>
-        </div>
+    <div className="w-full max-w-sm mx-auto bg-black/20 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-black/30 transition-all duration-300 group">
+      {/* Product Image */}
+      <div className="relative aspect-square p-3 sm:p-4">
+        <img
+          src={data.image?.imageUrl}
+          alt={data.title}
+          loading="lazy"
+          className="w-full h-full object-cover rounded-lg transition-transform duration-300 ease-out group-hover:scale-105"
+          style={{
+            WebkitBoxReflect:
+              "below 8px linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.03), transparent)",
+            filter: "drop-shadow(0px 8px 16px rgba(0,0,0,0.4))",
+          }}
+          onError={(e) => {
+            e.target.style.display = "none";
+          }}
+        />
+      </div>
 
-        <div className="flex items-center gap-2 p-2">
-          <span className="text-[#B9E018] font-bold text-base xl:text-2xl">
-            ${data.price.value}
+      {/* Product Details */}
+      <div className="px-4 pb-4 space-y-3">
+        {/* Title */}
+        <h3 className="text-white font-semibold text-sm sm:text-base lg:text-lg line-clamp-2 group-hover:text-[#B9E018] transition-colors duration-200">
+          {data.title}
+        </h3>
+
+        {/* Price and View Button */}
+        <div className="flex items-center justify-between">
+          <span className="text-[#B9E018] font-bold text-base sm:text-lg lg:text-xl">
+            ${data.price?.value}
           </span>
-          {/* <span className="text-white font-normal text-base xl:text-1xl opacity-60 line-through">
-            $350.99
-          </span> */}
+          <button className="bg-[#B9E018] text-black px-3 py-1 rounded-full text-xs sm:text-sm font-medium hover:bg-[#a0c916] transition-all duration-300 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0">
+            View
+          </button>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
+
 export default Product;

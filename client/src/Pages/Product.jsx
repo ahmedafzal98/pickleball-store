@@ -15,6 +15,8 @@ const Product = () => {
     (state) => state.products.selectedProduct
   );
 
+  console.log(selectedProduct);
+
   const sizes = ["XS", "S", "M", "L", "XL"];
 
   const [activeSize, setActiveSize] = useState();
