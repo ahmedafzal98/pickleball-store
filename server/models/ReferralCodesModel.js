@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const referalCodeSchema = mongoose.Schema(
   {
-    code: { type: String, required: true, trim: true },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

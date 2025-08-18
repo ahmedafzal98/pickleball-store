@@ -1,5 +1,6 @@
 const Joi = require("joi");
 const User = require("../models/UserModel");
+const ReferalCode = require("../models/ReferralCodesModel");
 const { validateUser } = require("../validators/userValidators");
 
 const addUser = async (req, res) => {
@@ -30,6 +31,13 @@ const redirectUser = async (req, res) => {
     const user = await User.findOne({ referralCode: req.params.id });
 
     if (!user) return res.status(404).json({ message: "User Not Found" });
+
+    await ReferalCode.create({ userId: user._id });
+
+    await ReferalCode.findOneAndUpdate(
+      { userId: user._id },
+      { $inc: { clicks: 1 } }
+    );
 
     res.redirect("http://wesellpickleball.xyz");
   } catch (error) {
