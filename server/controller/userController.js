@@ -32,18 +32,17 @@ const redirectUser = async (req, res) => {
 
     if (!user) return res.status(404).json({ message: "User Not Found" });
 
-    await ReferalCode.create({ userId: user._id });
-
     await ReferalCode.findOneAndUpdate(
       { userId: user._id },
-      { $inc: { clicks: 1 } }
+      { $inc: { clicks: 1 } },
+      { upsert: true, new: true }
     );
 
     res.redirect("http://wesellpickleball.xyz");
   } catch (error) {
     res.status(500).json({
       message: "Server error while getting user",
-      error: err.message,
+      error: error.message,
     });
   }
 };
