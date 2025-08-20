@@ -123,30 +123,24 @@ const Coverflow = ({ categories = [], onItemClick }) => {
 
       {/* Numbering below carousel */}
       {total > 0 && (
-        <div className="mt-4 flex justify-center">
-          <div
-            className="px-4 py-2 rounded-full shadow-lg text-white font-bold text-lg flex items-center space-x-2 animate-fadeIn"
-            style={{
-              background: `
-          radial-gradient(circle at left center, #b8e01873 0.25%, transparent 80%),
-          radial-gradient(circle at right center, #b8e01873 0.25%, transparent 80%),
-          #000000fb
-        `,
-            }}
-          >
-            <span className="bg-white text-yellow-600 font-bold w-8 h-8 flex items-center justify-center rounded-full shadow">
+        <div className="mt-2 flex justify-center">
+          <div className="px-3 py-1 rounded-full bg-black/80 text-white flex items-center gap-1">
+            {/* Active Index */}
+            <span className="text-sm md:text-base font-bold">
               {activeIndex + 1}
             </span>
-            <span className="text-sm">of</span>
-            <span className="bg-white text-yellow-600 font-bold w-8 h-8 flex items-center justify-center rounded-full shadow">
-              {total}
-            </span>
+
+            {/* "of" smaller + lighter */}
+            <span className="text-sm md:text-base font-bold">of</span>
+
+            {/* Total */}
+            <span className="text-sm md:text-base font-bold">{total}</span>
           </div>
         </div>
       )}
 
       {/* Coverflow Cards */}
-      <div className="relative flex items-center justify-center w-full max-w-7xl h-[400px] perspective-[1200px] z-10 overflow-visible">
+      <div className="relative flex items-center justify-center w-full max-w-7xl h-[300px] perspective-[1200px] z-10 overflow-visible">
         {loopedCategories.map((item, i) => {
           // Calculate offset from active index
           let offset;

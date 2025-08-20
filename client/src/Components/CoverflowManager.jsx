@@ -45,7 +45,7 @@ export default function CoverflowManager() {
   }, [layerData.layer3]);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-3">
       {/* Layer 1 */}
       <Coverflow
         categories={layerData.layer1}

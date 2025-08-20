@@ -15,7 +15,7 @@ const addUser = async (req, res) => {
         .status(400)
         .json({ message: "Issue while creating affiliate Link" });
 
-    const affiliateLink = `http://wesellpickleball.xyz/u/${referralCode}`;
+    const affiliateLink = `https://pickleball-store-backend.onrender.com/u/${referralCode}`;
 
     res.json({ message: "User added successfully", affiliateLink });
   } catch (err) {
