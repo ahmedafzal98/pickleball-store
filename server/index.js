@@ -4,15 +4,14 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const ebayRoutes = require("./routes/ebayRoutes");
+const amazonRoutes = require("./routes/amazonRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const verificationRoutes = require("./routes/verificationRoutes");
-const amazonRoutes = require("./routes/amazonRoutes");
 
 const connectDB = require("./config/db");
-
 const app = express();
 
-// Allowed CORS origins
+// CORS setup
 const allowedOrigins = [
   "https://pickleball-store-frontend.onrender.com",
   "http://localhost:5173",
@@ -34,13 +33,13 @@ app.use(
 
 app.use(express.json());
 
-// Routes
+// ✅ Routes
 app.use("/api/ebay", ebayRoutes);
 app.use("/api/amazon", amazonRoutes);
 app.use("/", verificationRoutes);
 app.use("/", userRoutes);
 
-// Connect DB and start server
+// Start server
 const PORT = process.env.PORT || 3000;
 connectDB().then(() => {
   app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
