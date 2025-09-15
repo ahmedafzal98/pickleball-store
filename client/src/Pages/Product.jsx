@@ -23,6 +23,9 @@ const Product = () => {
   const [counter, setCounter] = useState(0);
   const [activeOperator, setActiveOperator] = useState();
 
+  const epnParams =
+    "mkcid=1&campid=5339094537&customid=testClick&toolid=10001&mkevt=1";
+
   const handleActiveSize = (index) => {
     setActiveSize(index);
   };
@@ -128,7 +131,9 @@ const Product = () => {
                 </div>
                 {/* <div className="w-[1px] h-full bg-white"></div> */}
                 <Button
-                  href={`${selectedProduct.itemWebUrl}&campid=5339094537`}
+                  href={`${selectedProduct.itemWebUrl}${
+                    selectedProduct.itemWebUrl.includes("?") ? "&" : "?"
+                  }${epnParams}`}
                   target="_blank"
                   sx={{
                     marginLeft: "20px",
