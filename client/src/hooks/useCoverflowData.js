@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCategoryProducts,
   setSelectedProduct,
+  fetchAmazonProducts,
 } from "../../store/features/productSlice";
 
 export function useCoverflowData(navigate) {
@@ -11,9 +12,15 @@ export function useCoverflowData(navigate) {
   const [layerData, setLayerData] = useState({
     layer1: [],
     layer2: [],
-    layer3: [],
+    layer3: [], // eBay products
   });
 
+  // ✅ Keep Amazon products separate
+  const { amazonProducts, amazonStatus } = useSelector(
+    (state) => state.products
+  );
+
+  // Initialize Layer 1 categories
   const setInitialCategories = (categories) => {
     const cleanCategories = categories.map((cat) => ({
       ...cat,
@@ -27,10 +34,9 @@ export function useCoverflowData(navigate) {
     });
   };
 
+  // Handle clicks on any layer
   const handleLayerClick = async (item, currentLayer = 0) => {
     if (!item) return;
-
-    console.log(`Layer ${currentLayer} item clicked:`, item);
 
     const hasSubcategories =
       Array.isArray(item.subcategories) && item.subcategories.length > 0;
@@ -41,45 +47,48 @@ export function useCoverflowData(navigate) {
         setLayerData((prev) => ({
           ...prev,
           layer2: item.subcategories,
-          layer3: [], // Clear layer 3
+          layer3: [], // clear eBay products
         }));
       } else {
-        // No subcategories, this is a final item
-        console.log("Final item selected from Layer 1:", item);
+        // Final category selected
         dispatch(setSelectedProduct(item));
         dispatch(fetchCategoryProducts(item.name));
+        dispatch(fetchAmazonProducts(item.name));
         navigate("/product");
       }
     } else if (currentLayer === 2) {
-      console.log("Hello 2");
-
-      // Layer 2 -> Layer 3 or final
+      // Layer 2 -> Layer 3 (eBay)
       if (hasSubcategories) {
         setLayerData((prev) => ({
           ...prev,
-          layer3: item.subcategories,
+          layer3: item.subcategories, // eBay products
         }));
+
+        // Fetch Amazon products separately
+        dispatch(fetchAmazonProducts(item.name));
       } else {
-        // No subcategories, this is a final item
-        console.log("Final item selected from Layer 2:", item);
         dispatch(setSelectedProduct(item));
         dispatch(fetchCategoryProducts(item.name));
-        // navigate("/product");
+        dispatch(fetchAmazonProducts(item.name));
       }
     } else if (currentLayer === 3) {
-      console.log("Hello 3");
-
-      // Layer 3 is always final (no more subcategories)
-      // console.log("Final item selected from Layer 3:", item);
-      // dispatch(setSelectedProduct(item));
-      // dispatch(fetchCategoryProducts(item.name));
-      // navigate("/product");
+      // Final Layer clicked
+      dispatch(setSelectedProduct(item));
+      navigate("/product");
     }
   };
 
+  // Optional: reset layer3 if Amazon products update (no merge, just keep separate)
+  useEffect(() => {
+    if (amazonProducts.length === 0 && layerData.layer3.length === 0) return;
+    // No state merge needed, CoverflowManager will render Amazon and eBay separately
+  }, [amazonProducts]);
+
   return {
     layerData,
+    amazonProducts, // pass separately for side-by-side display
     setInitialCategories,
     handleLayerClick,
+    amazonStatus, // optional, useful for showing loading state
   };
 }
