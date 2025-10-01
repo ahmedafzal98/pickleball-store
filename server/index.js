@@ -15,6 +15,7 @@ const app = express();
 const allowedOrigins = [
   "https://pickleball-store-frontend.onrender.com",
   "http://localhost:5173",
+  "http://localhost:5174",
   "https://wesellpickleball.xyz",
 ];
 

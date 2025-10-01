@@ -54,7 +54,7 @@ export function useCoverflowData(navigate) {
         dispatch(setSelectedProduct(item));
         dispatch(fetchCategoryProducts(item.name));
         dispatch(fetchAmazonProducts(item.name));
-        navigate("/product");
+        // navigate("/product");
       }
     } else if (currentLayer === 2) {
       // Layer 2 -> Layer 3 (eBay)
@@ -74,7 +74,7 @@ export function useCoverflowData(navigate) {
     } else if (currentLayer === 3) {
       // Final Layer clicked
       dispatch(setSelectedProduct(item));
-      navigate("/product");
+      // navigate("/product");
     }
   };
 

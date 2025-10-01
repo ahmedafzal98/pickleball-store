@@ -9,13 +9,20 @@ import DelieveryIcon from "../assets/icons/icon_delivery.svg";
 import ReturnIcon from "../assets/icons/icon_return.svg";
 import SwiperCoverflow from "../Components/SwiperCoverflow";
 import { useLocation } from "react-router-dom";
+import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 const Product = () => {
   const selectedProduct = useSelector(
     (state) => state.products.selectedProduct
   );
 
-  console.log(selectedProduct);
+  const { itemWebUrl, legacyItemId } = selectedProduct;
+  const campaignID = "5339094537";
+  const affiliateId = Cookies.get("affiliateId");
+
+  const affiliateLink = `https://www.ebay.com/itm/${legacyItemId}?campid=${campaignID}&customid=${affiliateId}`;
+
+  console.log(affiliateLink);
 
   const sizes = ["XS", "S", "M", "L", "XL"];
 

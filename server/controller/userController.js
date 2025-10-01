@@ -19,6 +19,8 @@ const addUser = async (req, res) => {
 
     res.json({ message: "User added successfully", affiliateLink });
   } catch (err) {
+    console.log(err);
+
     res.status(500).json({
       message: "Server error while creating user",
       error: err.message,
@@ -28,17 +30,14 @@ const addUser = async (req, res) => {
 
 const redirectUser = async (req, res) => {
   try {
-    const user = await User.findOne({ referralCode: req.params.id });
+    const { id } = req.params;
 
-    if (!user) return res.status(404).json({ message: "User Not Found" });
+    res.cookie("affiliateId", id, {
+      httpOnly: true,
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
 
-    await ReferalCode.findOneAndUpdate(
-      { userId: user._id },
-      { $inc: { clicks: 1 } },
-      { upsert: true, new: true }
-    );
-
-    res.redirect("http://wesellpickleball.xyz");
+    res.redirect("http://localhost:5173");
   } catch (error) {
     res.status(500).json({
       message: "Server error while getting user",
