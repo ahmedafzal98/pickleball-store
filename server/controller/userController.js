@@ -33,12 +33,12 @@ const redirectUser = async (req, res) => {
     const { id } = req.params;
     console.log(id);
 
-    // res.cookie("affiliateId", id, {
-    //   httpOnly: true,
-    //   maxAge: 30 * 24 * 60 * 60 * 1000,
-    // });
+    res.cookie("affiliateId", id, {
+      httpOnly: true,
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
 
-    // res.redirect("http://localhost:5173");
+    res.redirect("http://localhost:5173");
   } catch (error) {
     console.log(error);
     res.status(500).json({
