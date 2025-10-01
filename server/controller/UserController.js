@@ -33,7 +33,7 @@ const redirectUser = async (req, res) => {
     const { id } = req.params;
     console.log(id);
 
-    res.cookie("affiliateId", affiliateId, {
+    res.cookie("affiliateId", id, {
       httpOnly: true,
       secure: true, // required in HTTPS (Render uses HTTPS)
       sameSite: "none", // required for cross-site cookies
