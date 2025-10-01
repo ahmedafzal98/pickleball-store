@@ -4,7 +4,6 @@ const getEbayItems = async (req, res) => {
   try {
     const query = req.query.q || "";
     const results = await searchEbayItems(query);
-    console.log(results);
 
     res.json(results);
   } catch (error) {
