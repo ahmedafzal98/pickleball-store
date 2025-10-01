@@ -11,6 +11,7 @@ import SwiperCoverflow from "../Components/SwiperCoverflow";
 import { useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 const Product = () => {
   const selectedProduct = useSelector(
     (state) => state.products.selectedProduct
@@ -30,6 +31,10 @@ const Product = () => {
   const [counter, setCounter] = useState(0);
   const [activeOperator, setActiveOperator] = useState();
 
+  useEffect(() => {
+    fetchAffiliateId();
+  }, []);
+
   const epnParams =
     "mkcid=1&campid=5339094537&customid=testClick&toolid=10001&mkevt=1";
 
@@ -44,6 +49,28 @@ const Product = () => {
     setActiveOperator("-");
     setCounter((prevCount) => prevCount - 1);
   };
+
+  const fetchAffiliateId = async () => {
+    try {
+      const res = await fetch(
+        "https://pickleball-store-backend.onrender.com/get-affiliate",
+        {
+          method: "GET",
+          credentials: "include", // ✅ Important: ensures cookies are sent
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log(data.affiliateId); // ✅ should show affiliateId
+    } catch (err) {
+      console.error("Error fetching affiliateId:", err);
+    }
+  };
+
   return (
     <>
       <Navbar />

@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const ebayRoutes = require("./routes/ebayRoutes");
@@ -11,6 +12,8 @@ const verificationRoutes = require("./routes/verificationRoutes");
 const connectDB = require("./config/db");
 const app = express();
 
+app.use(cookieParser());
+app.use(express.json());
 // CORS setup
 const allowedOrigins = [
   "https://pickleball-store-frontend.onrender.com",
