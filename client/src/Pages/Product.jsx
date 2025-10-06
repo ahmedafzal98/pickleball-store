@@ -17,23 +17,15 @@ const Product = () => {
     (state) => state.products.selectedProduct
   );
 
-  const { itemWebUrl, legacyItemId } = selectedProduct;
+  const { legacyItemId } = selectedProduct;
   const campaignID = "5339094537";
-  const affiliateId = Cookies.get("affiliateId");
-
-  const affiliateLink = `https://www.ebay.com/itm/${legacyItemId}?campid=${campaignID}&customid=${affiliateId}`;
-
-  console.log(affiliateLink);
 
   const sizes = ["XS", "S", "M", "L", "XL"];
 
   const [activeSize, setActiveSize] = useState();
   const [counter, setCounter] = useState(0);
   const [activeOperator, setActiveOperator] = useState();
-
-  useEffect(() => {
-    fetchAffiliateId();
-  }, []);
+  const [affiliateId, setAffiliateId] = useState();
 
   const epnParams =
     "mkcid=1&campid=5339094537&customid=testClick&toolid=10001&mkevt=1";
@@ -56,7 +48,7 @@ const Product = () => {
         "https://pickleball-store-backend.onrender.com/get-affiliate",
         {
           method: "GET",
-          credentials: "include", // ✅ Important: ensures cookies are sent
+          credentials: "include", // ✅ ensures cookies are sent
         }
       );
 
@@ -65,11 +57,21 @@ const Product = () => {
       }
 
       const data = await res.json();
-      console.log(data.affiliateId); // ✅ should show affiliateId
+      setAffiliateId(data.affiliateId);
     } catch (err) {
       console.error("Error fetching affiliateId:", err);
     }
   };
+
+  useEffect(() => {
+    fetchAffiliateId();
+  }, []);
+
+  const affiliateLink = affiliateId
+    ? `https://www.ebay.com/itm/${legacyItemId}?campid=${campaignID}&customid=${affiliateId}`
+    : null;
+
+  console.log(affiliateLink);
 
   return (
     <>
@@ -164,20 +166,20 @@ const Product = () => {
                   />
                 </div>
                 {/* <div className="w-[1px] h-full bg-white"></div> */}
-                <Button
-                  href={`${selectedProduct.itemWebUrl}${
-                    selectedProduct.itemWebUrl.includes("?") ? "&" : "?"
-                  }${epnParams}`}
-                  target="_blank"
-                  sx={{
-                    marginLeft: "20px",
-                    backgroundColor: "#B9E018",
-                    color: "black",
-                  }}
-                  variant="contained"
-                >
-                  Buy Now
-                </Button>
+                {affiliateLink && (
+                  <Button
+                    href={affiliateLink}
+                    target="_blank"
+                    sx={{
+                      marginLeft: "20px",
+                      backgroundColor: "#B9E018",
+                      color: "black",
+                    }}
+                    variant="contained"
+                  >
+                    Buy Now
+                  </Button>
+                )}
               </div>
               <div className="w-full h-[180px] flex flex-col items-center justify-evenly border rounded-sm mt-[8%] border-[rgba(255,255,255,0.5)]">
                 <div className="w-[332px] h-[50px] flex justify-start items-center">
