@@ -238,6 +238,23 @@ const Coverflow = ({ categories = [], onItemClick }) => {
                   >
                     {item.name}
                   </span>
+                  {item.price?.value && !isNaN(Number(item.price.value)) && (
+                    <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 via-black/30 to-transparent py-2 flex justify-center">
+                      <span
+                        className={`text-[#B9E018] font-extrabold tracking-wide drop-shadow-[0_0_10px_#B9E018] ${
+                          isActive
+                            ? "text-xl md:text-2xl"
+                            : "text-base md:text-lg"
+                        }`}
+                        style={{
+                          textShadow: "0 0 12px rgba(185,224,24,0.8)",
+                          letterSpacing: "0.5px",
+                        }}
+                      >
+                        ${Number(item.price.value).toFixed(2)}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

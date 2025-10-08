@@ -17,6 +17,8 @@ export default function CoverflowManager() {
     amazonStatus,
   } = useCoverflowData(navigate);
 
+  console.log(amazonProducts);
+
   const dispatch = useDispatch();
 
   const layer2Ref = useRef(null);
