@@ -18,6 +18,17 @@ const searchItems = async (req, res) => {
     PartnerTag: process.env.AMAZON_PARTNER_TAG,
     PartnerType: "Associates",
     Marketplace: "www.amazon.com",
+    Resources: [
+      "Images.Primary.Medium",
+      "Images.Primary.Large",
+      "ItemInfo.Title",
+      "ItemInfo.Features",
+      "ItemInfo.ByLineInfo",
+      "Offers.Listings.Price",
+      "Offers.Listings.Condition",
+      "Offers.Listings.DeliveryInfo.IsPrimeEligible",
+      "Offers.Listings.MerchantInfo",
+    ],
   };
 
   try {
