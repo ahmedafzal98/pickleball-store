@@ -198,14 +198,13 @@ const Coverflow = ({ categories = [], onItemClick }) => {
           return (
             <div
               key={`${item.id || item.name || i}-${i}`}
-              className={`absolute transition-all duration-500 cursor-pointer rounded-xl overflow-hidden active:scale-95 hover:scale-[1.03] ${
+              className={`absolute transition-all duration-500 cursor-pointer rounded-xl active:scale-95 hover:scale-[1.03] ${
                 isActive
                   ? "border-4 border-[#B9E018] shadow-[0_0_20px_#B9E018]"
                   : "border-2 border-white/30 shadow-[0_0_10px_rgba(255,255,255,0.2)]"
               }`}
               onClick={() => {
                 onItemClick?.(item);
-                // navigate("/product");
               }}
               style={{
                 transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
@@ -215,16 +214,13 @@ const Coverflow = ({ categories = [], onItemClick }) => {
                 willChange: "transform",
               }}
             >
-              <div className="relative w-[180px] h-[180px] md:w-[200px] md:h-[200px]">
+              {/* Card content */}
+              <div className="relative w-[180px] h-[180px] md:w-[200px] md:h-[200px] overflow-hidden rounded-xl">
                 <img
                   src={getImageUrl(item)}
                   alt={item?.name || "category"}
-                  onError={(e) => {
-                    const target = e.target;
-                    target.src = getFallbackImage();
-                  }}
+                  onError={(e) => (e.target.src = getFallbackImage())}
                   className="w-full h-full object-cover"
-                  style={{ filter: "brightness(100%)" }}
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <span
@@ -238,25 +234,21 @@ const Coverflow = ({ categories = [], onItemClick }) => {
                   >
                     {item.name}
                   </span>
-                  {item.price?.value && !isNaN(Number(item.price.value)) && (
-                    <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 via-black/30 to-transparent py-2 flex justify-center">
-                      <span
-                        className={`text-[#B9E018] font-extrabold tracking-wide drop-shadow-[0_0_10px_#B9E018] ${
-                          isActive
-                            ? "text-xl md:text-2xl"
-                            : "text-base md:text-lg"
-                        }`}
-                        style={{
-                          textShadow: "0 0 12px rgba(185,224,24,0.8)",
-                          letterSpacing: "0.5px",
-                        }}
-                      >
-                        ${Number(item.price.value).toFixed(2)}
-                      </span>
-                    </div>
-                  )}
                 </div>
               </div>
+
+              {/* ✅ Price is now outside the overflow-hidden container */}
+              {item.price?.value && !isNaN(Number(item.price.value)) && (
+                <div className="mt-2 flex justify-center">
+                  <span
+                    className={`text-white font-serif italic ${
+                      isActive ? "text-lg md:text-xl" : "text-base md:text-lg"
+                    }`}
+                  >
+                    ${Number(item.price.value).toFixed(2)}
+                  </span>
+                </div>
+              )}
             </div>
           );
         })}
