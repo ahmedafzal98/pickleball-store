@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import lodash from "lodash";
-import { debouncedSearchProducts } from "../../store/features/productSlice";
+import { debouncedSearchProducts } from "../store/features/productSlice";
 
 const useDebouncedSearch = () => {
   const dispatch = useDispatch();

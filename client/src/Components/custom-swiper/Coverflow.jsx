@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import rightArrow from "../assets/icons/rightPickleball.png";
-import leftArrow from "../assets/icons/leftPickleball.png";
+import rightArrow from "../../assets/icons/rightPickleball.png";
+import leftArrow from "../../assets/icons/leftPickleball.png";
 
 // Category image imports
-import category1 from "../assets/images/categories/category1.png";
-import category2 from "../assets/images/categories/category2.png";
-import category3 from "../assets/images/categories/category3.png";
-import category4 from "../assets/images/categories/category4.png";
-import category5 from "../assets/images/categories/category5.png";
-import category6 from "../assets/images/categories/category6.png";
-import category7 from "../assets/images/categories/category7.png";
-import category8 from "../assets/images/categories/category8.png";
-import category9 from "../assets/images/categories/category9.png";
-import category10 from "../assets/images/categories/category10.png";
+import category1 from "../../assets/images/categories/category1.png";
+import category2 from "../../assets/images/categories/category2.png";
+import category3 from "../../assets/images/categories/category3.png";
+import category4 from "../../assets/images/categories/category4.png";
+import category5 from "../../assets/images/categories/category5.png";
+import category6 from "../../assets/images/categories/category6.png";
+import category7 from "../../assets/images/categories/category7.png";
+import category8 from "../../assets/images/categories/category8.png";
+import category9 from "../../assets/images/categories/category9.png";
+import category10 from "../../assets/images/categories/category10.png";
 import { useNavigate } from "react-router-dom";
 
 // Local fallback images

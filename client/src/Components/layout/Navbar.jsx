@@ -1,15 +1,15 @@
 import { Tooltip, Backdrop, CircularProgress } from "@mui/material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import logo from "../assets/images/logo.png";
-import search from "../assets/icons/search.svg";
-import cart from "../assets/icons/cart.svg";
-import user from "../assets/icons/user.svg";
+import logo from "../../assets/images/logo.png";
+import search from "../../assets/icons/search.svg";
+import cart from "../../assets/icons/cart.svg";
+import user from "../../assets/icons/user.svg";
 import { useState, useEffect, useCallback } from "react";
-import categories from "../../data/categories";
-import allCategories from "../../data/allCategories";
+import categories from "../../../data/categories";
+import allCategories from "../../../data/allCategories";
 import CategoryIcon from "@mui/icons-material/Category";
-import { categoriesInfo } from "../../data/catrgoriesInfo";
+import { categoriesInfo } from "../../../data/catrgoriesInfo";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import loadash from "lodash";
@@ -17,8 +17,8 @@ import {
   debouncedFetch,
   fetchProducts,
 } from "../../store/features/productSlice";
-import useDebouncedSearch from "../hooks/useDebouncedSearch";
-import Loader from "./Loader";
+import useDebouncedSearch from "../../hooks/useDebouncedSearch";
+import Loader from "../shared/Loader";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

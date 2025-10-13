@@ -1,4 +1,4 @@
-import email from "../assets/icons/email.svg";
+import email from "../../assets/icons/email.svg";
 const NewsLetter = () => {
   return (
     <section className="w-full flex justify-center mt-[5%]">

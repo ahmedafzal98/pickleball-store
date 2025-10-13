@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import dropDownIcon from "../assets/icons/Drop-Down-Small.svg";
-import dropUpIcon from "../assets/icons/Drop-Up-Small.svg";
+import dropDownIcon from "../../assets/icons/Drop-Down-Small.svg";
+import dropUpIcon from "../../assets/icons/Drop-Up-Small.svg";
 
 const Counter = ({ id, increaseQuantity, decreaseQuantity, quantity }) => {
   const handleIncreaseQuantity = () => {

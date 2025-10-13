@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Button from "./Button";
-import SearchBar from "./SearchBar";
+import Button from "../shared/Button";
+import SearchBar from "../product/SearchBar";
 
 const Banner = () => {
   return (

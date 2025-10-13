@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import Banner from "../Components/Banner";
-import Categories from "../Components/Categories";
-import Footer from "../Components/Footer";
-import Navbar from "../Components/Navbar";
-import NewsLetter from "../Components/NewsLetter";
-import Products from "../Components/Products";
-import axios from "axios";
-import SwiperCoverflow from "../Components/SwiperCoverflow";
-import Subcategories from "../Components/Subcategories";
+import Banner from "../Components/marketing/Banner";
+import Footer from "../Components/layout/Footer";
+import Navbar from "../Components/layout/Navbar";
+import NewsLetter from "../Components/marketing/NewsLetter";
+import Products from "../Components/product/ProductsListContainer";
 import { useSelector } from "react-redux";
-import Coverflow from "../Components/Coverflow";
-import CoverflowManager from "../Components/CoverflowManager";
+import CoverflowManager from "../Components/custom-swiper/CoverflowManager";
 
 const Home = () => {
   const { selectedCategory } = useSelector((state) => state.products);
@@ -24,7 +19,7 @@ const Home = () => {
       {/* <Categories /> */}
       {/* <Coverflow /> */}
       <CoverflowManager />
-      <Subcategories />
+      {/* <Subcategories /> */}
       <Products />
       <NewsLetter />
       <Footer />

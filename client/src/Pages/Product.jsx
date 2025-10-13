@@ -1,13 +1,12 @@
-import SwiperGallery from "../Components/SwiperGallery";
-import Navbar from "../Components/Navbar";
-import Footer from "../Components/Footer";
+import SwiperGallery from "../Components/product/SwiperGallery";
+import Navbar from "../Components/layout/Navbar";
+import Footer from "../Components/layout/Footer";
 import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import DelieveryIcon from "../assets/icons/icon_delivery.svg";
 import ReturnIcon from "../assets/icons/icon_return.svg";
-import SwiperCoverflow from "../Components/SwiperCoverflow";
 import { useSelector } from "react-redux";
 
 const Product = () => {
@@ -218,17 +217,6 @@ const Product = () => {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Related Items */}
-      <section className="flex flex-col">
-        <div className="w-2/5 ml-[5%] flex items-center gap-6 mt-[5%]">
-          <div className="w-5 h-10 rounded-md bg-[#B9E018]"></div>
-          <span className="text-[16px] text-[#B9E018] font-semibold">
-            Related Item
-          </span>
-        </div>
-        <SwiperCoverflow />
       </section>
 
       <Footer />

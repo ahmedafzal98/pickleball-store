@@ -1,4 +1,4 @@
-import arrowOutward from "../assets/icons/arrow_outward.svg";
+import arrowOutward from "../../assets/icons/arrow_outward.svg";
 
 const Button = ({ title, backgroundColor, textColor, isIcon }) => {
   return (

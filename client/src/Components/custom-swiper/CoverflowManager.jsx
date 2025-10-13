@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useCoverflowData } from "../hooks/useCoverflowData";
+import { useCoverflowData } from "../../hooks/useCoverflowData";
 import Coverflow from "./Coverflow";
-import categories from "../../data/categories";
+import categories from "../../../data/categories";
 import { useNavigate } from "react-router-dom";
-import amazonIcon from "../assets/icons/amazon.png";
+import amazonIcon from "../../assets/icons/amazon.png";
 import { useDispatch } from "react-redux";
 import { setSelectedProduct } from "../../store/features/productSlice";
 

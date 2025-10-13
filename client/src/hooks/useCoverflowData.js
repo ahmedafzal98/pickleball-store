@@ -4,7 +4,7 @@ import {
   fetchCategoryProducts,
   setSelectedProduct,
   fetchAmazonProducts,
-} from "../../store/features/productSlice";
+} from "../store/features/productSlice";
 
 export function useCoverflowData(navigate) {
   const dispatch = useDispatch();

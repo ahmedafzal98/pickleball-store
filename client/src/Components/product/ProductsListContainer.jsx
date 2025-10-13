@@ -1,33 +1,21 @@
-import Product from "./Product";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 
-import { Virtual, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import SwiperCoverflow from "./SwiperCoverflow";
-import pickleballProducts from "../../data/pickleballProducts";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCategoryProducts,
-  fetchProducts,
   setSelectedProduct,
 } from "../../store/features/productSlice";
-import { Backdrop, Box, CircularProgress } from "@mui/material";
-import CustomSwiper from "./CustomSwiper";
-import Loader from "./Loader";
-import Coverflow from "./Coverflow";
+import Loader from "../shared/Loader";
+import Coverflow from "../custom-swiper/Coverflow";
 import { useNavigate } from "react-router-dom";
 export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { products, status, error, selectedCategory } = useSelector(
     (state) => state.products
-  );
-
-  const selectedProduct = useSelector(
-    (state) => state.products.selectedProduct
   );
 
   const { items } = products;

@@ -1,8 +1,8 @@
-import Footer from "../Components/Footer";
-import Navbar from "../Components/Navbar";
+import Footer from "../Components/layout/Footer";
+import Navbar from "../Components/layout/Navbar";
 import image1 from "../assets/images/apparel.webp";
 import image2 from "../assets/images/apparel2.webp";
-import Counter from "../Components/Counter";
+import Counter from "../Components/shared/Counter";
 import { useState } from "react";
 import { Badge, Button } from "@mui/material";
 import { Link } from "react-router-dom";
