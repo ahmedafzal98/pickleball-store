@@ -1,13 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import { useCoverflowData } from "../../hooks/useCoverflowData";
 import Coverflow from "./Coverflow";
 import categories from "../../../data/categories";
 import { useNavigate } from "react-router-dom";
 import amazonIcon from "../../assets/icons/amazon.png";
 import { useDispatch } from "react-redux";
-import { setSelectedProduct } from "../../store/features/productSlice";
 
-export default function CoverflowManager() {
+const CoverflowManager = forwardRef((props, ref) => {
   const navigate = useNavigate();
   const {
     layerData,
@@ -23,6 +27,12 @@ export default function CoverflowManager() {
 
   const layer2Ref = useRef(null);
   const layer3Ref = useRef(null);
+
+  useImperativeHandle(ref, () => ({
+    scrollToLayer2: () => {
+      layer2Ref.current?.scrollIntoView({ behavior: "smooth" });
+    },
+  }));
 
   useEffect(() => {
     setInitialCategories(categories);
@@ -108,4 +118,6 @@ export default function CoverflowManager() {
       )}
     </div>
   );
-}
+});
+
+export default CoverflowManager;

@@ -18,15 +18,16 @@ import {
   fetchProducts,
 } from "../../store/features/productSlice";
 import useDebouncedSearch from "../../hooks/useDebouncedSearch";
-import Loader from "../shared/Loader";
+import { useCoverflowData } from "../../hooks/useCoverflowData";
 
-const Navbar = () => {
+const Navbar = ({ navigate, onCategoryClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [query, setQuery] = useState("");
+  const { setInitialCategories, handleLayerClick } = useCoverflowData();
 
-  const options = ["Brands", "Paddles", "Balls", "Shoes", "More", "Deals"];
+  const options = ["Paddles", "Balls", "Shoes"];
 
   const { searchedProducts, searchStatus } = useSelector(
     (state) => state.products
@@ -34,6 +35,10 @@ const Navbar = () => {
   const debounceSearch = useDebouncedSearch();
 
   const { items } = searchedProducts;
+
+  useEffect(() => {
+    setInitialCategories(allCategories);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -45,14 +50,6 @@ const Navbar = () => {
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
-
-  const handleMouseEnter = (category) => {
-    setActiveCategory(category);
-  };
-
-  const handleMouseLeave = () => {
-    setActiveCategory(null);
-  };
 
   const handleAllCategoriesMouseEnter = () => {
     setShowAllCategories(true);
@@ -98,6 +95,10 @@ const Navbar = () => {
                     {allCategories.map((item, index) => (
                       <span
                         key={index}
+                        onClick={() => {
+                          handleLayerClick(item, 1);
+                          onCategoryClick();
+                        }}
                         className="text-white block p-3 rounded-md text-base font-semibold opacity-80 hover:bg-[#B9E018] cursor-pointer transition-all duration-200"
                       >
                         {item.name}
