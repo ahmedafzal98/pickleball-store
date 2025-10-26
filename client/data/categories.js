@@ -37,7 +37,6 @@ const categories = [
     image_url: category1,
     subcategories: [
       { name: "Allergy Gone", image_url: "" },
-      { name: "Air Filter", image_url: "" },
       { name: "Bee Pollen", image_url: "" },
       { name: "Eye Drops", image_url: "" },
       { name: "Nasal Fresh", image_url: "" },
@@ -52,7 +51,6 @@ const categories = [
       { name: "Backpacks", image_url: category4 },
       { name: "Duffel Bags", image_url: category5 },
       { name: "Fanny Packs", image_url: category6 },
-      { name: "Air Tags/Tracking Devices", image_url: category3 },
     ],
   },
   {
@@ -94,17 +92,6 @@ const categories = [
     ],
   },
 
-  {
-    name: "Bikes, Scooters and Accessories ",
-    image_url: category10,
-    subcategories: [
-      { name: "Air Tags/Tracking Devices", image_url: "" },
-      { name: "Skateboards", image_url: "" },
-      { name: "Rechargeable", image_url: "" },
-      { name: "Electric", image_url: "" },
-      { name: "Standard", image_url: "" },
-    ],
-  },
   {
     name: "Better Sleep and Relaxation",
     image_url: category1,
@@ -184,7 +171,6 @@ const categories = [
       { name: "Standard", image_url: "" },
       { name: "Scooters", image_url: "" },
       { name: "Locks", image_url: "" },
-      { name: "Air Tags/Tracking Devices", image_url: "" },
       { name: "Skateboards", image_url: "" },
       { name: "Skateboards Electric", image_url: "" },
       { name: "Skateboards Standard", image_url: "" },
@@ -253,14 +239,9 @@ const categories = [
     name: "Car/Truck Accessories",
     image_url: "",
     subcategories: [
-      { name: "Air Fresheners", image_url: "" },
-      { name: "Pickle Fragrance", image_url: "" },
       { name: "Cell Phone", image_url: "" },
       { name: "Seat covers", image_url: "" },
       { name: "Magnetic", image_url: "" },
-      { name: "Drift", image_url: "" },
-      { name: "Air Tags/Tracking Devices", image_url: "" },
-      { name: "Bumper Stickers", image_url: "" },
       { name: "Cell Phone Accessories", image_url: "" },
       { name: "Screen Protectors", image_url: "" },
       { name: "EMF Equilibrium Cards", image_url: "" },
@@ -294,19 +275,15 @@ const categories = [
       { name: "Plastic Cups", image_url: "" },
       { name: "Plastic Silverware", image_url: "" },
       { name: "Speakers, Sound Systems and Microphones", image_url: "" },
-      { name: "Signature Ball", image_url: "" },
       { name: "Stencils", image_url: "" },
       { name: "Tablecloths", image_url: "" },
       { name: "Temporary Tattoos", image_url: "" },
       { name: "Wrapping Paper/Gift Wrap", image_url: "" },
-      { name: "Candles", image_url: "" },
       { name: "Card Decks", image_url: "" },
       { name: "Cookie Cutters", image_url: "" },
-      { name: "Custom Pickleball Caricatures", image_url: "" },
       { name: "Food", image_url: "" },
       { name: "Food Pickleball Pasta", image_url: "" },
       { name: "Food Vlasic Dill Pickle Corn Puffs", image_url: "" },
-      { name: "Graduation Tassels", image_url: "" },
       { name: "Greeting Cards, Post It Notes and Stationary", image_url: "" },
       { name: "Greeting Cards", image_url: "" },
       { name: "Anniversary", image_url: "" },
@@ -396,7 +373,6 @@ const categories = [
       { name: "Cords", image_url: "" },
       { name: "Chargers", image_url: "" },
       { name: "Fast", image_url: "" },
-      { name: "Solar", image_url: "" },
       { name: "Charging Stations", image_url: "" },
       { name: "Holders", image_url: "" },
       { name: "Ring Tones", image_url: "" },
@@ -427,7 +403,6 @@ const categories = [
     subcategories: [
       { name: "Cards", image_url: "" },
       { name: "Gifts", image_url: "" },
-      { name: "Signature Ball", image_url: "" },
       { name: "Wrapping Paper", image_url: "" },
       { name: "Cookie Cutters", image_url: "" },
     ],
@@ -498,7 +473,6 @@ const categories = [
     subcategories: [
       { name: "Electric", image_url: "" },
       { name: "Regular", image_url: "" },
-      { name: "Solar", image_url: "" },
     ],
   },
   {
@@ -549,8 +523,6 @@ const categories = [
     name: "Drilling and Practice Accessories",
     image_url: "",
     subcategories: [
-      { name: "Ball Holders/Baskets", image_url: "" },
-      { name: "Ball Picker Uppers", image_url: "" },
       { name: "Pickle Putty", image_url: "" },
       { name: "Suction Cups", image_url: "" },
       { name: "Tubes", image_url: "" },
@@ -834,7 +806,6 @@ const categories = [
     subcategories: [
       { name: "Electric", image_url: "" },
       { name: "Gas", image_url: "" },
-      { name: "Solar", image_url: "" },
     ],
   },
   {
@@ -856,7 +827,7 @@ const categories = [
   {
     name: "Golf Carts",
     image_url: "",
-    subcategories: [{ name: "Air Tags/Tracking Devices", image_url: "" }],
+    subcategories: [],
   },
 
   {
@@ -903,7 +874,6 @@ const categories = [
     subcategories: [
       { name: "Cards", image_url: "" },
       { name: "Gifts", image_url: "" },
-      { name: "Signature Ball", image_url: "" },
       { name: "Wrapping Paper", image_url: "" },
     ],
   },
@@ -983,10 +953,10 @@ const categories = [
   {
     name: "Keychains",
     image_url: "",
-    subcategories: [{ name: "Air Tags/Tracking Devices", image_url: "" }],
+    subcategories: [],
   },
   {
-    name: "“Kitchen” Accessories",
+    name: "Kitchen Accessories",
     image_url: "",
     subcategories: [
       { name: "Potholders", image_url: "" },
@@ -1055,10 +1025,7 @@ const categories = [
   {
     name: "LED Pickleball Court Lighting",
     image_url: "",
-    subcategories: [
-      { name: "Hard Wired", image_url: "" },
-      { name: "Solar", image_url: "" },
-    ],
+    subcategories: [{ name: "Hard Wired", image_url: "" }],
   },
   {
     name: "Lockers/Caddies",
@@ -1100,7 +1067,6 @@ const categories = [
     name: "Mattresses",
     image_url: "",
     subcategories: [
-      { name: "Magnetic", image_url: "" },
       { name: "Pillowtops", image_url: "" },
       { name: "Floating Bed", image_url: "" },
     ],
@@ -1221,7 +1187,6 @@ const categories = [
       { name: "Energy", image_url: "" },
       { name: "Supplements", image_url: "" },
       { name: "Vitamins", image_url: "" },
-      { name: "Bee Pollen", image_url: "" },
       { name: "Greens", image_url: "" },
       { name: "Greens Fruits", image_url: "" },
       { name: "Greens Vegetables", image_url: "" },
@@ -1247,18 +1212,16 @@ const categories = [
   {
     name: "Orthotics and Shoe Inserts",
     image_url: "",
-    subcategories: [{ name: "Magnetic", image_url: "" }],
+    subcategories: [],
   },
   {
     name: "Paddles",
     image_url: "",
     subcategories: [
       { name: "Children’s", image_url: "" },
-      { name: "Engage", image_url: "" },
       { name: "Gearbox", image_url: "" },
       { name: "Joola", image_url: "" },
       { name: "Rizz", image_url: "" },
-      { name: "Selkirk", image_url: "" },
       { name: "Training", image_url: "" },
       { name: "Glow-In-The-Dark Paddles", image_url: "" },
       { name: "Mini Novelty Paddles", image_url: "" },
@@ -1291,9 +1254,6 @@ const categories = [
       { name: "Acupressure/Acupuncture", image_url: "" },
       { name: "Arm and Leg Compression Machines", image_url: "" },
       { name: "Bath Bombs", image_url: "" },
-      { name: "Braces and Supports", image_url: "" },
-      { name: "Ankle", image_url: "" },
-      { name: "Arm and Elbow", image_url: "" },
       { name: "Breathing device", image_url: "" },
       { name: "CPAP Machines", image_url: "" },
       { name: "Hyperbaric Chambers", image_url: "" },
@@ -1303,10 +1263,8 @@ const categories = [
       { name: "Back", image_url: "" },
       { name: "Knee", image_url: "" },
       { name: "KT Tape", image_url: "" },
-      { name: "Neck", image_url: "" },
       { name: "Pain Patches", image_url: "" },
       { name: "Knee: Wellnee", image_url: "" },
-      { name: "Shoulder", image_url: "" },
       { name: "Cold Plunge Pools", image_url: "https://fb.watch/x_U7-0JIuW/" },
       { name: "nuviorecovery.com", image_url: "https://nuviorecovery.com" },
       { name: "Cupping Therapy", image_url: "" },
@@ -1376,7 +1334,6 @@ const categories = [
     name: "Pets",
     image_url: "",
     subcategories: [
-      { name: "Air Filter", image_url: "" },
       { name: "Beds", image_url: "" },
       { name: "Air Tags/Tracking Devices", image_url: "" },
       { name: "Resonance Frequency Therapy", image_url: "" },
@@ -1525,11 +1482,7 @@ const categories = [
     name: "RV Accessories",
     image_url: "",
     subcategories: [
-      { name: "Air Fresheners", image_url: "" },
-      { name: "Drift", image_url: "" },
       { name: "Air Tags/Tracking Devices", image_url: "" },
-      { name: "Bumper Stickers", image_url: "" },
-      { name: "Pickle Fragrances", image_url: "" },
       { name: "Cell Phone Accessories", image_url: "" },
       { name: "Cleaning Supplies", image_url: "" },
       { name: "EMF Equilibrium Cards", image_url: "" },
@@ -1571,7 +1524,6 @@ const categories = [
           { name: "Mats", image_url: "" },
           { name: "Peanut Butter Licking", image_url: "" },
           { name: "Pooper Scoopers", image_url: "" },
-          { name: "Seat Covers", image_url: "" },
           { name: "Magnetic", image_url: "" },
         ],
       },
@@ -1719,11 +1671,6 @@ const categories = [
     name: "Sunshades",
     image_url: "",
     subcategories: [
-      {
-        name: "Car",
-        image_url: "",
-        subcategories: [],
-      },
       {
         name: "RV",
         image_url: "",
@@ -1877,11 +1824,6 @@ const categories = [
       {
         name: "Lumen Device",
         image_url: "https://fb.watch/y1RQditfLx/",
-        subcategories: [],
-      },
-      {
-        name: "Pills",
-        image_url: "",
         subcategories: [],
       },
     ],
