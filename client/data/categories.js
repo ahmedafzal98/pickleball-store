@@ -37,6 +37,7 @@ const categories = [
     image_url: category1,
     subcategories: [
       { name: "Allergy Gone", image_url: "" },
+      { name: "Air Filter", image_url: "" },
       { name: "Bee Pollen", image_url: "" },
       { name: "Eye Drops", image_url: "" },
       { name: "Nasal Fresh", image_url: "" },
@@ -45,12 +46,13 @@ const categories = [
   },
 
   {
-    name: "Bags and Backpacks",
+    name: "Automated Vacuums/Roombas",
     image_url: category3,
     subcategories: [
       { name: "Backpacks", image_url: category4 },
       { name: "Duffel Bags", image_url: category5 },
       { name: "Fanny Packs", image_url: category6 },
+      { name: "Air Tags/Tracking Devices", image_url: category3 },
     ],
   },
   {
@@ -92,6 +94,23 @@ const categories = [
     ],
   },
 
+  {
+    name: "Bikes, Scooters and Accessories ",
+    image_url: category10,
+    subcategories: [
+      { name: "Air Tags/Tracking Devices", image_url: "" },
+      { name: "Skateboards", image_url: "" },
+      { name: "Rechargeable", image_url: "" },
+      { name: "Electric", image_url: "" },
+      { name: "Standard", image_url: "" },
+    ],
+  },
+
+  {
+    name: "Blenders",
+    image_url: category10,
+    subcategories: [],
+  },
   {
     name: "Better Sleep and Relaxation",
     image_url: category1,
@@ -171,6 +190,7 @@ const categories = [
       { name: "Standard", image_url: "" },
       { name: "Scooters", image_url: "" },
       { name: "Locks", image_url: "" },
+      { name: "Air Tags/Tracking Devices", image_url: "" },
       { name: "Skateboards", image_url: "" },
       { name: "Skateboards Electric", image_url: "" },
       { name: "Skateboards Standard", image_url: "" },
@@ -239,9 +259,14 @@ const categories = [
     name: "Car/Truck Accessories",
     image_url: "",
     subcategories: [
+      { name: "Air Fresheners", image_url: "" },
+      { name: "Pickle Fragrance", image_url: "" },
       { name: "Cell Phone", image_url: "" },
       { name: "Seat covers", image_url: "" },
       { name: "Magnetic", image_url: "" },
+      { name: "Drift", image_url: "" },
+      { name: "Air Tags/Tracking Devices", image_url: "" },
+      { name: "Bumper Stickers", image_url: "" },
       { name: "Cell Phone Accessories", image_url: "" },
       { name: "Screen Protectors", image_url: "" },
       { name: "EMF Equilibrium Cards", image_url: "" },
@@ -275,15 +300,19 @@ const categories = [
       { name: "Plastic Cups", image_url: "" },
       { name: "Plastic Silverware", image_url: "" },
       { name: "Speakers, Sound Systems and Microphones", image_url: "" },
+      { name: "Signature Ball", image_url: "" },
       { name: "Stencils", image_url: "" },
       { name: "Tablecloths", image_url: "" },
       { name: "Temporary Tattoos", image_url: "" },
       { name: "Wrapping Paper/Gift Wrap", image_url: "" },
+      { name: "Candles", image_url: "" },
       { name: "Card Decks", image_url: "" },
       { name: "Cookie Cutters", image_url: "" },
+      { name: "Custom Pickleball Caricatures", image_url: "" },
       { name: "Food", image_url: "" },
       { name: "Food Pickleball Pasta", image_url: "" },
       { name: "Food Vlasic Dill Pickle Corn Puffs", image_url: "" },
+      { name: "Graduation Tassels", image_url: "" },
       { name: "Greeting Cards, Post It Notes and Stationary", image_url: "" },
       { name: "Greeting Cards", image_url: "" },
       { name: "Anniversary", image_url: "" },
@@ -373,6 +402,7 @@ const categories = [
       { name: "Cords", image_url: "" },
       { name: "Chargers", image_url: "" },
       { name: "Fast", image_url: "" },
+      { name: "Solar", image_url: "" },
       { name: "Charging Stations", image_url: "" },
       { name: "Holders", image_url: "" },
       { name: "Ring Tones", image_url: "" },
@@ -403,6 +433,7 @@ const categories = [
     subcategories: [
       { name: "Cards", image_url: "" },
       { name: "Gifts", image_url: "" },
+      { name: "Signature Ball", image_url: "" },
       { name: "Wrapping Paper", image_url: "" },
       { name: "Cookie Cutters", image_url: "" },
     ],
@@ -440,9 +471,9 @@ const categories = [
       { name: "Skirts", image_url: "" },
       { name: "Socks", image_url: "" },
       { name: "Compression Socks", image_url: "" },
+      { name: "Upload.jsx", image_url: "" },
       { name: "Gym", image_url: "" },
       { name: "Therapeutic Infrared Socks", image_url: "" },
-
       { name: "Sports Bras", image_url: "" },
       { name: "Suits", image_url: "" },
       { name: "Sweatpants", image_url: "" },
@@ -473,6 +504,7 @@ const categories = [
     subcategories: [
       { name: "Electric", image_url: "" },
       { name: "Regular", image_url: "" },
+      { name: "Solar", image_url: "" },
     ],
   },
   {
@@ -506,6 +538,20 @@ const categories = [
       { name: "Aluminum and Sulfate Free", image_url: "" },
     ],
   },
+
+  {
+    name: "Detox",
+    image_url: "",
+    subcategories: [
+      { name: "Diets", image_url: "" },
+      { name: "Foods", image_url: "" },
+      { name: "Foot Spas ", image_url: "" },
+      { name: "IV Drips", image_url: "" },
+      { name: "Pills", image_url: "" },
+      { name: "Programs", image_url: "" },
+    ],
+  },
+
   {
     name: "Detox Foot Spas",
     image_url: "https://www.healifeco.com/products/ftsap",
@@ -523,6 +569,8 @@ const categories = [
     name: "Drilling and Practice Accessories",
     image_url: "",
     subcategories: [
+      { name: "Ball Holders/Baskets", image_url: "" },
+      { name: "Ball Picker Uppers", image_url: "" },
       { name: "Pickle Putty", image_url: "" },
       { name: "Suction Cups", image_url: "" },
       { name: "Tubes", image_url: "" },
@@ -534,6 +582,8 @@ const categories = [
       { name: "Synch health", image_url: "" },
       { name: "Wearables", image_url: "" },
       { name: "The Vibe", image_url: "" },
+      { name: "apolloneuro", image_url: "" },
+      { name: "vibetracker", image_url: "" },
       {
         name: "Earbuds/Earphones/Headphones",
         image_url: "",
@@ -550,7 +600,10 @@ const categories = [
       {
         name: "Electrolytes",
         image_url: "",
-        subcategories: [{ name: "Chews", image_url: "" }],
+        subcategories: [
+          { name: "Chews", image_url: "" },
+          { name: "Pickleball Juice", image_url: "" },
+        ],
       },
       {
         name: "Flags",
@@ -643,10 +696,12 @@ const categories = [
       { name: "Discs", image_url: "" },
       { name: "Lymphatic drainage massage", image_url: "" },
       { name: "Omni", image_url: "" },
-      { name: "", image_url: "" },
-      { name: "", image_url: "" },
-      { name: "", image_url: "" },
-      { name: "", image_url: "" },
+      { name: "apolloneuro", image_url: "" },
+      { name: "vibetracker", image_url: "" },
+      { name: "IV drips", image_url: "" },
+      { name: "chillchair", image_url: "" },
+      { name: "Lymphatic drainage massage", image_url: "" },
+      { name: "mindlycalm", image_url: "" },
     ],
   },
 
@@ -696,12 +751,18 @@ const categories = [
   {
     name: "Sleep Frequency Devices",
     image_url: "https://mindlycalm.com",
-    subcategories: [],
+    subcategories: [{ name: "Omni", image_url: "" }],
   },
   {
     name: "Superhuman Protocols",
     image_url: "https://davincimedicalusa.com",
     subcategories: [],
+  },
+
+  {
+    name: "Vegus Nerve Stimulators ",
+    image_url: "",
+    subcategories: [{ name: "Zenowell", image_url: "" }],
   },
   {
     name: "Exercise Equipment and Accessories",
@@ -741,6 +802,9 @@ const categories = [
             name: "The Vibe",
             image_url: "https://resona.health/?ap_id=dominickdecarlo",
           },
+          { name: "apolloneuro", image_url: "https://fb.watch/y6UkdDYNAH/?" },
+          { name: "vibetracker", image_url: "https://fb.watch/y6UkdDYNAH/?" },
+
           { name: "Tend", image_url: "https://fb.watch/y6UkdDYNAH/?" },
           { name: "Heal Flux", image_url: "" },
           { name: "Wearables", image_url: "" },
@@ -765,7 +829,7 @@ const categories = [
     ],
   },
   {
-    name: "Financially, How To Play More Pickleball",
+    name: "Financially, How To Play More Pickleball, Wealth Management",
     image_url: "",
     subcategories: [
       { name: "Heal Flux", image_url: "" },
@@ -791,6 +855,7 @@ const categories = [
     name: "Frequency/Vibrational Therapies",
     image_url: "",
     subcategories: [
+      { name: "Heal Flux", image_url: "" },
       { name: "Magnets", image_url: "https://magnetsforless.com" },
       {
         name: "The Vibe",
@@ -798,6 +863,9 @@ const categories = [
       },
       { name: "Tend", image_url: "https://fb.watch/y6UkdDYNAH/?" },
       { name: "Vibrational Standing Pads", image_url: "" },
+      { name: "Wearables", image_url: "https://magnetsforless.com" },
+      { name: "apolloneuro", image_url: "" },
+      { name: "vibetracker", image_url: "" },
     ],
   },
   {
@@ -806,6 +874,7 @@ const categories = [
     subcategories: [
       { name: "Electric", image_url: "" },
       { name: "Gas", image_url: "" },
+      { name: "Solar", image_url: "" },
     ],
   },
   {
@@ -827,7 +896,7 @@ const categories = [
   {
     name: "Golf Carts",
     image_url: "",
-    subcategories: [],
+    subcategories: [{ name: "Air Tags/Tracking Devices", image_url: "" }],
   },
 
   {
@@ -874,6 +943,7 @@ const categories = [
     subcategories: [
       { name: "Cards", image_url: "" },
       { name: "Gifts", image_url: "" },
+      { name: "Signature Ball", image_url: "" },
       { name: "Wrapping Paper", image_url: "" },
     ],
   },
@@ -889,6 +959,14 @@ const categories = [
     subcategories: [
       { name: "For Rent", image_url: "" },
       { name: "For Sale", image_url: "" },
+    ],
+  },
+  {
+    name: "Hormonal Supplements  ",
+    image_url: "",
+    subcategories: [
+      { name: "HGH Alternative", image_url: "" },
+      { name: "Sermorelin", image_url: "" },
     ],
   },
   {
@@ -925,6 +1003,7 @@ const categories = [
     image_url: "",
     subcategories: [
       { name: "Bracelets", image_url: "" },
+      { name: "vibetracker", image_url: "" },
       { name: "Earrings", image_url: "" },
       { name: "Magnetic", image_url: "https://magnetsforless.com" },
       { name: "Necklaces", image_url: "" },
@@ -953,7 +1032,7 @@ const categories = [
   {
     name: "Keychains",
     image_url: "",
-    subcategories: [],
+    subcategories: [{ name: "Air Tags/Tracking Devices", image_url: "" }],
   },
   {
     name: "Kitchen Accessories",
@@ -1025,7 +1104,10 @@ const categories = [
   {
     name: "LED Pickleball Court Lighting",
     image_url: "",
-    subcategories: [{ name: "Hard Wired", image_url: "" }],
+    subcategories: [
+      { name: "Hard Wired", image_url: "" },
+      { name: "Solar", image_url: "" },
+    ],
   },
   {
     name: "Lockers/Caddies",
@@ -1053,6 +1135,7 @@ const categories = [
     subcategories: [
       { name: "Chairs", image_url: "" },
       { name: "Foot Massagers and Spas", image_url: "" },
+      { name: "chillchair", image_url: "" },
       { name: "Guns", image_url: "" },
       { name: "Hot Tubs", image_url: "" },
       { name: "Scraping Tools", image_url: "" },
@@ -1067,6 +1150,7 @@ const categories = [
     name: "Mattresses",
     image_url: "",
     subcategories: [
+      { name: "Magnetic", image_url: "" },
       { name: "Pillowtops", image_url: "" },
       { name: "Floating Bed", image_url: "" },
     ],
@@ -1187,6 +1271,7 @@ const categories = [
       { name: "Energy", image_url: "" },
       { name: "Supplements", image_url: "" },
       { name: "Vitamins", image_url: "" },
+      { name: "Bee Pollen", image_url: "" },
       { name: "Greens", image_url: "" },
       { name: "Greens Fruits", image_url: "" },
       { name: "Greens Vegetables", image_url: "" },
@@ -1212,16 +1297,18 @@ const categories = [
   {
     name: "Orthotics and Shoe Inserts",
     image_url: "",
-    subcategories: [],
+    subcategories: [{ name: "Magnetic", image_url: "" }],
   },
   {
     name: "Paddles",
     image_url: "",
     subcategories: [
       { name: "Children’s", image_url: "" },
+      { name: "Engage", image_url: "" },
       { name: "Gearbox", image_url: "" },
       { name: "Joola", image_url: "" },
       { name: "Rizz", image_url: "" },
+      { name: "Selkirk", image_url: "" },
       { name: "Training", image_url: "" },
       { name: "Glow-In-The-Dark Paddles", image_url: "" },
       { name: "Mini Novelty Paddles", image_url: "" },
@@ -1254,6 +1341,9 @@ const categories = [
       { name: "Acupressure/Acupuncture", image_url: "" },
       { name: "Arm and Leg Compression Machines", image_url: "" },
       { name: "Bath Bombs", image_url: "" },
+      { name: "Braces and Supports", image_url: "" },
+      { name: "Ankle", image_url: "" },
+      { name: "Arm and Elbow", image_url: "" },
       { name: "Breathing device", image_url: "" },
       { name: "CPAP Machines", image_url: "" },
       { name: "Hyperbaric Chambers", image_url: "" },
@@ -1263,11 +1353,16 @@ const categories = [
       { name: "Back", image_url: "" },
       { name: "Knee", image_url: "" },
       { name: "KT Tape", image_url: "" },
+      { name: "Neck", image_url: "" },
       { name: "Pain Patches", image_url: "" },
       { name: "Knee: Wellnee", image_url: "" },
+      { name: "Shoulder", image_url: "" },
       { name: "Cold Plunge Pools", image_url: "https://fb.watch/x_U7-0JIuW/" },
       { name: "nuviorecovery.com", image_url: "https://nuviorecovery.com" },
       { name: "Cupping Therapy", image_url: "" },
+      { name: "Levide Cup", image_url: "" },
+      { name: "revomadic", image_url: "" },
+      { name: "IV drips", image_url: "" },
       {
         name: "Detox Foot Spas",
         image_url: "https://www.healifeco.com/products/ftsap",
@@ -1283,7 +1378,7 @@ const categories = [
       { name: "Epsom Salts", image_url: "" },
       { name: "Finger/Toe Nail Clippers and Files", image_url: "" },
       { name: "Foam Rollers", image_url: "" },
-      { name: "Foot Baths", image_url: "" },
+      { name: "Foot Baths Spas", image_url: "" },
       {
         name: "Foot Fungus",
         image_url: "https://Norelie-RedRevive-US-AppLovin-AB",
@@ -1297,6 +1392,7 @@ const categories = [
       { name: "Vibrational Standing Pads", image_url: "" },
       { name: "Heating Pads", image_url: "" },
       { name: "Hot Tubs", image_url: "" },
+      { name: "Hyperbaric Chambers", image_url: "" },
       { name: "HYPNOHELP™️ (Hypnosis Audio Program For Pain)", image_url: "" },
       { name: "Ice Packs", image_url: "" },
       { name: "Infrared Therapy", image_url: "" },
@@ -1334,6 +1430,7 @@ const categories = [
     name: "Pets",
     image_url: "",
     subcategories: [
+      { name: "Air Filter", image_url: "" },
       { name: "Beds", image_url: "" },
       { name: "Air Tags/Tracking Devices", image_url: "" },
       { name: "Resonance Frequency Therapy", image_url: "" },
@@ -1474,7 +1571,7 @@ const categories = [
     subcategories: [],
   },
   {
-    name: "Red Light Therapy Wands",
+    name: "Red Light Therapies Wands",
     image_url: "https://norelie.co/products/redrevive-cold-laser-therapy-wand",
     subcategories: [{ name: "Prungo", image_url: "" }],
   },
@@ -1482,8 +1579,13 @@ const categories = [
     name: "RV Accessories",
     image_url: "",
     subcategories: [
+      { name: "Air Fresheners", image_url: "" },
+      { name: "Drift", image_url: "" },
       { name: "Air Tags/Tracking Devices", image_url: "" },
+      { name: "Bumper Stickers", image_url: "" },
+      { name: "Pickle Fragrances", image_url: "" },
       { name: "Cell Phone Accessories", image_url: "" },
+      { name: "Screen Protectors", image_url: "" },
       { name: "Cleaning Supplies", image_url: "" },
       { name: "EMF Equilibrium Cards", image_url: "" },
       { name: "First Aid Kits", image_url: "" },
@@ -1524,6 +1626,7 @@ const categories = [
           { name: "Mats", image_url: "" },
           { name: "Peanut Butter Licking", image_url: "" },
           { name: "Pooper Scoopers", image_url: "" },
+          { name: "Seat Covers", image_url: "" },
           { name: "Magnetic", image_url: "" },
         ],
       },
@@ -1572,26 +1675,32 @@ const categories = [
       { name: "Score Keeping Watches", image_url: "" },
     ],
   },
+
+  {
+    name: "Shaving",
+    image_url: "",
+    subcategories: [],
+  },
+
+  {
+    name: "Shaving",
+    image_url: "",
+    subcategories: [],
+  },
   {
     name: "Shoes/Footwear",
     image_url: "",
-    subcategories: [
-      { name: "Flip Flops/Slides", image_url: "" },
-      { name: "Toe and Bunion Spacers", image_url: "" },
-      { name: "Shoe Cleaners", image_url: "" },
-      { name: "Shoe Laces", image_url: "" },
-      { name: "Shoe Racks", image_url: "" },
-      { name: "Shoes", image_url: "" },
-      {
-        name: "Sock Shoes",
-        image_url: "https://fb.watch/x_RYDavz5-/?",
-      },
-    ],
+    subcategories: [{ name: "Blades/Cartridges", image_url: "" }],
   },
   {
     name: "Sleep Frequency Devices",
     image_url: "",
-    subcategories: [{ name: "Omni", image_url: "" }],
+    subcategories: [{ name: "Handles", image_url: "" }],
+  },
+  {
+    name: "Socks",
+    image_url: "",
+    subcategories: [{ name: "Electric ", image_url: "" }],
   },
   {
     name: "Gym",
@@ -1607,6 +1716,7 @@ const categories = [
         name: "Sock Shoes",
         image_url: "https://fb.watch/x_RYDavz5-/?",
       },
+      { name: "Therapeutic Infrared Socks", image_url: "" },
       { name: "Toe and Bunion Spacers", image_url: "" },
     ],
   },
@@ -1644,7 +1754,7 @@ const categories = [
   {
     name: "3D Ovens",
     image_url: "",
-    subcategories: [],
+    subcategories: [{ name: "agarikitchen", image_url: "" }],
   },
 
   {
@@ -1671,6 +1781,11 @@ const categories = [
     name: "Sunshades",
     image_url: "",
     subcategories: [
+      {
+        name: "Car",
+        image_url: "",
+        subcategories: [],
+      },
       {
         name: "RV",
         image_url: "",
@@ -1728,31 +1843,25 @@ const categories = [
   {
     name: "Video Cameras, Cameras and WebCams For Live Streaming",
     image_url: "Josh’s Home System",
-    subcategories: [],
-  },
-  {
-    name: "Wagons/Flatbeds",
-    image_url: "",
     subcategories: [
       { name: "Josh’s Home System", image_url: "" },
       { name: "Clip On Umbrella for Cameras", image_url: "" },
     ],
   },
   {
+    name: "Wagons/Flatbeds",
+    image_url: "",
+    subcategories: [],
+  },
+  {
     name: "Water Bottles/Thermoses/Shaker Bottles",
     image_url: "",
     subcategories: [
-      {
-        name: "Can/Water Bottle Insulators",
-        image_url: "",
-        subcategories: [],
-      },
-      {
-        name: "Air Tags/Tracking Devices",
-        image_url: "",
-      },
+      { name: "Air Tags/Tracking Devices", image_url: "" },
+      { name: "Can/Water Bottle Insulators", image_url: "" },
     ],
   },
+
   {
     name: "Water Filtration Systems",
     image_url: "",
@@ -1782,49 +1891,44 @@ const categories = [
         name: "Alter",
         image_url:
           "https://www.alterme.com/shop/swab-kit?utm_source=facebook&utm_medium=paid&utm_campaign=%5BT%5D25/03/01-AP-Cold-CBO-HV-7DC1DV-Broad-DNA%20Report&utm_term=%5BT%5D25/03/01-Broad-Exclusions-PUR-US-18+-M%26W-Autoplacements-7DC1DV-HV-Post%20ID-DNA%20Report-CBS%201&utm_content=%5BT%5D25/03/01-Post%20ID-DNA%20Report-%7CCBS%201%7C-V2-IMG&tw_source=fb&tw_adid=120216203517140328&promocode=ALTER70&fbclid=IwZXh0bgNhZW0BMABhZGlkAasYABU91FgBHTiUWQZ-MdmEMI4781hnUXgb2iGsTNh9mpqQ4G_izkArB7fALkCddyilDA_aem_HiD-RAwm9okvyiEm75e3rA&campaign_id=120216199304820328&ad_id=120216203517140328&utm_id=120216199304820328",
-        subcategories: [],
       },
 
       {
         name: "Belts and Wraps",
         image_url: "",
-        subcategories: [],
       },
       {
         name: "IV drips",
         image_url: "",
-        subcategories: [],
       },
       {
         name: "Protein Powder",
         image_url: "",
-        subcategories: [],
       },
       {
         name: "Electrical Muscle Stimulation Suits",
         image_url: "Katalyst: https://fb.watch/y7kNgRwqVR/?",
-        subcategories: [],
       },
       {
         name: "Vision Body",
         image_url:
           "https://visionbody.com/blogs/news/my-journey-back-to-peak-fitness-with-visionbody-ultimate-powersuit?fbclid=IwZXh0bgNhZW0BMABhZGlkAasaG_IGe-EBHS_FQJ4yVDHXOvy-paOhkZiE86FikOlX1jI0eHTT16xKoMKUez8klR87WA_aem_tcvZ6cJXe4YyrdUpMgwzBQ&utm_source=facebook&utm_medium=paid&campaign_id=120214466147150481&ad_id=120218474426700481",
-        subcategories: [],
       },
       {
         name: "HYPNOVIDEO™️ (Audio Program For Weight Loss)",
         image_url: "",
-        subcategories: [],
       },
       {
         name: "Lotions",
         image_url: "",
-        subcategories: [],
       },
       {
         name: "Lumen Device",
         image_url: "https://fb.watch/y1RQditfLx/",
-        subcategories: [],
+      },
+      {
+        name: "Pills",
+        image_url: "",
       },
     ],
   },
