@@ -251,7 +251,17 @@ const categories = [
     subcategories: [],
   },
   {
+    name: "Dating",
+    image_url: "",
+    subcategories: [],
+  },
+  {
     name: "Graduation Tassels",
+    image_url: "",
+    subcategories: [],
+  },
+  {
+    name: "Drones",
     image_url: "",
     subcategories: [],
   },
@@ -506,6 +516,11 @@ const categories = [
       { name: "Regular", image_url: "" },
       { name: "Solar", image_url: "" },
     ],
+  },
+  {
+    name: "clock",
+    image_url: "",
+    subcategories: [],
   },
   {
     name: "Court Cleaning Accessories",
@@ -952,6 +967,11 @@ const categories = [
     image_url: "",
     subcategories: [],
   },
+  {
+    name: "Home Court Supplies",
+    image_url: "",
+    subcategories: [],
+  },
 
   {
     name: "Homes with Pickleball Courts",
@@ -1035,7 +1055,7 @@ const categories = [
     subcategories: [{ name: "Air Tags/Tracking Devices", image_url: "" }],
   },
   {
-    name: "Kitchen Accessories",
+    name: "“Kitchen” Accessories",
     image_url: "",
     subcategories: [
       { name: "Potholders", image_url: "" },
@@ -1688,6 +1708,11 @@ const categories = [
     subcategories: [],
   },
   {
+    name: "License Plate Holders",
+    image_url: "",
+    subcategories: [],
+  },
+  {
     name: "Shoes/Footwear",
     image_url: "",
     subcategories: [{ name: "Blades/Cartridges", image_url: "" }],
@@ -1927,10 +1952,19 @@ const categories = [
         image_url: "https://fb.watch/y1RQditfLx/",
       },
       {
+        name: "Video Cameras, Cameras  and WebCams For Live Streaming",
+        image_url: "https://fb.watch/y1RQditfLx/",
+      },
+      {
         name: "Pills",
         image_url: "",
       },
     ],
+  },
+  {
+    name: "Wheelchairs",
+    image_url: "",
+    subcategories: [],
   },
 ];
 
