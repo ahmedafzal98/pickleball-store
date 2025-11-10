@@ -20,6 +20,22 @@ export function useCoverflowData(navigate) {
     (state) => state.products
   );
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(
+          "https://pickleball-admin.onrender.com/api/categories"
+        );
+        const data = await response.json();
+        setInitialCategories(data);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   // Initialize Layer 1 categories
   const setInitialCategories = (categories) => {
     const cleanCategories = categories.map((cat) => ({
