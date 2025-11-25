@@ -30,7 +30,7 @@ export function useCoverflowData(navigate) {
       const res = await fetch(
         `${
           import.meta.env.VITE_API_BASE_URL
-        }/items/categories?fields=id,name,parent.id,parent.name,image.*`,
+        }/items/categories?fields=id,name,parent.id,parent.name,image.*,children.*&limit=-1`,
         {
           method: "GET",
           headers: {
