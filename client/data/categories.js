@@ -27,8 +27,19 @@ const categories = [
     name: "Air Purifiers",
     image_url: category3,
     subcategories: [
-      { name: "Air Filter", image_url: "" },
-      { name: "nuwaveforever.com", image_url: "" },
+      {
+        name: "Air Filter",
+        image_url: "",
+        subcategories: [
+          { name: "Air Filter", image_url: "" },
+          { name: "Air ", image_url: "" },
+        ],
+      },
+      {
+        name: "nuwaveforever.com",
+        image_url: "",
+        subcategories: [{ name: "Air ", image_url: "" }],
+      },
     ],
   },
 

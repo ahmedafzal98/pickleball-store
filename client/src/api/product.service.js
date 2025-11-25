@@ -23,8 +23,9 @@ export async function fetchAmazonProductsByKeyword(keyword) {
   try {
     const url = `${AMAZON_API_URL}/search?keyword=pickleball ${keyword}`;
     const response = await fetch(url);
-    const data = await response.json();
+    console.log(response);
 
+    const data = await response.json();
     // Data Transformation/Shaping (CRUCIAL to keep here)
     return (
       data?.SearchResult?.Items?.map((item) => ({

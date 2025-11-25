@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchCategoryProducts,
   setSelectedProduct,
+  fetchCategoryProducts,
   fetchAmazonProducts,
 } from "../store/features/productSlice";
 
@@ -12,99 +12,137 @@ export function useCoverflowData(navigate) {
   const [layerData, setLayerData] = useState({
     layer1: [],
     layer2: [],
-    layer3: [], // eBay products
+    layer3: [],
+    layer4: [], // final products (leaf)
   });
 
-  // ✅ Keep Amazon products separate
-  const { amazonProducts, amazonStatus } = useSelector(
-    (state) => state.products
-  );
+  const { amazonProducts } = useSelector((state) => state.products);
 
+  // -------------------------
+  // Fetch categories from API
+  // -------------------------
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(
-          "https://pickleball-admin.onrender.com/api/categories"
-        );
-        const data = await response.json();
-        setInitialCategories(data);
-      } catch (error) {
-        console.error("Failed to fetch categories:", error);
-      }
-    };
-
     fetchCategories();
   }, []);
 
-  // Initialize Layer 1 categories
-  const setInitialCategories = (categories) => {
-    const cleanCategories = categories.map((cat) => ({
-      ...cat,
-      subcategories: cat.subcategories || [],
-    }));
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/items/categories?fields=id,name,parent.id,parent.name,image.*`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_DIRECTUS_TOKEN}`,
+          },
+        }
+      );
 
-    setLayerData({
-      layer1: cleanCategories,
-      layer2: [],
-      layer3: [],
-    });
+      const data = await res.json();
+      const tree = buildCategoryTree(data?.data || []);
+      setLayerData({ layer1: tree, layer2: [], layer3: [], layer4: [] });
+    } catch (error) {
+      console.error("Failed to fetch categories:", error);
+    }
   };
 
-  // Handle clicks on any layer
-  const handleLayerClick = async (item, currentLayer = 0) => {
+  // -------------------------
+  // Convert flat categories to tree
+  // -------------------------
+  const buildCategoryTree = (categories) => {
+    const map = {};
+    const roots = [];
+
+    categories.forEach((cat) => {
+      map[cat.id] = { ...cat, subcategories: [] };
+    });
+
+    categories.forEach((cat) => {
+      if (cat.parent?.id) {
+        map[cat.parent.id]?.subcategories.push(map[cat.id]);
+      } else {
+        roots.push(map[cat.id]);
+      }
+    });
+
+    return roots;
+  };
+
+  // -------------------------
+  // Handle layer click
+  // -------------------------
+  const handleLayerClick = async (item, currentLayer) => {
     if (!item) return;
 
     const hasSubcategories =
       Array.isArray(item.subcategories) && item.subcategories.length > 0;
 
-    if (currentLayer === 1) {
-      // Layer 1 -> Layer 2
-      if (hasSubcategories) {
-        setLayerData((prev) => ({
-          ...prev,
-          layer2: item.subcategories,
-          layer3: [], // clear eBay products
-        }));
-      } else {
-        // Final category selected
-        dispatch(setSelectedProduct(item));
-        dispatch(fetchCategoryProducts(item.name));
-        dispatch(fetchAmazonProducts(item.name));
-        // navigate("/product");
-      }
-    } else if (currentLayer === 2) {
-      // Layer 2 -> Layer 3 (eBay)
-      if (hasSubcategories) {
-        setLayerData((prev) => ({
-          ...prev,
-          layer3: item.subcategories, // eBay products
-        }));
+    switch (currentLayer) {
+      case 1:
+        if (hasSubcategories) {
+          setLayerData((prev) => ({
+            ...prev,
+            layer2: item.subcategories,
+            layer3: [],
+            layer4: [],
+          }));
+        } else {
+          await fetchProductsForCategory(item);
+        }
+        break;
 
-        // Fetch Amazon products separately
-        dispatch(fetchAmazonProducts(item.name));
-      } else {
+      case 2:
+        if (hasSubcategories) {
+          setLayerData((prev) => ({
+            ...prev,
+            layer3: item.subcategories,
+            layer4: [],
+          }));
+        } else {
+          await fetchProductsForCategory(item);
+        }
+        break;
+
+      case 3:
+        if (hasSubcategories) {
+          setLayerData((prev) => ({
+            ...prev,
+            layer4: item.subcategories, // show backend products
+          }));
+          await fetchProductsForCategory(item); // also fetch leaf products from backend + Amazon
+        } else {
+          await fetchProductsForCategory(item);
+        }
+        break;
+
+      case 4:
         dispatch(setSelectedProduct(item));
-        dispatch(fetchCategoryProducts(item.name));
-        dispatch(fetchAmazonProducts(item.name));
-      }
-    } else if (currentLayer === 3) {
-      // Final Layer clicked
-      dispatch(setSelectedProduct(item));
-      // navigate("/product");
+        navigate("/product");
+        break;
+
+      default:
+        break;
     }
   };
 
-  // Optional: reset layer3 if Amazon products update (no merge, just keep separate)
-  useEffect(() => {
-    if (amazonProducts.length === 0 && layerData.layer3.length === 0) return;
-    // No state merge needed, CoverflowManager will render Amazon and eBay separately
-  }, [amazonProducts]);
+  // -------------------------
+  // Fetch leaf products: eBay + Amazon
+  // -------------------------
+  const fetchProductsForCategory = async (item) => {
+    try {
+      dispatch(setSelectedProduct(item));
+      dispatch(fetchCategoryProducts(item.name)); // eBay / Directus
+      dispatch(fetchAmazonProducts(item.name)); // Amazon, safe to fail
+    } catch (err) {
+      console.error("Error fetching leaf products:", err);
+    }
+  };
 
   return {
     layerData,
-    amazonProducts, // pass separately for side-by-side display
-    setInitialCategories,
+    amazonProducts,
     handleLayerClick,
-    amazonStatus, // optional, useful for showing loading state
   };
 }

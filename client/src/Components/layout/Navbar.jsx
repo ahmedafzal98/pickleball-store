@@ -25,7 +25,7 @@ const Navbar = ({ navigate, onCategoryClick }) => {
   const [activeCategory, setActiveCategory] = useState(null);
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [query, setQuery] = useState("");
-  const { setInitialCategories, handleLayerClick } = useCoverflowData();
+  const { handleLayerClick } = useCoverflowData();
 
   const options = ["Paddles", "Balls", "Shoes"];
 
@@ -36,9 +36,9 @@ const Navbar = ({ navigate, onCategoryClick }) => {
 
   const { items } = searchedProducts;
 
-  useEffect(() => {
-    setInitialCategories(allCategories);
-  }, []);
+  // useEffect(() => {
+  //   setInitialCategories(allCategories);
+  // }, []);
 
   useEffect(() => {
     if (isOpen) {

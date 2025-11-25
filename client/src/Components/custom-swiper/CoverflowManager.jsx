@@ -6,27 +6,18 @@ import React, {
 } from "react";
 import { useCoverflowData } from "../../hooks/useCoverflowData";
 import Coverflow from "./Coverflow";
-import categories from "../../../data/categories";
 import { useNavigate } from "react-router-dom";
 import amazonIcon from "../../assets/icons/amazon.png";
-import { useDispatch } from "react-redux";
 
 const CoverflowManager = forwardRef((props, ref) => {
   const navigate = useNavigate();
-  const {
-    layerData,
-    amazonProducts,
-    setInitialCategories,
-    handleLayerClick,
-    amazonStatus,
-  } = useCoverflowData(navigate);
 
-  console.log(amazonProducts);
-
-  const dispatch = useDispatch();
+  const { layerData, amazonProducts, handleLayerClick } =
+    useCoverflowData(navigate);
 
   const layer2Ref = useRef(null);
   const layer3Ref = useRef(null);
+  const layer4Ref = useRef(null);
 
   useImperativeHandle(ref, () => ({
     scrollToLayer2: () => {
@@ -34,29 +25,19 @@ const CoverflowManager = forwardRef((props, ref) => {
     },
   }));
 
+  // Auto scroll to each layer
   useEffect(() => {
-    setInitialCategories(categories);
-  }, []);
-
-  useEffect(() => {
-    if (layerData.layer2.length > 0) {
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          layer2Ref.current?.scrollIntoView({ behavior: "smooth" });
-        });
-      }, 300);
-    }
+    if (layerData.layer2?.length)
+      layer2Ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [layerData.layer2]);
-
   useEffect(() => {
-    if (layerData.layer3.length > 0 || amazonProducts.length > 0) {
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          layer3Ref.current?.scrollIntoView({ behavior: "smooth" });
-        });
-      }, 300);
-    }
-  }, [layerData.layer3, amazonProducts]);
+    if (layerData.layer3?.length)
+      layer3Ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [layerData.layer3]);
+  useEffect(() => {
+    if (layerData.layer4?.length || amazonProducts?.length)
+      layer4Ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [layerData.layer4, amazonProducts]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -67,7 +48,7 @@ const CoverflowManager = forwardRef((props, ref) => {
       />
 
       {/* Layer 2 */}
-      {layerData.layer2.length > 0 && (
+      {layerData.layer2?.length > 0 && (
         <div ref={layer2Ref}>
           <Coverflow
             categories={layerData.layer2}
@@ -76,11 +57,21 @@ const CoverflowManager = forwardRef((props, ref) => {
         </div>
       )}
 
-      {/* Layer 3: eBay + Amazon side by side */}
-      {(layerData.layer3.length > 0 || amazonProducts.length > 0) && (
-        <div ref={layer3Ref} className="">
-          {/* eBay Products */}
-          {layerData.layer3.length > 0 && (
+      {/* Layer 3 */}
+      {layerData.layer3?.length > 0 && (
+        <div ref={layer3Ref}>
+          <Coverflow
+            categories={layerData.layer3}
+            onItemClick={(item) => handleLayerClick(item, 3)}
+          />
+        </div>
+      )}
+
+      {/* Layer 4: Leaf Products */}
+      {(layerData.layer4?.length > 0 || amazonProducts?.length > 0) && (
+        <div ref={layer4Ref} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* eBay / backend products */}
+          {layerData.layer4?.length > 0 && (
             <div className="p-4 rounded-xl shadow-sm flex flex-col">
               <div className="flex items-center gap-2 mb-3">
                 <img src="/assets/icons/ebay.png" alt="eBay" className="h-6" />
@@ -89,14 +80,14 @@ const CoverflowManager = forwardRef((props, ref) => {
                 </h2>
               </div>
               <Coverflow
-                categories={layerData.layer3}
-                onItemClick={(item) => handleLayerClick(item, 3)}
+                categories={layerData.layer4}
+                onItemClick={(item) => handleLayerClick(item, 4)}
               />
             </div>
           )}
 
-          {/* Amazon Products */}
-          {amazonProducts.length > 0 && (
+          {/* Amazon products */}
+          {amazonProducts?.length > 0 && (
             <div className="p-4 rounded-xl shadow-sm flex flex-col">
               <div className="flex items-center gap-2 mb-3">
                 <img src={amazonIcon} alt="Amazon" className="h-6" />
@@ -104,12 +95,11 @@ const CoverflowManager = forwardRef((props, ref) => {
                   Amazon Products
                 </h2>
               </div>
-              // Inside your Amazon products UI
               <Coverflow
                 categories={amazonProducts}
                 onItemClick={(item) => {
                   dispatch(setSelectedProduct(item));
-                  navigate("/product"); // 👉 Go to product detail page
+                  navigate("/product");
                 }}
               />
             </div>

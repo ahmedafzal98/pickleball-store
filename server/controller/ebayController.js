@@ -13,5 +13,4 @@ const getEbayItems = async (req, res) => {
       .json({ error: error.response?.data || "Internal Server Error" });
   }
 };
-
 module.exports = { getEbayItems };
