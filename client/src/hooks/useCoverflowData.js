@@ -27,18 +27,12 @@ export function useCoverflowData(navigate) {
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch(
-        `${
-          import.meta.env.VITE_API_BASE_URL
-        }/items/categories?fields=id,name,parent.id,parent.name,image.*,children.*&limit=-1`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_DIRECTUS_TOKEN}`,
-          },
-        }
-      );
+      const res = await fetch("https://pickleball-admin-client.onrender.com", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const data = await res.json();
       const tree = buildCategoryTree(data?.data || []);

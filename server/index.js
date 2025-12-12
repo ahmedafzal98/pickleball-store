@@ -21,6 +21,8 @@ const allowedOrigins = [
   "http://localhost:5174",
   "http://localhost:5175",
   "https://wesellpickleball.xyz",
+
+  "https://pickleball-admin-client.onrender.com",
 ];
 
 app.use(
