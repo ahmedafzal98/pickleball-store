@@ -8,15 +8,16 @@ import {
 
 export function useCoverflowData(navigate) {
   const dispatch = useDispatch();
+  const { amazonProducts } = useSelector((state) => state.products);
 
-  const [layerData, setLayerData] = useState({
+  const [layers, setLayers] = useState({
     layer1: [],
     layer2: [],
     layer3: [],
-    layer4: [], // final products (leaf)
+    layer4: [], // leaf products
   });
-
-  const { amazonProducts } = useSelector((state) => state.products);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // -------------------------
   // Fetch categories from API
@@ -26,24 +27,24 @@ export function useCoverflowData(navigate) {
   }, []);
 
   const fetchCategories = async () => {
+    setLoading(true);
     try {
-      const res = await fetch("https://pickleball-admin.onrender.com", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
+      const res = await fetch(
+        "https://pickleball-admin.onrender.com/api/categories"
+      );
       const data = await res.json();
-      const tree = buildCategoryTree(data?.data || []);
-      setLayerData({ layer1: tree, layer2: [], layer3: [], layer4: [] });
-    } catch (error) {
-      console.error("Failed to fetch categories:", error);
+      const tree = buildCategoryTree(data || []);
+      setLayers({ layer1: tree, layer2: [], layer3: [], layer4: [] });
+    } catch (err) {
+      console.error("Failed to fetch categories:", err);
+      setError(err.message || "Failed to fetch categories");
+    } finally {
+      setLoading(false);
     }
   };
 
   // -------------------------
-  // Convert flat categories to tree
+  // Build tree from flat categories
   // -------------------------
   const buildCategoryTree = (categories) => {
     const map = {};
@@ -54,8 +55,8 @@ export function useCoverflowData(navigate) {
     });
 
     categories.forEach((cat) => {
-      if (cat.parent?.id) {
-        map[cat.parent.id]?.subcategories.push(map[cat.id]);
+      if (cat.parent !== null && map[cat.parent]) {
+        map[cat.parent].subcategories.push(map[cat.id]);
       } else {
         roots.push(map[cat.id]);
       }
@@ -67,52 +68,52 @@ export function useCoverflowData(navigate) {
   // -------------------------
   // Handle layer click
   // -------------------------
-  const handleLayerClick = async (item, currentLayer) => {
-    if (!item) return;
+  const handleLayerClick = async (category, currentLayer) => {
+    if (!category) return;
 
-    const hasSubcategories =
-      Array.isArray(item.subcategories) && item.subcategories.length > 0;
+    const hasChildren =
+      Array.isArray(category.subcategories) &&
+      category.subcategories.length > 0;
 
     switch (currentLayer) {
       case 1:
-        if (hasSubcategories) {
-          setLayerData((prev) => ({
+        if (hasChildren) {
+          setLayers((prev) => ({
             ...prev,
-            layer2: item.subcategories,
+            layer2: category.subcategories,
             layer3: [],
             layer4: [],
           }));
         } else {
-          await fetchProductsForCategory(item);
+          await fetchLeafProducts(category);
         }
         break;
 
       case 2:
-        if (hasSubcategories) {
-          setLayerData((prev) => ({
+        if (hasChildren) {
+          setLayers((prev) => ({
             ...prev,
-            layer3: item.subcategories,
+            layer3: category.subcategories,
             layer4: [],
           }));
         } else {
-          await fetchProductsForCategory(item);
+          await fetchLeafProducts(category);
         }
         break;
 
       case 3:
-        if (hasSubcategories) {
-          setLayerData((prev) => ({
+        if (hasChildren) {
+          setLayers((prev) => ({
             ...prev,
-            layer4: item.subcategories, // show backend products
+            layer4: [], // reset leaf products
           }));
-          await fetchProductsForCategory(item); // also fetch leaf products from backend + Amazon
         } else {
-          await fetchProductsForCategory(item);
+          await fetchLeafProducts(category);
         }
         break;
 
       case 4:
-        dispatch(setSelectedProduct(item));
+        dispatch(setSelectedProduct(category));
         navigate("/product");
         break;
 
@@ -122,21 +123,27 @@ export function useCoverflowData(navigate) {
   };
 
   // -------------------------
-  // Fetch leaf products: eBay + Amazon
+  // Fetch leaf products (eBay + Amazon)
   // -------------------------
-  const fetchProductsForCategory = async (item) => {
+  const fetchLeafProducts = async (category) => {
     try {
-      dispatch(setSelectedProduct(item));
-      dispatch(fetchCategoryProducts(item.name)); // eBay / Directus
-      dispatch(fetchAmazonProducts(item.name)); // Amazon, safe to fail
+      setLoading(true);
+      dispatch(setSelectedProduct(category));
+      dispatch(fetchCategoryProducts(category.name)); // backend / eBay
+      dispatch(fetchAmazonProducts(category.name)); // Amazon
     } catch (err) {
       console.error("Error fetching leaf products:", err);
+      setError(err.message || "Failed to fetch products");
+    } finally {
+      setLoading(false);
     }
   };
 
   return {
-    layerData,
+    layers,
     amazonProducts,
+    loading,
+    error,
     handleLayerClick,
   };
 }
