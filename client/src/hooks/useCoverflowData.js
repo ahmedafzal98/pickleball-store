@@ -27,7 +27,7 @@ export function useCoverflowData(navigate) {
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch("https://pickleball-admin-client.onrender.com", {
+      const res = await fetch("https://pickleball-admin.onrender.com", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
