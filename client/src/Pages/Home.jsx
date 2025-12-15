@@ -6,6 +6,7 @@ import NewsLetter from "../Components/marketing/NewsLetter";
 import Products from "../Components/product/ProductsListContainer";
 import { useSelector } from "react-redux";
 import CoverflowManager from "../Components/custom-swiper/CoverflowManager";
+import Chatbot from "../Components/chatbot/Chatbot";
 
 const Home = () => {
   const { selectedCategory } = useSelector((state) => state.products);
@@ -14,6 +15,7 @@ const Home = () => {
 
   return (
     <>
+      <Chatbot />
       <Navbar />
       <Banner />
       {/* <Categories /> */}
